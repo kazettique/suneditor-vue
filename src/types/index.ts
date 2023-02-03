@@ -26,7 +26,7 @@ type lang =
   | 'it'
   | Lang;
 
-export default interface SetOptions extends SunEditorOptions {
+export interface SetOptions extends SunEditorOptions {
   customPlugins?: Array<Plugin> | Record<string, Plugin>;
 }
 

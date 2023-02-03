@@ -3,9 +3,12 @@
 </template>
 
 <script setup lang="ts">
-import type { IEmits, IProps } from '@/types';
+import type { IEmits, IProps, SetOptions } from '@/types';
 import type SunEditorCore from 'suneditor/src/lib/core';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watchEffect } from 'vue';
+import plugins from 'suneditor/src/plugins';
+import suneditor from 'suneditor';
+import type { SunEditorOptions } from 'suneditor/src/options';
 
 const props = withDefaults(defineProps<IProps>(), {
   // setOptions: () => {},
@@ -19,12 +22,29 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emits = defineEmits<IEmits>();
 
-const txtArea = ref<HTMLTextAreaElement | null>(null);
-const editor = ref<SunEditorCore>();
-const initialEffect = ref<boolean>(true);
+const textAreaEl = ref<HTMLTextAreaElement | null>(null);
+const editorInstance = ref<SunEditorCore | null>(null);
+// const initialEffect = ref<boolean>(true);
 
-onMounted(() => {});
-onUnmounted(() => {});
+const options = computed<SunEditorOptions>(() => ({
+  // lang: props.lang,
+}));
+
+watchEffect(() => {
+  if (textAreaEl.value) {
+    editorInstance.value = suneditor.create(textAreaEl.value, options.value);
+  }
+});
+
+onMounted(() => {
+  // if (textAreaEl.value) {
+  //   editorInstance.value = suneditor.create(textAreaEl.value, options.value);
+  // }
+});
+
+onUnmounted(() => {
+  // editorInstance.value = null;
+});
 </script>
 
 <style lang="scss" scoped></style>
