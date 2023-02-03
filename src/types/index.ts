@@ -1,6 +1,34 @@
 import type SunEditorCore from 'suneditor/src/lib/core';
-import type SetOptions from './SetOptions';
-import type lang from './lang';
+import type { SunEditorOptions } from 'suneditor/src/options';
+
+import type { Lang } from 'suneditor/src/lang/Lang';
+
+type lang =
+  | 'en'
+  | 'da'
+  | 'de'
+  | 'es'
+  | 'fr'
+  | 'ja'
+  | 'ko'
+  | 'pt_br'
+  | 'nl'
+  | 'ru'
+  | 'it'
+  | 'zh_cn'
+  | 'ro'
+  | 'pl'
+  | 'ckb'
+  | 'lv'
+  | 'se'
+  | 'ua'
+  | 'he'
+  | 'it'
+  | Lang;
+
+export default interface SetOptions extends SunEditorOptions {
+  customPlugins?: Array<Plugin> | Record<string, Plugin>;
+}
 
 export interface IProps {
   setOptions?: SetOptions;

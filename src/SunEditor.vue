@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IEmits, IProps } from '@/types/SunEditorProps';
+import type { IEmits, IProps } from '@/types';
 import type SunEditorCore from 'suneditor/src/lib/core';
 import { onMounted, onUnmounted, ref } from 'vue';
 

@@ -1,4 +1,4 @@
-import type Lang from '../types/lang';
+import type Lang from '@/types';
 
 const getLanguage = (lang?: Lang) => {
   switch (typeof lang) {
