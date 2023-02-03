@@ -2,8 +2,19 @@ import type SunEditorCore from 'suneditor/src/lib/core';
 import type { SunEditorOptions } from 'suneditor/src/options';
 
 import type { Lang } from 'suneditor/src/lang/Lang';
+import type { Context } from 'suneditor/src/lib/context';
+import type {
+  Controllers,
+  Core,
+  audioInputInformation,
+  fileInfo,
+  imageInputInformation,
+  videoInputInformation,
+} from 'suneditor/src/lib/core';
 
-type lang =
+export type UploadStateType = 'create' | 'update' | 'delete';
+
+export type LangType =
   | 'en'
   | 'da'
   | 'de'
@@ -35,18 +46,16 @@ export interface IProps {
   defaultValue?: string;
   setContents?: string;
   name?: string;
-  onResizeEditor?: (height: number, prevHeight: number) => void;
   appendContents?: string;
   setDefaultStyle?: string;
   hideToolbar?: boolean;
   disableToolbar?: boolean;
   disable?: boolean;
   readOnly?: boolean;
-  hide?: boolean;
+  hide?: boolean; // TODO: no need?
   autoFocus?: boolean;
-  getSunEditorInstance?: (sunEditor: SunEditorCore) => void;
   placeholder?: string;
-  lang?: lang;
+  lang?: LangType;
   width?: string;
   height?: string;
   setAllPlugins?: boolean;
@@ -85,13 +94,13 @@ export interface IEmits {
       targetImgElement,
       index,
       state,
-      imageInfo,
+      info,
       remainingFilesCount,
     }: {
       targetImgElement: HTMLImageElement;
       index: number;
-      state: string;
-      imageInfo: object;
+      state: UploadStateType;
+      info: fileInfo;
       remainingFilesCount: number;
     },
   ): void;
@@ -103,7 +112,13 @@ export interface IEmits {
       state,
       info,
       remainingFilesCount,
-    }: { targetElement: HTMLElement; index: number; state: string; info: object; remainingFilesCount: number },
+    }: {
+      targetElement: HTMLElement;
+      index: number;
+      state: UploadStateType;
+      info: fileInfo;
+      remainingFilesCount: number;
+    },
   ): void;
   (
     event: 'audioUpload',
@@ -113,7 +128,13 @@ export interface IEmits {
       state,
       info,
       remainingFilesCount,
-    }: { targetElement: HTMLElement; index: number; state: string; info: object; remainingFilesCount: number },
+    }: {
+      targetElement: HTMLElement;
+      index: number;
+      state: UploadStateType;
+      info: fileInfo;
+      remainingFilesCount: number;
+    },
   ): void;
   (
     event: 'imageUploadBefore',
@@ -122,11 +143,11 @@ export interface IEmits {
       info,
       uploadHandler,
     }: {
-      files: Array<File>;
-      info: object;
+      files: Array<File>; // TODO: different with origin
+      info: imageInputInformation;
       uploadHandler: Function;
     },
-  ): void;
+  ): boolean | any[] | undefined;
   (
     event: 'videoUploadBefore',
     {
@@ -134,11 +155,11 @@ export interface IEmits {
       info,
       uploadHandler,
     }: {
-      files: Array<File>;
-      info: object;
+      files: Array<File>; // TODO: different with origin
+      info: videoInputInformation;
       uploadHandler: Function;
     },
-  ): void;
+  ): boolean | any[] | undefined;
   (
     event: 'audioUploadBefore',
     {
@@ -146,18 +167,18 @@ export interface IEmits {
       info,
       uploadHandler,
     }: {
-      files: Array<File>;
-      info: object;
+      files: Array<File>; // TODO: different with origin
+      info: audioInputInformation;
       uploadHandler: Function;
     },
-  ): void;
+  ): boolean | any[] | undefined;
   (event: 'imageUploadError', { errorMessage, result }: { errorMessage: string; result: any }): void;
   (event: 'videoUploadError', { errorMessage, result }: { errorMessage: string; result: any }): void;
   (event: 'audioUploadError', { errorMessage, result }: { errorMessage: string; result: any }): void;
   (event: 'toggleCodeView', isCodeView: boolean): void;
   (event: 'toggleFullScreen', isFullScreen: boolean): void;
-  (event: 'showInline', { toolbar, context }: { toolbar: Element; context: any }): void;
-  (event: 'showController', { name, controllers }: { name: string; controllers: Array<any> }): void;
+  (event: 'showInline', { toolbar, context }: { toolbar: Element; context: Context }): void;
+  (event: 'showController', { name, controllers }: { name: string; controllers: Controllers }): void;
   (
     event: 'imageUploadHandler',
     {
@@ -166,15 +187,34 @@ export interface IEmits {
       core,
     }: {
       xmlHttpRequest: XMLHttpRequest;
-      info: {
-        isUpdate: boolean;
-        linkValue: any;
-        element: Element;
-        align: any;
-        linkNewWindow: any;
-        [key: string]: any;
-      };
-      core: any;
+      info: imageInputInformation;
+      core: Core;
     },
   ): void;
+  (
+    event: 'videoUploadHandler',
+    {
+      xmlHttpRequest,
+      info,
+      core,
+    }: {
+      xmlHttpRequest: XMLHttpRequest;
+      info: videoInputInformation;
+      core: Core;
+    },
+  ): void;
+  (
+    event: 'audioUploadHandler',
+    {
+      xmlHttpRequest,
+      info,
+      core,
+    }: {
+      xmlHttpRequest: XMLHttpRequest;
+      info: audioInputInformation;
+      core: Core;
+    },
+  ): void;
+  (event: 'resizeEditor', { height, prevHeight }: { height: number; prevHeight: number }): void;
+  (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
 }
