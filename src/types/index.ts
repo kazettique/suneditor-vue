@@ -1,16 +1,17 @@
-import type SunEditorCore from 'suneditor/src/lib/core';
-import type { SunEditorOptions } from 'suneditor/src/options';
-
 import type { Lang } from 'suneditor/src/lang/Lang';
 import type { Context } from 'suneditor/src/lib/context';
+import type SunEditorCore from 'suneditor/src/lib/core';
 import type {
+  audioInputInformation,
   Controllers,
   Core,
-  audioInputInformation,
   fileInfo,
   imageInputInformation,
   videoInputInformation,
 } from 'suneditor/src/lib/core';
+import type { SunEditorOptions } from 'suneditor/src/options';
+
+import type { ButtonEnum, ButtonType } from './enum';
 
 export type UploadStateType = 'create' | 'update' | 'delete';
 
@@ -38,27 +39,31 @@ export type LangType =
   | Lang;
 
 export interface SetOptions extends SunEditorOptions {
+  buttonList: ButtonType[][];
   customPlugins?: Array<Plugin> | Record<string, Plugin>;
 }
 
 export interface IProps {
-  setOptions?: SetOptions;
-  defaultValue?: string;
-  setContents?: string;
-  name?: string;
   appendContents?: string;
-  setDefaultStyle?: string;
-  hideToolbar?: boolean;
-  disableToolbar?: boolean;
-  disable?: boolean;
-  readOnly?: boolean;
-  hide?: boolean; // TODO: no need?
   autoFocus?: boolean;
-  placeholder?: string;
-  lang?: LangType;
-  width?: string;
+  defaultValue?: string;
+  disable?: boolean;
+  disableToolbar?: boolean;
+  disableWysiwyg?: boolean;
   height?: string;
+  hide?: boolean; // TODO: no need?
+  hideToolbar?: boolean;
+  isNoticeOpen?: boolean;
+  lang?: LangType;
+  name?: string;
+  noticeMessage?: string;
+  placeholder?: string;
+  readOnly?: boolean;
   setAllPlugins?: boolean;
+  setContents?: string;
+  setDefaultStyle?: string; // TODO: no need?
+  setOptions?: SetOptions;
+  width?: string;
 }
 
 export interface IEmits {
@@ -72,13 +77,13 @@ export interface IEmits {
   (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
   (event: 'keyDown', keyboardEvent: KeyboardEvent): void;
   (event: 'focus', focusEvent: FocusEvent): void;
-  (event: 'blur', { focusEvent, editorContents }: { focusEvent: FocusEvent; editorContents: string }): void;
+  (event: 'blur', { focusEvent, editorContents }: { editorContents: string; focusEvent: FocusEvent }): void;
   (event: 'save', contents: string): void;
   (event: 'setToolbarButtons', buttonList: Array<any>): void;
   (event: 'load', reload: boolean): void;
   (
     event: 'drop',
-    { dragEvent, cleanData, maxCharCount }: { dragEvent: DragEvent; cleanData: string; maxCharCount: boolean },
+    { dragEvent, cleanData, maxCharCount }: { cleanData: string; dragEvent: DragEvent; maxCharCount: boolean },
   ): boolean | Array<any> | void;
   (
     event: 'paste',
@@ -86,7 +91,7 @@ export interface IEmits {
       clipboardEvent,
       cleanData,
       maxCharCount,
-    }: { clipboardEvent: ClipboardEvent; cleanData: string; maxCharCount: boolean },
+    }: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: boolean },
   ): void;
   (
     event: 'imageUpload',
@@ -97,11 +102,11 @@ export interface IEmits {
       info,
       remainingFilesCount,
     }: {
-      targetImgElement: HTMLImageElement;
       index: number;
-      state: UploadStateType;
       info: fileInfo;
       remainingFilesCount: number;
+      state: UploadStateType;
+      targetImgElement: HTMLImageElement;
     },
   ): void;
   (
@@ -113,11 +118,11 @@ export interface IEmits {
       info,
       remainingFilesCount,
     }: {
-      targetElement: HTMLElement;
       index: number;
-      state: UploadStateType;
       info: fileInfo;
       remainingFilesCount: number;
+      state: UploadStateType;
+      targetElement: HTMLElement;
     },
   ): void;
   (
@@ -129,11 +134,11 @@ export interface IEmits {
       info,
       remainingFilesCount,
     }: {
-      targetElement: HTMLElement;
       index: number;
-      state: UploadStateType;
       info: fileInfo;
       remainingFilesCount: number;
+      state: UploadStateType;
+      targetElement: HTMLElement;
     },
   ): void;
   (
@@ -172,13 +177,13 @@ export interface IEmits {
       uploadHandler: Function;
     },
   ): boolean | any[] | undefined;
-  (event: 'imageUploadError', { errorMessage, result }: { errorMessage: string; result: any }): void;
-  (event: 'videoUploadError', { errorMessage, result }: { errorMessage: string; result: any }): void;
-  (event: 'audioUploadError', { errorMessage, result }: { errorMessage: string; result: any }): void;
+  (event: 'imageUploadError', { errorMessage, result }: { errorMessage: string; result: any }): boolean;
+  (event: 'videoUploadError', { errorMessage, result }: { errorMessage: string; result: any }): boolean;
+  (event: 'audioUploadError', { errorMessage, result }: { errorMessage: string; result: any }): boolean;
   (event: 'toggleCodeView', isCodeView: boolean): void;
   (event: 'toggleFullScreen', isFullScreen: boolean): void;
-  (event: 'showInline', { toolbar, context }: { toolbar: Element; context: Context }): void;
-  (event: 'showController', { name, controllers }: { name: string; controllers: Controllers }): void;
+  (event: 'showInline', { toolbar, context }: { context: Context; toolbar: Element }): void;
+  (event: 'showController', { name, controllers }: { controllers: Controllers; name: string }): void;
   (
     event: 'imageUploadHandler',
     {
@@ -186,9 +191,9 @@ export interface IEmits {
       info,
       core,
     }: {
-      xmlHttpRequest: XMLHttpRequest;
-      info: imageInputInformation;
       core: Core;
+      info: imageInputInformation;
+      xmlHttpRequest: XMLHttpRequest;
     },
   ): void;
   (
@@ -198,9 +203,9 @@ export interface IEmits {
       info,
       core,
     }: {
-      xmlHttpRequest: XMLHttpRequest;
-      info: videoInputInformation;
       core: Core;
+      info: videoInputInformation;
+      xmlHttpRequest: XMLHttpRequest;
     },
   ): void;
   (
@@ -210,11 +215,14 @@ export interface IEmits {
       info,
       core,
     }: {
-      xmlHttpRequest: XMLHttpRequest;
-      info: audioInputInformation;
       core: Core;
+      info: audioInputInformation;
+      xmlHttpRequest: XMLHttpRequest;
     },
   ): void;
-  (event: 'resizeEditor', { height, prevHeight }: { height: number; prevHeight: number }): void;
+  (
+    event: 'resizeEditor',
+    { height, prevHeight }: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null },
+  ): {};
   (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
 }

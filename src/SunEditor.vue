@@ -3,28 +3,32 @@
 </template>
 
 <script setup lang="ts">
-import type { IEmits, IProps, UploadStateType } from '@/types';
 import suneditor from 'suneditor';
 import type { Context } from 'suneditor/src/lib/context';
 import type SunEditorCore from 'suneditor/src/lib/core';
 import type {
-Controllers,
-Core,
-audioInputInformation,
-fileInfo,
-imageInputInformation,
-videoInputInformation,
+  audioInputInformation,
+  Controllers,
+  Core,
+  fileInfo,
+  imageInputInformation,
+  videoInputInformation,
 } from 'suneditor/src/lib/core';
 import { computed, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 
+import type { IEmits, IProps, UploadStateType } from '@/types';
+
 const props = withDefaults(defineProps<IProps>(), {
+  disable: false,
+  disableToolbar: false,
+  disableWysiwyg: false,
+  hideToolbar: false,
+  isNoticeOpen: false,
+  noticeMessage: '',
+  readOnly: false,
+  setAllPlugins: true,
   setOptions: () => ({}),
   width: '100%',
-  setAllPlugins: true,
-  disable: false,
-  readOnly: false,
-  hideToolbar: false,
-  disableToolbar: false,
 });
 
 const emits = defineEmits<IEmits>();
@@ -46,6 +50,47 @@ watch(setOptions, (newValue, oldValue) => {
     editorInstance.value.setOptions(newValue);
   }
 });
+
+// TODO: set default style ?
+
+// notice watcher
+watchEffect(() => {
+  if (editorInstance.value) {
+    if (props.isNoticeOpen) {
+      editorInstance.value.noticeOpen(props.noticeMessage);
+    } else {
+      editorInstance.value.noticeClose();
+    }
+  }
+});
+
+// TODO: save
+// TODO: get context
+// TODO: get contents
+// TODO: get text
+// TODO: get char count
+// TODO: get images info
+// TODO: get files info
+// TODO: insert image
+
+const insertHTML = (
+  html: Element | string,
+  notCleaningData?: boolean,
+  checkCharCount?: boolean,
+  rangeSelection?: boolean,
+): void => {
+  if (editorInstance.value) {
+    editorInstance.value.insertHTML(html, notCleaningData, checkCharCount, rangeSelection);
+  }
+};
+
+const setContents = (contents: string): void => {
+  if (editorInstance.value) {
+    editorInstance.value.setContents(contents);
+  }
+};
+
+// append contents
 
 // readOnly watcher
 const readOnly = computed(() => props.readOnly);
@@ -79,6 +124,18 @@ watch(hideToolbar, (newValue, oldValue) => {
   }
 });
 
+// disable wysiwyg watcher
+const disableWysiwyg = computed(() => props.disableWysiwyg);
+watch(disableWysiwyg, (newValue, oldValue) => {
+  if (editorInstance.value) {
+    if (newValue) {
+      editorInstance.value.wysiwyg.disable();
+    } else {
+      editorInstance.value.wysiwyg.enable();
+    }
+  }
+});
+
 // disable toolbar watcher
 const disableToolbar = computed(() => props.disableToolbar);
 watch(disableToolbar, (newValue, oldValue) => {
@@ -90,23 +147,6 @@ watch(disableToolbar, (newValue, oldValue) => {
     }
   }
 });
-
-const insertHTML = (
-  html: Element | string,
-  notCleaningData?: boolean,
-  checkCharCount?: boolean,
-  rangeSelection?: boolean,
-): void => {
-  if (editorInstance.value) {
-    editorInstance.value.insertHTML(html, notCleaningData, checkCharCount, rangeSelection);
-  }
-};
-
-const setContents = (contents: string): void => {
-  if (editorInstance.value) {
-    editorInstance.value.setContents(contents);
-  }
-};
 
 onMounted(() => {
   if (textAreaEl.value) {
@@ -131,15 +171,15 @@ onMounted(() => {
     // instance.onCut = (e: Event, clipboardData: any, core: Core): boolean => {}; // TODO: fix return type
     instance.onSave = (contents: string, core: Core): void => emits('save', contents);
     instance.showInline = (toolbar: Element, context: Context, core: Core): void =>
-      emits('showInline', { toolbar, context });
+      emits('showInline', { context, toolbar });
     instance.showController = (name: String, controllers: Controllers, core: Core): void =>
-      emits('showController', { name, controllers });
+      emits('showController', { controllers, name });
     instance.imageUploadHandler = (xmlHttp: XMLHttpRequest, info: imageInputInformation, core: Core): void =>
-      emits('imageUploadHandler', { xmlHttp, info, core });
+      emits('imageUploadHandler', { core, info, xmlHttp });
     instance.videoUploadHandler = (xmlHttp: XMLHttpRequest, info: videoInputInformation, core: Core): void =>
-      emits('videoUploadHandler', { xmlHttp, info, core });
+      emits('videoUploadHandler', { core, info, xmlHttp });
     instance.audioUploadHandler = (xmlHttp: XMLHttpRequest, info: audioInputInformation, core: Core): void =>
-      emits('audioUploadHandler', { xmlHttp, info, core });
+      emits('audioUploadHandler', { core, info, xmlHttp });
     instance.toggleCodeView = (isCodeView: boolean, core: Core): void => emits('toggleCodeView', isCodeView);
     instance.toggleFullScreen = (isFullScreen: boolean, core: Core): void => emits('toggleFullScreen', isFullScreen);
     instance.onImageUploadBefore = (
@@ -173,7 +213,7 @@ onMounted(() => {
       info: fileInfo,
       remainingFilesCount: number,
       core: Core,
-    ): void => emits('imageUpload', { targetElement, index, state, info, remainingFilesCount });
+    ): void => emits('imageUpload', { index, info, remainingFilesCount, state, targetElement });
     instance.onVideoUpload = (
       targetElement: HTMLIFrameElement | HTMLVideoElement,
       index: number,
@@ -181,7 +221,7 @@ onMounted(() => {
       info: fileInfo,
       remainingFilesCount: number,
       core: Core,
-    ): void => emits('videoUpload', { targetElement, index, state, info, remainingFilesCount });
+    ): void => emits('videoUpload', { index, info, remainingFilesCount, state, targetElement });
     instance.onAudioUpload = (
       targetElement: HTMLAudioElement,
       index: number,
@@ -189,7 +229,20 @@ onMounted(() => {
       info: fileInfo,
       remainingFilesCount: number,
       core: Core,
-    ): void => emits('audioUpload', { targetElement, index, state, info, remainingFilesCount });
+    ): void => emits('audioUpload', { index, info, remainingFilesCount, state, targetElement });
+    instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean =>
+      emits('imageUploadError', { errorMessage, result });
+    instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean =>
+      emits('videoUploadError', { errorMessage, result });
+    instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean =>
+      emits('audioUploadError', { errorMessage, result });
+    instance.onResizeEditor = (
+      height: number,
+      prevHeight: number,
+      core: Core,
+      resizeObserverEntry: ResizeObserverEntry | null,
+    ): {} => emits('resizeEditor', { height, prevHeight, resizeObserverEntry });
+    instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', buttonList);
 
     editorInstance.value = instance;
   }
