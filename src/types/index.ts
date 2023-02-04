@@ -11,35 +11,17 @@ import type {
 } from 'suneditor/src/lib/core';
 import type { SunEditorOptions } from 'suneditor/src/options';
 
-import type { ButtonEnum, ButtonType } from './enum';
+import type { ButtonEnum, LangEnum } from './enum';
 
 export type UploadStateType = 'create' | 'update' | 'delete';
 
-export type LangType =
-  | 'en'
-  | 'da'
-  | 'de'
-  | 'es'
-  | 'fr'
-  | 'ja'
-  | 'ko'
-  | 'pt_br'
-  | 'nl'
-  | 'ru'
-  | 'it'
-  | 'zh_cn'
-  | 'ro'
-  | 'pl'
-  | 'ckb'
-  | 'lv'
-  | 'se'
-  | 'ua'
-  | 'he'
-  | 'it'
-  | Lang;
+export type LangType = `${LangEnum}` | Lang;
 
+export type ButtonType = `${ButtonEnum}`;
+
+export type ButtonListItemType = ButtonType[] | ButtonType;
 export interface SetOptions extends SunEditorOptions {
-  buttonList: ButtonType[][];
+  buttonList?: (ButtonType[] | ButtonType)[];
   customPlugins?: Array<Plugin> | Record<string, Plugin>;
 }
 

@@ -1,5 +1,6 @@
 export enum ButtonEnum {
   ALIGN = 'align',
+  BLOCKQUOTE = 'blockquote',
   BOLD = 'bold',
   CODE_VIEW = 'codeView',
   FONT = 'font',
@@ -7,6 +8,7 @@ export enum ButtonEnum {
   FONT_SIZE = 'fontSize',
   FORMAT_BLOCK = 'formatBlock',
   FULLSCREEN = 'fullscreen',
+  GALLERY = 'gallery',
   HILITE_COLOR = 'hiliteColor',
   HORIZONTAL_RULE = 'horizontalRule',
   IMAGE = 'image',
@@ -15,6 +17,7 @@ export enum ButtonEnum {
   LINK = 'link',
   LIST = 'list',
   OUTDENT = 'outdent',
+  PARAGRAPH_STYLE = 'ParagraphStyle',
   PREVIEW = 'preview',
   PRINT = 'print',
   REDO = 'redo',
@@ -32,35 +35,23 @@ export enum ButtonEnum {
   VIDEO = 'video',
 }
 
-export type ButtonType =
-  | 'align'
-  | 'bold'
-  | 'codeView'
-  | 'font'
-  | 'fontColor'
-  | 'fontSize'
-  | 'formatBlock'
-  | 'fullscreen'
-  | 'hiliteColor'
-  | 'horizontalRule'
-  | 'image'
-  | 'indent'
-  | 'italic'
-  | 'link'
-  | 'list'
-  | 'outdent'
-  | 'preview'
-  | 'print'
-  | 'redo'
-  | 'removeFormat'
-  | 'save'
-  | 'showBlocks'
-  | '/'
-  | 'strike'
-  | 'subscript'
-  | 'superscript'
-  | 'table'
-  | 'template'
-  | 'underline'
-  | 'undo'
-  | 'video';
+export enum LangEnum {
+  CKB = 'ckb',
+  DA = 'da',
+  DE = 'de',
+  EN = 'en',
+  ES = 'es',
+  FR = 'fr',
+  HE = 'he',
+  IT = 'it',
+  JA = 'ja',
+  KO = 'ko',
+  NL = 'nl',
+  PL = 'pl',
+  PT_BR = 'pt_br',
+  RO = 'ro',
+  RU = 'ru',
+  SE = 'se',
+  UA = 'ua',
+  ZH_CN = 'zh_cn',
+}
