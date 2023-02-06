@@ -49,7 +49,7 @@ export interface IEmits {
   (event: 'scroll', uiEvent: UIEvent): void;
   (event: 'copy', clipboardEvent: ClipboardEvent): boolean;
   (event: 'cut', clipboardEvent: ClipboardEvent): boolean;
-  (event: 'click', mouseEvent: MouseEvent): void;
+  (event: 'click', mouseEvent: PointerEvent): void;
   (event: 'mouseDown', mouseEvent: MouseEvent): void;
   (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
   (event: 'keyDown', keyboardEvent: KeyboardEvent): void;
@@ -145,12 +145,6 @@ const editorInstance = ref<SunEditorCore | null>(null);
 
 const compInstance = getCurrentInstance();
 const editorId = compInstance ? 'editor' + compInstance.uid.toString() : 'null';
-
-// watchEffect(() => {
-//   if (textAreaEl.value) {
-//     editorInstance.value = suneditor.create(textAreaEl.value, props.setOptions);
-//   }
-// });
 
 // setOptions watcher
 const setOptions = computed(() => props.setOptions);
@@ -264,16 +258,19 @@ onMounted(() => {
   // setup custom events
   instance.onScroll = (event: Event, core: Core): void => {
     console.log('event', event);
-    // emits('scroll', event)
+    // emits('scroll', event);
   };
   instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
   instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
-  instance.onClick = (event: Event, core: Core): void => emits('click', event as MouseEvent);
-  // instance.onInput = (event: Event, core: Core): void => emits('input', event); // TODO: check event type & value
+  instance.onClick = (event: Event, core: Core): void => emits('click', event as PointerEvent);
+  // instance.onInput = (event: Event, core: Core): void => {
+  //   console.log('event', event);
+  //   emits('input', event);
+  // }; // TODO: check event type & value
   instance.onKeyDown = (event: Event, core: Core): void => emits('keyDown', event as KeyboardEvent);
   instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', event as KeyboardEvent);
   instance.onChange = (contents: string, core: Core): void => emits('change', contents);
-  instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event); // TODO: check event type & value
+  instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
   // instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
   //   emits('drop', event, cleanData, maxCharCount, core);
   // instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>

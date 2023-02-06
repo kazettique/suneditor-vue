@@ -1,12 +1,14 @@
 <template>
   <div>
-    <SunEditor v-bind:set-options="editorConfig" />
-    <div>home</div>
+    <SunEditor v-bind:set-options="currentSetup" v-bind:disable="disable" v-on:scroll="onScroll" />
+    <button type="button" v-on:click="changeSetup">change setup</button>
+    <button type="button" v-on:click="toggleDisable">toggle disable</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import plugins from 'suneditor/src/plugins';
+import { ref } from 'vue';
 
 import SunEditor from '@/SunEditor.vue';
 import type { SetOptions } from '@/types';
@@ -56,6 +58,39 @@ const editorConfig: SetOptions = {
   placeholder: 'test placeholder',
   plugins: { ...plugins },
   width: '500px',
+};
+const editorConfig2: SetOptions = {
+  buttonList: [
+    ['undo', 'redo'],
+    ['font', 'fontSize', 'formatBlock'],
+    ['paragraphStyle', 'blockquote'],
+    ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+    ['fontColor', 'hiliteColor', 'textStyle'],
+    ['removeFormat'],
+  ],
+  charCounter: true,
+  charCounterLabel: 'Maintain by Woody - Total Character',
+  formats: ['p', 'blockquote', 'h2', 'h3'],
+  height: '300px',
+  minHeight: '150px',
+  placeholder: 'test placeholder',
+  plugins: { ...plugins },
+  width: '500px',
+};
+
+const currentSetup = ref<SetOptions>(editorConfig);
+const disable = ref<boolean>(false);
+
+const changeSetup = () => {
+  currentSetup.value = editorConfig2;
+};
+
+const toggleDisable = () => {
+  disable.value = !disable.value;
+};
+
+const onScroll = (event: Event) => {
+  console.log('event', event);
 };
 
 // const selectedImage = (param) => {
