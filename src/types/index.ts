@@ -1,4 +1,14 @@
 import type { Lang } from 'suneditor/src/lang/Lang';
+import type { Context } from 'suneditor/src/lib/context';
+import type {
+  audioInputInformation,
+  Controllers,
+  Core,
+  fileInfo,
+  imageInputInformation,
+  videoInputInformation,
+} from 'suneditor/src/lib/core';
+import type SunEditorCore from 'suneditor/src/lib/core';
 import type { SunEditorOptions } from 'suneditor/src/options';
 
 import type { ButtonEnum, LangEnum } from './enum';
@@ -33,7 +43,7 @@ export interface SetOptions extends SunEditorOptions {
 //   readOnly?: boolean;
 //   setAllPlugins?: boolean;
 //   setContents?: string;
-//   setDefaultStyle?: string; // TODO: no need?
+//   setDefaultStyle?: string;
 //   setOptions?: SetOptions;
 //   width?: string;
 // }
@@ -42,9 +52,9 @@ export interface SetOptions extends SunEditorOptions {
 //   (event: 'change', content: string): void;
 //   (event: 'input', inputEvent: InputEvent): void;
 //   (event: 'scroll', uiEvent: UIEvent): void;
-//   (event: 'copy', clipboardEvent: ClipboardEvent): boolean;
-//   (event: 'cut', clipboardEvent: ClipboardEvent): boolean;
-//   (event: 'click', mouseEvent: MouseEvent): void;
+//   (event: 'copy', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
+//   (event: 'cut', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
+//   (event: 'click', mouseEvent: PointerEvent): void;
 //   (event: 'mouseDown', mouseEvent: MouseEvent): void;
 //   (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
 //   (event: 'keyDown', keyboardEvent: KeyboardEvent): void;
@@ -54,7 +64,9 @@ export interface SetOptions extends SunEditorOptions {
 //   (event: 'setToolbarButtons', buttonList: Array<any>): void;
 //   (event: 'load', reload: boolean): void;
 //   (event: 'drop', dragEvent: DragEvent, cleanData: string, maxCharCount: boolean, core: Core): boolean | string;
-//   (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: boolean, core: Core): void;
+//   (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: boolean, core: Core):
+//     | boolean
+//     | string;
 //   (
 //     event: 'imageUpload',
 //     targetImgElement: HTMLImageElement,
@@ -117,4 +129,21 @@ export interface SetOptions extends SunEditorOptions {
 //     resizeObserverEntry: ResizeObserverEntry | null,
 //   ): {};
 //   (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
+// }
+
+// export interface IExpose {
+//   getCharCount: (charCounterType?: string) => number;
+//   getContents: (onlyContents: boolean) => string;
+//   getContext: () => Context;
+//   getFilesInfo: (pluginName: string) => fileInfo[];
+//   getImagesInfo: () => fileInfo[];
+//   getText: () => string;
+//   insertHTML: (
+//     html: Element | string,
+//     notCleaningData?: boolean,
+//     checkCharCount?: boolean,
+//     rangeSelection?: boolean,
+//   ) => void;
+//   insertImage: (files: FileList) => void;
+//   save: () => void;
 // }

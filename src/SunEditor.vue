@@ -1,5 +1,7 @@
 <template>
-  <textarea v-bind:id="editorId" />
+  <div>
+    <textarea v-bind:id="editorId" />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -20,6 +22,7 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watch
 
 import type { LangType, SetOptions, UploadStateType } from '@/types';
 
+// TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
   appendContents?: string;
   autoFocus?: boolean;
@@ -38,17 +41,18 @@ export interface IProps {
   readOnly?: boolean;
   setAllPlugins?: boolean;
   setContents?: string;
-  setDefaultStyle?: string; // TODO: no need?
+  setDefaultStyle?: string;
   setOptions?: SetOptions;
   width?: string;
 }
 
+// TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IEmits {
   (event: 'change', content: string): void;
   (event: 'input', inputEvent: InputEvent): void;
   (event: 'scroll', uiEvent: UIEvent): void;
-  (event: 'copy', clipboardEvent: ClipboardEvent): boolean;
-  (event: 'cut', clipboardEvent: ClipboardEvent): boolean;
+  (event: 'copy', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
+  (event: 'cut', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
   (event: 'click', mouseEvent: PointerEvent): void;
   (event: 'mouseDown', mouseEvent: MouseEvent): void;
   (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
@@ -59,7 +63,9 @@ export interface IEmits {
   (event: 'setToolbarButtons', buttonList: Array<any>): void;
   (event: 'load', reload: boolean): void;
   (event: 'drop', dragEvent: DragEvent, cleanData: string, maxCharCount: boolean, core: Core): boolean | string;
-  (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: boolean, core: Core): void;
+  (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: boolean, core: Core):
+    | boolean
+    | string;
   (
     event: 'imageUpload',
     targetImgElement: HTMLImageElement,
@@ -124,6 +130,26 @@ export interface IEmits {
   (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
 }
 
+// TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
+export interface IExpose {
+  appendContents: (contents: string) => void;
+  getCharCount: (charCounterType?: string) => number;
+  getContents: (onlyContents: boolean) => string;
+  getContext: () => Context;
+  getFilesInfo: (pluginName: string) => fileInfo[];
+  getImagesInfo: () => fileInfo[];
+  getText: () => string;
+  insertHTML: (
+    html: Element | string,
+    notCleaningData?: boolean,
+    checkCharCount?: boolean,
+    rangeSelection?: boolean,
+  ) => void;
+  insertImage: (files: FileList) => void;
+  save: () => void;
+  setContents: (contents: string) => void;
+}
+
 const props = withDefaults(defineProps<IProps>(), {
   disable: false,
   disableToolbar: false,
@@ -139,14 +165,12 @@ const props = withDefaults(defineProps<IProps>(), {
 
 const emits = defineEmits<IEmits>();
 
-// const textAreaEl = ref<HTMLTextAreaElement | null>(null);
 const editorInstance = ref<SunEditorCore | null>(null);
-// const initialEffect = ref<boolean>(true);
 
 const compInstance = getCurrentInstance();
-const editorId = compInstance ? 'editor' + compInstance.uid.toString() : 'null';
+const editorId: string = compInstance ? 'editor_' + compInstance.uid.toString() : 'null';
 
-// setOptions watcher
+// props watcher: setOptions
 const setOptions = computed(() => props.setOptions);
 watch(setOptions, (newValue, oldValue) => {
   if (editorInstance.value) {
@@ -154,9 +178,15 @@ watch(setOptions, (newValue, oldValue) => {
   }
 });
 
-// TODO: set default style ?
+// props watcher: setDefaultStyle
+const setDefaultStyle = computed(() => props.setDefaultStyle);
+watch(setDefaultStyle, (newValue, oldValue) => {
+  if (editorInstance.value && newValue) {
+    return editorInstance.value.setDefaultStyle(newValue);
+  }
+});
 
-// notice watcher
+// watcher: notice
 watchEffect(() => {
   if (editorInstance.value) {
     if (props.isNoticeOpen) {
@@ -167,15 +197,75 @@ watchEffect(() => {
   }
 });
 
-// TODO: save
-// TODO: get context
-// TODO: get contents
-// TODO: get text
-// TODO: get char count
-// TODO: get images info
-// TODO: get files info
-// TODO: insert image
+// expose method: save
+const save = (): void => {
+  if (editorInstance.value) {
+    return editorInstance.value.save();
+  }
+};
 
+// expose method: getContext
+const getContext = (): Context => {
+  if (editorInstance.value) {
+    return editorInstance.value.getContext();
+  } else {
+    return {} as Context;
+  }
+};
+
+// expose method: getContents
+const getContents = (onlyContents: boolean): string => {
+  if (editorInstance.value) {
+    return editorInstance.value.getContents(onlyContents);
+  } else {
+    return '';
+  }
+};
+
+// expose method: getText
+const getText = (): string => {
+  if (editorInstance.value) {
+    return editorInstance.value.getText();
+  } else {
+    return '';
+  }
+};
+
+// expose method: getCharCount
+const getCharCount = (charCounterType?: string): number => {
+  if (editorInstance.value) {
+    return editorInstance.value.getCharCount(charCounterType);
+  } else {
+    return 0;
+  }
+};
+
+// expose method: getImagesInfo
+const getImagesInfo = (): fileInfo[] => {
+  if (editorInstance.value) {
+    return editorInstance.value.getImagesInfo();
+  } else {
+    return [];
+  }
+};
+
+// expose method: getFilesInfo
+const getFilesInfo = (pluginName: string): fileInfo[] => {
+  if (editorInstance.value) {
+    return editorInstance.value.getFilesInfo(pluginName);
+  } else {
+    return [];
+  }
+};
+
+// expose method: insertImage
+const insertImage = (files: FileList): void => {
+  if (editorInstance.value) {
+    editorInstance.value.insertImage(files);
+  }
+};
+
+// expose method: insertHTML
 const insertHTML = (
   html: Element | string,
   notCleaningData?: boolean,
@@ -187,6 +277,7 @@ const insertHTML = (
   }
 };
 
+// expose method: setContents
 const setContents = (contents: string): void => {
   if (editorInstance.value) {
     editorInstance.value.setContents(contents);
@@ -194,8 +285,13 @@ const setContents = (contents: string): void => {
 };
 
 // append contents
+const appendContents = (contents: string): void => {
+  if (editorInstance.value) {
+    editorInstance.value.appendContents(contents);
+  }
+};
 
-// readOnly watcher
+// props watcher: readOnly
 const readOnly = computed(() => props.readOnly);
 watch(readOnly, (newValue, oldValue) => {
   if (editorInstance.value) {
@@ -203,7 +299,7 @@ watch(readOnly, (newValue, oldValue) => {
   }
 });
 
-// disable watcher
+// props watcher: disable
 const disable = computed(() => props.disable);
 watch(disable, (newValue, oldValue) => {
   if (editorInstance.value) {
@@ -215,7 +311,7 @@ watch(disable, (newValue, oldValue) => {
   }
 });
 
-// hide toolbar watcher
+// props watcher: hideToolbar
 const hideToolbar = computed(() => props.hideToolbar);
 watch(hideToolbar, (newValue, oldValue) => {
   if (editorInstance.value) {
@@ -227,7 +323,7 @@ watch(hideToolbar, (newValue, oldValue) => {
   }
 });
 
-// disable wysiwyg watcher
+// props watcher: disableWysiwyg
 const disableWysiwyg = computed(() => props.disableWysiwyg);
 watch(disableWysiwyg, (newValue, oldValue) => {
   if (editorInstance.value) {
@@ -239,7 +335,7 @@ watch(disableWysiwyg, (newValue, oldValue) => {
   }
 });
 
-// disable toolbar watcher
+// props watcher: disableToolbar
 const disableToolbar = computed(() => props.disableToolbar);
 watch(disableToolbar, (newValue, oldValue) => {
   if (editorInstance.value) {
@@ -251,11 +347,25 @@ watch(disableToolbar, (newValue, oldValue) => {
   }
 });
 
+defineExpose<IExpose>({
+  appendContents,
+  getCharCount,
+  getContents,
+  getContext,
+  getFilesInfo,
+  getImagesInfo,
+  getText,
+  insertHTML,
+  insertImage,
+  save,
+  setContents,
+});
+
 onMounted(() => {
   console.log('create sunEditor!');
   const instance = suneditor.create(editorId, props.setOptions);
 
-  // setup custom events
+  // hooking up emits with suneditor instance
   instance.onScroll = (event: Event, core: Core): void => {
     console.log('event', event);
     // emits('scroll', event);
@@ -272,11 +382,15 @@ onMounted(() => {
   instance.onChange = (contents: string, core: Core): void => emits('change', contents);
   instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
   // instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-  //   emits('drop', event, cleanData, maxCharCount, core);
+  //   emits('drop123', event, cleanData, maxCharCount, core);
   // instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
   //   emits('paste', event, cleanData, maxCharCount, core); // TODO: fix return type
-  // instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean => {}; // TODO: fix return type
-  // instance.onCut = (e: Event, clipboardData: any, core: Core): boolean => {}; // TODO: fix return type
+  // instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean => {
+  //   return emits('copy', event, clipboardData);
+  // }; // TODO: fix return type
+  // instance.onCut = (event: Event, clipboardData: any, core: Core): boolean => {
+  //   return emits('cut', event, clipboardData);
+  // }; // TODO: fix type overflow
   instance.onSave = (contents: string, core: Core): void => emits('save', contents);
   instance.showInline = (toolbar: Element, context: Context, core: Core): void => emits('showInline', context, toolbar);
   // instance.showController = (name: String, controllers: Controllers, core: Core): void =>
@@ -289,30 +403,24 @@ onMounted(() => {
     emits('audioUploadHandler', xmlHttp, info, core);
   instance.toggleCodeView = (isCodeView: boolean, core: Core): void => emits('toggleCodeView', isCodeView);
   instance.toggleFullScreen = (isFullScreen: boolean, core: Core): void => emits('toggleFullScreen', isFullScreen);
-  // instance.onImageUploadBefore = (
-  //   files: any[],
-  //   info: imageInputInformation,
-  //   core: Core,
-  //   uploadHandler: Function,
-  // ): boolean | any[] | undefined => {
-  //   emits('imageUploadBefore',  files, info, core, uploadHandler );
-  // }; // TODO: fix return type
-  // instance.onVideoUploadBefore = (
-  //   files: any[],
-  //   info: videoInputInformation,
-  //   core: Core,
-  //   uploadHandler: Function,
-  // ): boolean | any[] | undefined => {
-  //   emits('videoUploadBefore', files, info, core, uploadHandler);
-  // }; // TODO: fix return type
-  // instance.onAudioUploadBefore = (
-  //   files: any[],
-  //   info: audioInputInformation,
-  //   core: Core,
-  //   uploadHandler: Function,
-  // ): boolean | any[] | undefined => {
-  //   emits('audioUploadBefore', files, info, uploadHandler);
-  // }; // TODO: fix return type
+  instance.onImageUploadBefore = (
+    files: any[],
+    info: imageInputInformation,
+    core: Core,
+    uploadHandler: Function,
+  ): boolean | any[] | undefined => emits('imageUploadBefore', files, info, core, uploadHandler);
+  instance.onVideoUploadBefore = (
+    files: any[],
+    info: videoInputInformation,
+    core: Core,
+    uploadHandler: Function,
+  ): boolean | any[] | undefined => emits('videoUploadBefore', files, info, core, uploadHandler);
+  instance.onAudioUploadBefore = (
+    files: any[],
+    info: audioInputInformation,
+    core: Core,
+    uploadHandler: Function,
+  ): boolean | any[] | undefined => emits('audioUploadBefore', files, info, uploadHandler);
   instance.onImageUpload = (
     targetElement: HTMLImageElement,
     index: number,

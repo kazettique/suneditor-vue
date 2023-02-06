@@ -1,8 +1,9 @@
 <template>
   <div>
-    <SunEditor v-bind:set-options="currentSetup" v-bind:disable="disable" v-on:scroll="onScroll" />
+    <SunEditor ref="editorEl" v-bind:set-options="currentSetup" v-bind:disable="disable" v-on:change="onScroll" />
     <button type="button" v-on:click="changeSetup">change setup</button>
     <button type="button" v-on:click="toggleDisable">toggle disable</button>
+    <button type="button" v-on:click="handleInsert">insert html</button>
   </div>
 </template>
 
@@ -10,7 +11,7 @@
 import plugins from 'suneditor/src/plugins';
 import { ref } from 'vue';
 
-import SunEditor from '@/SunEditor.vue';
+import SunEditor, { type IExpose } from '@/SunEditor.vue';
 import type { SetOptions } from '@/types';
 
 // const editorPlugins = {
@@ -80,6 +81,7 @@ const editorConfig2: SetOptions = {
 
 const currentSetup = ref<SetOptions>(editorConfig);
 const disable = ref<boolean>(false);
+const editorEl = ref<IExpose>();
 
 const changeSetup = () => {
   currentSetup.value = editorConfig2;
@@ -91,6 +93,15 @@ const toggleDisable = () => {
 
 const onScroll = (event: Event) => {
   console.log('event', event);
+};
+
+const handleInsert = () => {
+  console.log('editorEl.value', editorEl.value);
+  if (editorEl.value) {
+    const a = editorEl.value;
+    console.log('a', a);
+    editorEl.value.insertHTML('<h2>insert message outer</h2>');
+  }
 };
 
 // const selectedImage = (param) => {
