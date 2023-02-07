@@ -11,7 +11,7 @@
 import plugins from 'suneditor/src/plugins';
 import { ref } from 'vue';
 
-import SunEditor, { type IExpose } from '@/SunEditor.vue';
+import SunEditor from '@/SunEditor.vue';
 import type { SetOptions } from '@/types';
 
 // const editorPlugins = {
@@ -81,7 +81,7 @@ const editorConfig2: SetOptions = {
 
 const currentSetup = ref<SetOptions>(editorConfig);
 const disable = ref<boolean>(false);
-const editorEl = ref<IExpose>();
+const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 
 const changeSetup = () => {
   currentSetup.value = editorConfig2;
