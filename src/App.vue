@@ -1,6 +1,13 @@
 <template>
   <div>
-    <SunEditor ref="editorEl" v-bind:set-options="currentSetup" v-bind:disable="disable" v-on:change="onScroll" />
+    <SunEditor
+      ref="editorEl"
+      v-bind:set-options="currentSetup"
+      v-bind:disable="disable"
+      v-on:input="onScroll"
+      v-on:save="onScroll"
+      v-on:load="onScroll"
+    />
     <button type="button" v-on:click="changeSetup">change setup</button>
     <button type="button" v-on:click="toggleDisable">toggle disable</button>
     <button type="button" v-on:click="handleInsert">insert html</button>
@@ -11,8 +18,8 @@
 import plugins from 'suneditor/src/plugins';
 import { ref } from 'vue';
 
-import SunEditor from '@/SunEditor.vue';
-import type { SetOptions } from '@/types';
+import SunEditor, { type IEmits } from '@/SunEditor.vue';
+import type { OverloadFunc, OverloadFunc2, SetOptions } from '@/types';
 
 // const editorPlugins = {
 //   Gallery: {
@@ -119,6 +126,9 @@ const handleInsert = () => {
 //     true,
 //   );
 // };
+const handlers: OverloadFunc2['change'] = (content) => {
+  console.log('test');
+};
 </script>
 
 <style scoped></style>

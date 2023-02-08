@@ -147,3 +147,49 @@ export interface SetOptions extends SunEditorOptions {
 //   insertImage: (files: FileList) => void;
 //   save: () => void;
 // }
+
+type DefineEmitFuncBase = (event: string, ...args: any[]) => any;
+type ExportEmitFuncBase = (...args: any[]) => any;
+
+// TODO: overload function type
+export type OverloadFunc = {
+  change: (event: 'change', content: string) => void;
+  input: (event: 'input', inputEvent: InputEvent) => void;
+};
+
+// * ideal type for user
+export type OverloadFunc2 = {
+  change: (content: string) => void;
+  input: (inputEvent: InputEvent) => void;
+};
+
+declare function overloadEmits(content: string): void;
+declare function overloadEmits(inputEvent: InputEvent): void;
+
+type ExportEmits = typeof overloadEmits;
+
+// (event: Key,...payload) => returnType;
+
+export interface OriginalIEmits {
+  (event: 'change', content: string): void;
+  (event: 'input', inputEvent: InputEvent): void;
+}
+
+export type OriginalIEmits2 = {
+  (event: 'change', content: string): void;
+  (event: 'input', inputEvent: InputEvent): void;
+};
+
+// TODO: interface emits with mapped type
+export interface TestIEmits {
+  // [T in keyof OverloadFunc]: OverloadFunc[T];
+  // [key: string]: OriginalIEmits;
+}
+
+export type TestIEmits2 = {
+  [T in keyof OverloadFunc2]: OverloadFunc2[T];
+};
+
+export type TestIEmits3<T extends keyof OverloadFunc> = {
+  [U in T]: U;
+};
