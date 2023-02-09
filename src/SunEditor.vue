@@ -20,7 +20,7 @@ import type {
 } from 'suneditor/src/lib/core';
 import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 
-import type { LangType, SetOptions, UploadStateType } from '@/types';
+import type { IExpose, SetOptions, UploadStateType } from '@/types';
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
@@ -122,26 +122,6 @@ export interface IEmits {
   (event: 'audioUploadHandler', xmlHttpRequest: XMLHttpRequest, info: audioInputInformation, core: Core): void;
   (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
   (event: 'showController', controllers: Controllers, name: string): void;
-}
-
-// TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
-export interface IExpose {
-  appendContents: (contents: string) => void;
-  getCharCount: (charCounterType?: string) => number;
-  getContents: (onlyContents: boolean) => string;
-  getContext: () => Context;
-  getFilesInfo: (pluginName: string) => fileInfo[];
-  getImagesInfo: () => fileInfo[];
-  getText: () => string;
-  insertHTML: (
-    html: Element | string,
-    notCleaningData?: boolean,
-    checkCharCount?: boolean,
-    rangeSelection?: boolean,
-  ) => void;
-  insertImage: (files: FileList) => void;
-  save: () => void;
-  setContents: (contents: string) => void;
 }
 
 const props = withDefaults(defineProps<IProps>(), {

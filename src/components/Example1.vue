@@ -33,15 +33,19 @@
       v-on:video-upload-error="editorEventHandlers.videoUploadError"
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
     />
+    <button v-on:click="save">save</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import plugins from 'suneditor/src/plugins';
+import { ref } from 'vue';
 
 import getLanguage from '@/misc/getLanguage';
 import SunEditor, { type IProps } from '@/SunEditor.vue';
-import type { ExportIEmits, SetOptions } from '@/types';
+import type { ExportIEmits, IExpose, SetOptions } from '@/types';
+
+const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 
 const editorConfig: SetOptions = {
   buttonList: [
@@ -91,6 +95,7 @@ const editorProps: IProps = {
   setOptions: editorConfig,
 };
 
+// * EVENTS
 const editorEventHandlers: ExportIEmits = {
   audioUpload: (targetElement, index, state, info, remainingFilesCount) => {
     console.log('audioUpload');
@@ -205,6 +210,17 @@ const editorEventHandlers: ExportIEmits = {
   videoUploadHandler: (xmlHttpRequest, info, core) => {
     console.log('videoUploadHandler');
   },
+};
+
+// * EXPOSE METHODS
+const insertHTML: IExpose['insertHTML'] = (html, notCleaningData, checkCharCount, rangeSelection) => {
+  if (editorEl.value) {
+    editorEl.value.insertHTML(html, notCleaningData, checkCharCount, rangeSelection);
+  }
+};
+
+const save: IExpose['save'] = () => {
+  console.log('save');
 };
 </script>
 
