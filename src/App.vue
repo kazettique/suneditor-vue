@@ -41,6 +41,7 @@
 import plugins from 'suneditor/src/plugins';
 import { ref } from 'vue';
 
+import getLanguage from '@/misc/getLanguage';
 import SunEditor from '@/SunEditor.vue';
 import type { ExportIEmits, IProps, SetOptions } from '@/types';
 
@@ -66,11 +67,13 @@ const editorConfig: SetOptions = {
   charCounterLabel: 'Maintain by Purin - Total Character',
   formats: ['p', 'blockquote', 'h2', 'h3'],
   height: 'auto',
+  lang: getLanguage('zh_tw'),
   minHeight: '150',
   placeholder: 'test placeholder',
   plugins: { ...plugins },
   width: '500px',
 };
+
 const editorConfig2: SetOptions = {
   buttonList: [
     ['undo', 'redo'],

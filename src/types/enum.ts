@@ -50,6 +50,7 @@ export enum LangEnum {
   IT = 'it',
   JA = 'ja',
   KO = 'ko',
+  LV = 'lv',
   NL = 'nl',
   PL = 'pl',
   PT_BR = 'pt_br',

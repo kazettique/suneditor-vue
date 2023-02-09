@@ -15,7 +15,7 @@ import type { ButtonEnum, LangEnum } from './enum';
 
 export type UploadStateType = 'create' | 'update' | 'delete';
 
-export type LangType = `${LangEnum}` | Lang;
+export type LangType = `${LangEnum}`;
 
 export type ButtonType = `${ButtonEnum}`;
 
