@@ -48,24 +48,6 @@ export interface IProps {
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IEmits {
-  (event: 'change', content: string): void;
-  (event: 'input', inputEvent: InputEvent): void;
-  (event: 'scroll', uiEvent: UIEvent): void;
-  (event: 'copy', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
-  (event: 'cut', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
-  (event: 'click', mouseEvent: PointerEvent): void;
-  (event: 'mouseDown', mouseEvent: MouseEvent): void;
-  (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
-  (event: 'keyDown', keyboardEvent: KeyboardEvent): void;
-  (event: 'focus', focusEvent: FocusEvent): void;
-  (event: 'blur', focusEvent: FocusEvent): void;
-  (event: 'save', contents: string): void;
-  (event: 'setToolbarButtons', buttonList: Array<any>): void;
-  (event: 'load', reload: boolean): void;
-  (event: 'drop', dragEvent: DragEvent, cleanData: string, maxCharCount: boolean, core: Core): boolean | string;
-  (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: boolean, core: Core):
-    | boolean
-    | string;
   (
     event: 'imageUpload',
     targetImgElement: HTMLImageElement,
@@ -110,16 +92,6 @@ export interface IEmits {
     info: audioInputInformation,
     uploadHandler: Function,
   ): boolean | any[] | undefined;
-  (event: 'imageUploadError', errorMessage: string, result: any): boolean;
-  (event: 'videoUploadError', errorMessage: string, result: any): boolean;
-  (event: 'audioUploadError', errorMessage: string, result: any): boolean;
-  (event: 'toggleCodeView', isCodeView: boolean): void;
-  (event: 'toggleFullScreen', isFullScreen: boolean): void;
-  (event: 'showInline', context: Context, toolbar: Element): void;
-  (event: 'showController', controllers: Controllers, name: string): void;
-  (event: 'imageUploadHandler', xmlHttpRequest: XMLHttpRequest, info: imageInputInformation, core: Core): void;
-  (event: 'videoUploadHandler', xmlHttpRequest: XMLHttpRequest, info: videoInputInformation, core: Core): void;
-  (event: 'audioUploadHandler', xmlHttpRequest: XMLHttpRequest, info: audioInputInformation, core: Core): void;
   (
     event: 'resizeEditor',
     height: number,
@@ -127,7 +99,35 @@ export interface IEmits {
     prevHeight: number,
     resizeObserverEntry: ResizeObserverEntry | null,
   ): {};
+  (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: number, core: Core):
+    | boolean
+    | string;
+  (event: 'input', inputEvent: InputEvent): void;
+  (event: 'drop', dragEvent: DragEvent, cleanData: string, maxCharCount: number, core: Core): boolean;
+  (event: 'copy', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
+  (event: 'cut', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
+  (event: 'scroll', uiEvent: UIEvent): void;
+  (event: 'change', content: string): void;
+  (event: 'click', mouseEvent: PointerEvent): void;
+  (event: 'mouseDown', mouseEvent: MouseEvent): void;
+  (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
+  (event: 'keyDown', keyboardEvent: KeyboardEvent): void;
+  (event: 'focus', focusEvent: FocusEvent): void;
+  (event: 'blur', focusEvent: FocusEvent): void;
+  (event: 'save', contents: string): void;
+  (event: 'setToolbarButtons', buttonList: Array<any>): void;
+  (event: 'load', reload: boolean): void;
+  (event: 'imageUploadError', errorMessage: string, result: any): boolean;
+  (event: 'videoUploadError', errorMessage: string, result: any): boolean;
+  (event: 'audioUploadError', errorMessage: string, result: any): boolean;
+  (event: 'toggleCodeView', isCodeView: boolean): void;
+  (event: 'toggleFullScreen', isFullScreen: boolean): void;
+  (event: 'showInline', context: Context, toolbar: Element): void;
+  (event: 'imageUploadHandler', xmlHttpRequest: XMLHttpRequest, info: imageInputInformation, core: Core): void;
+  (event: 'videoUploadHandler', xmlHttpRequest: XMLHttpRequest, info: videoInputInformation, core: Core): void;
+  (event: 'audioUploadHandler', xmlHttpRequest: XMLHttpRequest, info: audioInputInformation, core: Core): void;
   (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
+  (event: 'showController', controllers: Controllers, name: string): void;
 }
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
@@ -368,33 +368,28 @@ onMounted(() => {
   // hooking up emits with suneditor instance
   instance.onScroll = (event: Event, core: Core): void => {
     console.log('event', event);
-    // emits('scroll', event);
+    // emits('scroll', event as string);
   };
   instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
   instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
   instance.onClick = (event: Event, core: Core): void => emits('click', event as PointerEvent);
-  // instance.onInput = (event: Event, core: Core): void => {
-  //   console.log('event', event);
-  //   emits('input', event);
-  // }; // TODO: check event type & value
+  instance.onInput = (event: Event, core: Core): void => emits('input', event as InputEvent);
   instance.onKeyDown = (event: Event, core: Core): void => emits('keyDown', event as KeyboardEvent);
   instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', event as KeyboardEvent);
   instance.onChange = (contents: string, core: Core): void => emits('change', contents);
   instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
-  // instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-  //   emits('drop123', event, cleanData, maxCharCount, core);
-  // instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-  //   emits('paste', event, cleanData, maxCharCount, core); // TODO: fix return type
-  // instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean => {
-  //   return emits('copy', event, clipboardData);
-  // }; // TODO: fix return type
-  // instance.onCut = (event: Event, clipboardData: any, core: Core): boolean => {
-  //   return emits('cut', event, clipboardData);
-  // }; // TODO: fix type overflow
+  instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
+    emits('drop', event as DragEvent, cleanData, maxCharCount, core);
+  instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
+    emits('paste', event as ClipboardEvent, cleanData, maxCharCount, core); // TODO: fix return type
+  instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean =>
+    emits('copy', event as ClipboardEvent, clipboardData);
+  instance.onCut = (event: Event, clipboardData: any, core: Core): boolean =>
+    emits('cut', event as ClipboardEvent, clipboardData);
   instance.onSave = (contents: string, core: Core): void => emits('save', contents);
   instance.showInline = (toolbar: Element, context: Context, core: Core): void => emits('showInline', context, toolbar);
-  // instance.showController = (name: String, controllers: Controllers, core: Core): void =>
-  //   emits('showController', { controllers, name });
+  instance.showController = (name: String, controllers: Controllers, core: Core): void =>
+    emits('showController', controllers, name as string);
   instance.imageUploadHandler = (xmlHttp: XMLHttpRequest, info: imageInputInformation, core: Core): void =>
     emits('imageUploadHandler', xmlHttp, info, core);
   instance.videoUploadHandler = (xmlHttp: XMLHttpRequest, info: videoInputInformation, core: Core): void =>

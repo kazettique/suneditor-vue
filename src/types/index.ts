@@ -173,7 +173,7 @@ export interface ExportIEmits {
   click: (mouseEvent: PointerEvent) => void;
   copy: (clipboardEvent: ClipboardEvent, clipboardData: any) => boolean;
   cut: (clipboardEvent: ClipboardEvent, clipboardData: any) => boolean;
-  drop: (dragEvent: DragEvent, cleanData: string, maxCharCount: boolean, core: Core) => boolean | string;
+  drop: (dragEvent: DragEvent, cleanData: string, maxCharCount: number, core: Core) => boolean | string;
   focus: (focusEvent: FocusEvent) => void;
   getSunEditorInstance: (sunEditor: SunEditorCore) => void;
   imageUpload: (
