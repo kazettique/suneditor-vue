@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "suneditor": "^2.44.3",
-    "vue": "^3.2.45"
+    "vue": "^3.2.47"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
