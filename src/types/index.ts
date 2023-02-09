@@ -113,6 +113,28 @@ export interface ExportIEmits {
   videoUploadHandler: (xmlHttpRequest: XMLHttpRequest, info: videoInputInformation, core: Core) => void;
 }
 
+// * TEST AREA BELOW
+
+// * ideal type for user
+export type OverloadFunc2 = {
+  change: (content: string) => void;
+  input: (inputEvent: InputEvent) => void;
+};
+// *   |
+// *   |
+// *   V
+// TODO: What's the magic should perform here?
+// *   |
+// *   |
+// *   V
+// * emit overloaded type or interface for Vue
+export interface IEmitsForVue {
+  (event: 'change', content: string): void;
+  (event: 'input', inputEvent: InputEvent): void;
+}
+
+// * ================TYPESCRIPT EXPERIMENT================================
+
 type DefineEmitFuncBase = (event: string, ...args: any[]) => any;
 type ExportEmitFuncBase = (...args: any[]) => any;
 
@@ -120,12 +142,6 @@ type ExportEmitFuncBase = (...args: any[]) => any;
 export type OverloadFunc = {
   change: (event: 'change', content: string) => void;
   input: (event: 'input', inputEvent: InputEvent) => void;
-};
-
-// * ideal type for user
-export type OverloadFunc2 = {
-  change: (content: string) => void;
-  input: (inputEvent: InputEvent) => void;
 };
 
 declare function overloadEmits(content: string): void;
