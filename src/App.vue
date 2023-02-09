@@ -2,8 +2,7 @@
   <div>
     <SunEditor
       ref="editorEl"
-      v-bind:set-options="currentSetup"
-      v-bind:disable="disable"
+      v-bind="editorProps"
       v-on:audio-upload="handleAudioUpload"
       v-on:audio-upload-before="audioUploadBefore"
       v-on:audio-upload-error="audioUploadError"
@@ -35,8 +34,6 @@
       v-on:video-upload-handler="handleVideoUploadHandler"
     />
     <button type="button" v-on:click="changeSetup">change setup</button>
-    <button type="button" v-on:click="toggleDisable">toggle disable</button>
-    <button type="button" v-on:click="handleInsert">insert html</button>
   </div>
 </template>
 
@@ -45,7 +42,7 @@ import plugins from 'suneditor/src/plugins';
 import { ref } from 'vue';
 
 import SunEditor from '@/SunEditor.vue';
-import type { ExportIEmits, SetOptions } from '@/types';
+import type { ExportIEmits, IProps, SetOptions } from '@/types';
 
 const editorConfig: SetOptions = {
   buttonList: [
@@ -94,16 +91,13 @@ const editorConfig2: SetOptions = {
 };
 
 const currentSetup = ref<SetOptions>(editorConfig);
-const disable = ref<boolean>(false);
 const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 
 const changeSetup = () => {
   currentSetup.value = editorConfig2;
 };
 
-const toggleDisable = () => {
-  disable.value = !disable.value;
-};
+const toggleDisable = () => {};
 
 const handleInsert = () => {
   console.log('editorEl.value', editorEl.value);
@@ -114,7 +108,32 @@ const handleInsert = () => {
   }
 };
 
-// * event handlers
+// * PROPS
+const editorProps: IProps = {
+  appendContents: 'test append contents',
+  autoFocus: true,
+  defaultValue: 'test default value',
+  disableToolbar: true,
+  disableWysiwyg: true,
+  height: '500px', // TODO: no need?
+  hide: false, // TODO: no need?
+  hideToolbar: false, // TODO: no need?
+  isNoticeOpen: false,
+  lang: 'ja', // TODO; no need?
+  name: 'test name', // TODO: no need?
+  noticeMessage: 'test notice message',
+  placeholder: 'test placeholder 5566', // TODO: no need?
+  readOnly: false,
+  setAllPlugins: false,
+  setContents: 'test set contents', // TODO: no need?
+  setDefaultStyle: 'test set default style',
+  setOptions: editorConfig,
+  width: '500px', // TODO: no need?
+};
+
+// * EXPOSE METHODS
+
+// * EVENT HANDLERS
 const handleAudioUpload: ExportIEmits['audioUpload'] = (targetElement, index, state, info, remainingFilesCount) => {
   console.log('audioUpload');
 };

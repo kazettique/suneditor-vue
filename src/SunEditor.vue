@@ -25,25 +25,25 @@ import type { LangType, SetOptions, UploadStateType } from '@/types';
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
   appendContents?: string;
-  autoFocus?: boolean;
+  autoFocus?: boolean; // TODO: where is this?
   defaultValue?: string;
   disable?: boolean;
   disableToolbar?: boolean;
   disableWysiwyg?: boolean;
-  height?: string;
+  height?: string; // TODO: no need?
   hide?: boolean; // TODO: no need?
-  hideToolbar?: boolean;
+  hideToolbar?: boolean; // TODO: no need?
   isNoticeOpen?: boolean;
-  lang?: LangType;
-  name?: string;
+  lang?: LangType; // TODO: no need?
+  name?: string; // TODO: no need?
   noticeMessage?: string;
-  placeholder?: string;
+  placeholder?: string; // TODO: no need?
   readOnly?: boolean;
   setAllPlugins?: boolean;
-  setContents?: string;
+  setContents?: string; // TODO: no need?
   setDefaultStyle?: string;
   setOptions?: SetOptions;
-  width?: string;
+  width?: string; // TODO: no need?
 }
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
