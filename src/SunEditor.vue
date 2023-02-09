@@ -30,20 +30,14 @@ export interface IProps {
   disable?: boolean;
   disableToolbar?: boolean;
   disableWysiwyg?: boolean;
-  height?: string; // TODO: no need?
   hide?: boolean; // TODO: no need?
-  hideToolbar?: boolean; // TODO: no need?
   isNoticeOpen?: boolean;
-  lang?: LangType; // TODO: no need?
-  name?: string; // TODO: no need?
   noticeMessage?: string;
-  placeholder?: string; // TODO: no need?
   readOnly?: boolean;
   setAllPlugins?: boolean;
   setContents?: string; // TODO: no need?
   setDefaultStyle?: string;
   setOptions?: SetOptions;
-  width?: string; // TODO: no need?
 }
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
