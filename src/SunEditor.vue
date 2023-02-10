@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <textarea v-bind:id="editorId" />
-  </div>
+  <textarea v-bind:id="editorId" />
 </template>
 
 <script setup lang="ts">
@@ -340,10 +338,7 @@ onMounted(() => {
   const instance = suneditor.create(editorId, props.setOptions);
 
   // hooking up emits with suneditor instance
-  instance.onScroll = (event: Event, core: Core): void => {
-    console.log('event', event);
-    // emits('scroll', event as string);
-  };
+  instance.onScroll = (event: Event, core: Core): void => emits('scroll', event as UIEvent);
   instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
   instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
   instance.onClick = (event: Event, core: Core): void => emits('click', event as PointerEvent);
@@ -355,7 +350,7 @@ onMounted(() => {
   instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
     emits('drop', event as DragEvent, cleanData, maxCharCount, core);
   instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-    emits('paste', event as ClipboardEvent, cleanData, maxCharCount, core); // TODO: fix return type
+    emits('paste', event as ClipboardEvent, cleanData, maxCharCount, core);
   instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean =>
     emits('copy', event as ClipboardEvent, clipboardData);
   instance.onCut = (event: Event, clipboardData: any, core: Core): boolean =>
