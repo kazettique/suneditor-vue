@@ -61,3 +61,9 @@ export enum LangEnum {
   ZH_CN = 'zh_cn',
   ZH_TW = 'zh_tw',
 }
+
+export enum UploadStateEnum {
+  CREATE = 'create',
+  DELETE = 'delete',
+  UPDATE = 'update',
+}
