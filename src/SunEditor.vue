@@ -337,7 +337,7 @@ onMounted(() => {
   console.log('create sunEditor!');
   const instance = suneditor.create(editorId, props.setOptions);
 
-  // hooking up emits with suneditor instance
+  // binding emit handlers with suneditor instance
   instance.onScroll = (event: Event, core: Core): void => emits('scroll', event as UIEvent);
   instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
   instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
