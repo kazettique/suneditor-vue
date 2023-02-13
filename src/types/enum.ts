@@ -67,3 +67,10 @@ export enum UploadStateEnum {
   DELETE = 'delete',
   UPDATE = 'update',
 }
+
+export enum PluginDisplayEnum {
+  COMMAND = 'command',
+  CONTAINER = 'container',
+  DIALOG = 'dialog',
+  SUBMENU = 'submenu',
+}

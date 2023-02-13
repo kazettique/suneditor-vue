@@ -10,16 +10,23 @@ import type {
 } from 'suneditor/src/lib/core';
 import type SunEditorCore from 'suneditor/src/lib/core';
 import type { SunEditorOptions } from 'suneditor/src/options';
+import type { CommandPlugin } from 'suneditor/src/plugins/CommandPlugin';
+import type { DialogPlugin } from 'suneditor/src/plugins/DialogPlugin';
+import type { Plugin } from 'suneditor/src/plugins/Plugin';
+import type { SubmenuPlugin } from 'suneditor/src/plugins/SubmenuPlugin';
 
-import type { ButtonEnum, LangEnum, UploadStateEnum } from './enum';
+import type { ButtonEnum, LangEnum, PluginDisplayEnum, UploadStateEnum } from './enum';
 
 export type UploadStateType = `${UploadStateEnum}`;
-
 export type LangType = `${LangEnum}`;
 
 export type ButtonType = `${ButtonEnum}`;
 
-export type ButtonListItemType = ButtonType[] | ButtonType;
+export type PluginDisplayType = `${PluginDisplayEnum}`;
+
+export type PluginNameType = string;
+
+export type ButtonListItemType = ButtonType[] | ButtonType | PluginNameType[] | PluginNameType;
 export interface SetOptions extends SunEditorOptions {
   buttonList?: (ButtonType[] | ButtonType)[];
   // customPlugins?: Array<Plugin> | Record<string, Plugin>;
@@ -131,6 +138,26 @@ export type OverloadFunc2 = {
 export interface IEmitsForVue {
   (event: 'change', content: string): void;
   (event: 'input', inputEvent: InputEvent): void;
+}
+
+export interface IPlugin extends Plugin {
+  display: PluginDisplayType;
+  name: PluginNameType;
+}
+
+export interface ICommandPlugin extends CommandPlugin {
+  display: PluginDisplayEnum.COMMAND;
+  name: PluginNameType;
+}
+
+export interface IDialogPlugin extends DialogPlugin {
+  display: PluginDisplayEnum.DIALOG;
+  name: PluginNameType;
+}
+
+export interface ISubmenuPlugin extends SubmenuPlugin {
+  display: PluginDisplayEnum.SUBMENU;
+  name: PluginNameType;
 }
 
 // * ================TYPESCRIPT EXPERIMENT================================

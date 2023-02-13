@@ -4,5 +4,6 @@
     "kazettique",
     "rushstack",
     "suneditor"
-  ]
+  ],
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
