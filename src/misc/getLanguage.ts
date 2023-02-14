@@ -1,8 +1,8 @@
 import { ckb, da, de, en, es, fr, he, it, ja, ko, lv, nl, pl, pt_br, ro, ru, se, ua, zh_cn } from 'suneditor/src/lang';
 import type { Lang } from 'suneditor/src/lang/Lang';
 
-import zh_tw from '@/lang/zh_tw';
-import type { LangType } from '@/types';
+import zh_tw from '../lang/zh_tw';
+import type { LangType } from '../types';
 
 const getLanguage = (lang: LangType): Lang => {
   switch (lang) {
