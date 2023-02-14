@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import Hello from '../components/Hello.vue';
 
 test('mount component', async () => {
+  // arrange
   expect(Hello).toBeTruthy();
 
   const wrapper = mount(Hello, {

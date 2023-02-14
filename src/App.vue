@@ -1,7 +1,8 @@
 <template>
   <div class="wrapper">
     <Example1 />
-    <Example2 />
+    <!-- <Example2 /> -->
+    <div v-show="false">test5566</div>
   </div>
 </template>
 

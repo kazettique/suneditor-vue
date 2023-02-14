@@ -1,5 +1,7 @@
 <template>
-  <textarea v-bind:id="editorId" />
+  <div data-test-comp="SunEditor">
+    <textarea v-bind:id="editorId" />
+  </div>
 </template>
 
 <script setup lang="ts">

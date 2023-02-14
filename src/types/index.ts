@@ -120,6 +120,23 @@ export interface ExportIEmits {
   videoUploadHandler: (xmlHttpRequest: XMLHttpRequest, info: videoInputInformation, core: Core) => void;
 }
 
+export interface IPlugin extends Plugin {
+  display: PluginDisplayType;
+  name: PluginNameType;
+}
+
+export interface ICommandPlugin extends CommandPlugin {
+  display: PluginDisplayEnum.COMMAND;
+}
+
+export interface IDialogPlugin extends DialogPlugin {
+  display: PluginDisplayEnum.DIALOG;
+}
+
+export interface ISubmenuPlugin extends SubmenuPlugin {
+  display: PluginDisplayEnum.SUBMENU;
+}
+
 // * TEST AREA BELOW
 
 // * ideal type for user
@@ -138,26 +155,6 @@ export type OverloadFunc2 = {
 export interface IEmitsForVue {
   (event: 'change', content: string): void;
   (event: 'input', inputEvent: InputEvent): void;
-}
-
-export interface IPlugin extends Plugin {
-  display: PluginDisplayType;
-  name: PluginNameType;
-}
-
-export interface ICommandPlugin extends CommandPlugin {
-  display: PluginDisplayEnum.COMMAND;
-  name: PluginNameType;
-}
-
-export interface IDialogPlugin extends DialogPlugin {
-  display: PluginDisplayEnum.DIALOG;
-  name: PluginNameType;
-}
-
-export interface ISubmenuPlugin extends SubmenuPlugin {
-  display: PluginDisplayEnum.SUBMENU;
-  name: PluginNameType;
 }
 
 // * ================TYPESCRIPT EXPERIMENT================================
