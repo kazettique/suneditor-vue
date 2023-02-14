@@ -14,6 +14,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@edge-runtime/vm": "^2.0.5",
     "suneditor": "^2.44.3",
     "vue": "^3.2.47"
   },

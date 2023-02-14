@@ -1,6 +1,6 @@
 <template>
   <div data-test-comp="SunEditor">
-    <textarea v-bind:id="editorId" />
+    <textarea id="editorId" />
   </div>
 </template>
 
@@ -20,7 +20,7 @@ import type {
 } from 'suneditor/src/lib/core';
 import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 
-import type { IExpose, SetOptions, UploadStateType } from '@/types';
+import type { IExpose, SetOptions, UploadStateType } from './types';
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
@@ -337,7 +337,7 @@ defineExpose<IExpose>({
 
 onMounted(() => {
   console.log('create sunEditor!');
-  const instance = suneditor.create(editorId, props.setOptions);
+  const instance = suneditor.create('editorId', props.setOptions);
 
   // binding emit handlers with suneditor instance
   instance.onScroll = (event: Event, core: Core): void => emits('scroll', event as UIEvent);
