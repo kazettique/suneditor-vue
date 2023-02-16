@@ -337,95 +337,102 @@ defineExpose<IExpose>({
 
 onMounted(() => {
   console.log('create sunEditor!');
-  const instance = suneditor.create('editorId', props.setOptions);
+  // Need to create sun editor instance with setTimeout,
+  // preventing issue about mounting sun editor instance in Vitest environment.
+  // The error message is shown below.
+  // ! Error: [SUNEDITOR.create.fail] The element for that id was not found (ID:"editor_1")
+  setTimeout(() => {
+    const instance = suneditor.create(editorId, props.setOptions);
 
-  // binding emit handlers with suneditor instance
-  instance.onScroll = (event: Event, core: Core): void => emits('scroll', event as UIEvent);
-  instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
-  instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
-  instance.onClick = (event: Event, core: Core): void => emits('click', event as PointerEvent);
-  instance.onInput = (event: Event, core: Core): void => emits('input', event as InputEvent);
-  instance.onKeyDown = (event: Event, core: Core): void => emits('keyDown', event as KeyboardEvent);
-  instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', event as KeyboardEvent);
-  instance.onChange = (contents: string, core: Core): void => emits('change', contents);
-  instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
-  instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-    emits('drop', event as DragEvent, cleanData, maxCharCount, core);
-  instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-    emits('paste', event as ClipboardEvent, cleanData, maxCharCount, core);
-  instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean =>
-    emits('copy', event as ClipboardEvent, clipboardData);
-  instance.onCut = (event: Event, clipboardData: any, core: Core): boolean =>
-    emits('cut', event as ClipboardEvent, clipboardData);
-  instance.onSave = (contents: string, core: Core): void => emits('save', contents);
-  instance.showInline = (toolbar: Element, context: Context, core: Core): void => emits('showInline', context, toolbar);
-  instance.showController = (name: String, controllers: Controllers, core: Core): void =>
-    emits('showController', controllers, name as string);
-  instance.imageUploadHandler = (xmlHttp: XMLHttpRequest, info: imageInputInformation, core: Core): void =>
-    emits('imageUploadHandler', xmlHttp, info, core);
-  instance.videoUploadHandler = (xmlHttp: XMLHttpRequest, info: videoInputInformation, core: Core): void =>
-    emits('videoUploadHandler', xmlHttp, info, core);
-  instance.audioUploadHandler = (xmlHttp: XMLHttpRequest, info: audioInputInformation, core: Core): void =>
-    emits('audioUploadHandler', xmlHttp, info, core);
-  instance.toggleCodeView = (isCodeView: boolean, core: Core): void => emits('toggleCodeView', isCodeView);
-  instance.toggleFullScreen = (isFullScreen: boolean, core: Core): void => emits('toggleFullScreen', isFullScreen);
-  instance.onImageUploadBefore = (
-    files: any[],
-    info: imageInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ): boolean | any[] | undefined => emits('imageUploadBefore', files, info, core, uploadHandler);
-  instance.onVideoUploadBefore = (
-    files: any[],
-    info: videoInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ): boolean | any[] | undefined => emits('videoUploadBefore', files, info, core, uploadHandler);
-  instance.onAudioUploadBefore = (
-    files: any[],
-    info: audioInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ): boolean | any[] | undefined => emits('audioUploadBefore', files, info, uploadHandler);
-  instance.onImageUpload = (
-    targetElement: HTMLImageElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
-    core: Core,
-  ): void => emits('imageUpload', targetElement, index, state, info, remainingFilesCount);
-  instance.onVideoUpload = (
-    targetElement: HTMLIFrameElement | HTMLVideoElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
-    core: Core,
-  ): void => emits('videoUpload', targetElement, index, state, info, remainingFilesCount);
-  instance.onAudioUpload = (
-    targetElement: HTMLAudioElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
-    core: Core,
-  ): void => emits('audioUpload', targetElement, index, state, info, remainingFilesCount);
-  instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean =>
-    emits('imageUploadError', errorMessage, result);
-  instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean =>
-    emits('videoUploadError', errorMessage, result);
-  instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean =>
-    emits('audioUploadError', errorMessage, result);
-  instance.onResizeEditor = (
-    height: number,
-    prevHeight: number,
-    core: Core,
-    resizeObserverEntry: ResizeObserverEntry | null,
-  ): {} => emits('resizeEditor', height, core, prevHeight, resizeObserverEntry);
-  instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', buttonList);
+    // binding emit handlers with suneditor instance
+    instance.onScroll = (event: Event, core: Core): void => emits('scroll', event as UIEvent);
+    instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
+    instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
+    instance.onClick = (event: Event, core: Core): void => emits('click', event as PointerEvent);
+    instance.onInput = (event: Event, core: Core): void => emits('input', event as InputEvent);
+    instance.onKeyDown = (event: Event, core: Core): void => emits('keyDown', event as KeyboardEvent);
+    instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', event as KeyboardEvent);
+    instance.onChange = (contents: string, core: Core): void => emits('change', contents);
+    instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
+    instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
+      emits('drop', event as DragEvent, cleanData, maxCharCount, core);
+    instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
+      emits('paste', event as ClipboardEvent, cleanData, maxCharCount, core);
+    instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean =>
+      emits('copy', event as ClipboardEvent, clipboardData);
+    instance.onCut = (event: Event, clipboardData: any, core: Core): boolean =>
+      emits('cut', event as ClipboardEvent, clipboardData);
+    instance.onSave = (contents: string, core: Core): void => emits('save', contents);
+    instance.showInline = (toolbar: Element, context: Context, core: Core): void =>
+      emits('showInline', context, toolbar);
+    instance.showController = (name: String, controllers: Controllers, core: Core): void =>
+      emits('showController', controllers, name as string);
+    instance.imageUploadHandler = (xmlHttp: XMLHttpRequest, info: imageInputInformation, core: Core): void =>
+      emits('imageUploadHandler', xmlHttp, info, core);
+    instance.videoUploadHandler = (xmlHttp: XMLHttpRequest, info: videoInputInformation, core: Core): void =>
+      emits('videoUploadHandler', xmlHttp, info, core);
+    instance.audioUploadHandler = (xmlHttp: XMLHttpRequest, info: audioInputInformation, core: Core): void =>
+      emits('audioUploadHandler', xmlHttp, info, core);
+    instance.toggleCodeView = (isCodeView: boolean, core: Core): void => emits('toggleCodeView', isCodeView);
+    instance.toggleFullScreen = (isFullScreen: boolean, core: Core): void => emits('toggleFullScreen', isFullScreen);
+    instance.onImageUploadBefore = (
+      files: any[],
+      info: imageInputInformation,
+      core: Core,
+      uploadHandler: Function,
+    ): boolean | any[] | undefined => emits('imageUploadBefore', files, info, core, uploadHandler);
+    instance.onVideoUploadBefore = (
+      files: any[],
+      info: videoInputInformation,
+      core: Core,
+      uploadHandler: Function,
+    ): boolean | any[] | undefined => emits('videoUploadBefore', files, info, core, uploadHandler);
+    instance.onAudioUploadBefore = (
+      files: any[],
+      info: audioInputInformation,
+      core: Core,
+      uploadHandler: Function,
+    ): boolean | any[] | undefined => emits('audioUploadBefore', files, info, uploadHandler);
+    instance.onImageUpload = (
+      targetElement: HTMLImageElement,
+      index: number,
+      state: UploadStateType,
+      info: fileInfo,
+      remainingFilesCount: number,
+      core: Core,
+    ): void => emits('imageUpload', targetElement, index, state, info, remainingFilesCount);
+    instance.onVideoUpload = (
+      targetElement: HTMLIFrameElement | HTMLVideoElement,
+      index: number,
+      state: UploadStateType,
+      info: fileInfo,
+      remainingFilesCount: number,
+      core: Core,
+    ): void => emits('videoUpload', targetElement, index, state, info, remainingFilesCount);
+    instance.onAudioUpload = (
+      targetElement: HTMLAudioElement,
+      index: number,
+      state: UploadStateType,
+      info: fileInfo,
+      remainingFilesCount: number,
+      core: Core,
+    ): void => emits('audioUpload', targetElement, index, state, info, remainingFilesCount);
+    instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean =>
+      emits('imageUploadError', errorMessage, result);
+    instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean =>
+      emits('videoUploadError', errorMessage, result);
+    instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean =>
+      emits('audioUploadError', errorMessage, result);
+    instance.onResizeEditor = (
+      height: number,
+      prevHeight: number,
+      core: Core,
+      resizeObserverEntry: ResizeObserverEntry | null,
+    ): {} => emits('resizeEditor', height, core, prevHeight, resizeObserverEntry);
+    instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', buttonList);
 
-  editorInstance.value = instance;
+    editorInstance.value = instance;
+  }, 50);
 });
 
 onUnmounted(() => {

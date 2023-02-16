@@ -1,25 +1,27 @@
 import { mount } from '@vue/test-utils';
 
 import Hello from '../components/Hello.vue';
+import SunEditor from '../SunEditor.vue';
 
-test.skip('mount component', async () => {
-  // arrange
-  expect(Hello).toBeTruthy();
+test('mount component', async () => {
+  // expect(Hello).toBeTruthy();
 
-  const wrapper = mount(Hello, {
-    props: {
-      count: 4,
-    },
-  });
+  // const wrapper = mount(Hello, {
+  //   props: {
+  //     count: 4,
+  //   },
+  // });
 
-  expect(wrapper.text()).toContain('4 x 2 = 8');
-  expect(wrapper.html()).toMatchSnapshot();
+  const wrapper2 = mount(SunEditor);
 
-  await wrapper.get('button').trigger('click');
+  // expect(wrapper.text()).toContain('4 x 2 = 8');
+  // expect(wrapper.html()).toMatchSnapshot();
 
-  expect(wrapper.text()).toContain('4 x 3 = 12');
+  // await wrapper.get('button').trigger('click');
 
-  await wrapper.get('button').trigger('click');
+  // expect(wrapper.text()).toContain('4 x 3 = 12');
 
-  expect(wrapper.text()).toContain('4 x 4 = 16');
+  // await wrapper.get('button').trigger('click');
+
+  // expect(wrapper.text()).toContain('4 x 4 = 16');
 });

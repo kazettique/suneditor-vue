@@ -12,7 +12,7 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'edge-runtime',
+    environment: 'jsdom',
     globals: true,
   },
 });
