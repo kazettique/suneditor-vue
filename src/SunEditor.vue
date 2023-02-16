@@ -1,6 +1,6 @@
 <template>
   <div data-test-comp="SunEditor">
-    <textarea id="editorId" />
+    <textarea v-bind:id="editorId" />
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export interface IProps {
   disableWysiwyg?: boolean;
   hide?: boolean; // TODO: no need?
   isNoticeOpen?: boolean;
+  isTestingMode?: boolean; // component testing flag
   noticeMessage?: string;
   readOnly?: boolean;
   setAllPlugins?: boolean;
@@ -130,6 +131,7 @@ const props = withDefaults(defineProps<IProps>(), {
   disableWysiwyg: false,
   hideToolbar: false,
   isNoticeOpen: false,
+  isTestingMode: false,
   noticeMessage: '',
   readOnly: false,
   setAllPlugins: true,
@@ -336,12 +338,7 @@ defineExpose<IExpose>({
 });
 
 onMounted(() => {
-  console.log('create sunEditor!');
-  // Need to create sun editor instance with setTimeout,
-  // preventing issue about mounting sun editor instance in Vitest environment.
-  // The error message is shown below.
-  // ! Error: [SUNEDITOR.create.fail] The element for that id was not found (ID:"editor_1")
-  setTimeout(() => {
+  const instantiateEditor = (): void => {
     const instance = suneditor.create(editorId, props.setOptions);
 
     // binding emit handlers with suneditor instance
@@ -430,9 +427,16 @@ onMounted(() => {
       resizeObserverEntry: ResizeObserverEntry | null,
     ): {} => emits('resizeEditor', height, core, prevHeight, resizeObserverEntry);
     instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', buttonList);
-
     editorInstance.value = instance;
-  }, 50);
+    console.log('SunEditor instance created!');
+  };
+
+  // * Need to create sun editor instance with setTimeout,
+  // * preventing issue about mounting sun editor instance in Vitest environment.
+  // * The error message is shown below.
+  // ! Error: [SUNEDITOR.create.fail] The element for that id was not found (ID:"editor_1")
+  if (props.isTestingMode) setTimeout(instantiateEditor, 50);
+  else instantiateEditor();
 });
 
 onUnmounted(() => {

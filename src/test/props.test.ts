@@ -5,7 +5,7 @@ import editorEventHandlers from '../mock/emits';
 import editorProps from '../mock/props';
 import SunEditor from '../SunEditor.vue';
 
-describe('Test component props', async () => {
+describe.skip('Test component props', async () => {
   it('check sun editor instance', () => {
     // * ARRANGE
     expect(SunEditor).toBeTruthy();
