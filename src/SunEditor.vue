@@ -431,10 +431,12 @@ onMounted(() => {
     console.log('SunEditor instance created!');
   };
 
+  console.log(import.meta.env);
   // * Need to create sun editor instance with setTimeout,
   // * preventing issue about mounting sun editor instance in Vitest environment.
   // * The error message is shown below.
   // ! Error: [SUNEDITOR.create.fail] The element for that id was not found (ID:"editor_1")
+  // TODO: use env variable later, not props
   if (props.isTestingMode) setTimeout(instantiateEditor, 50);
   else instantiateEditor();
 });

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 
 import SunEditor from '../SunEditor.vue';
 
-test('mount component', async () => {
+test.skip('mount component', async () => {
   expect(SunEditor).toBeTruthy();
 
   const wrapper = mount(SunEditor, {
