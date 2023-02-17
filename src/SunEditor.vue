@@ -42,7 +42,7 @@ export interface IProps {
 }
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
-export interface IEmits {
+interface IEmits {
   (
     event: 'imageUpload',
     targetImgElement: HTMLImageElement,

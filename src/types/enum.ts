@@ -10,7 +10,7 @@ export enum ButtonEnum {
   FORMAT_BLOCK = 'formatBlock',
   FULL_SCREEN = 'fullScreen',
   GALLERY = 'gallery',
-  HIGHLIGHT_COLOR = 'hiliteColor', // TODO: here is a typo from author
+  HILITE_COLOR = 'hiliteColor',
   HORIZONTAL_RULE = 'horizontalRule',
   IMAGE = 'image',
   INDENT = 'indent',
