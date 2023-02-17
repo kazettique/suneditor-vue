@@ -1,7 +1,7 @@
 // * ================TYPESCRIPT EXPERIMENT================================
 
 // * ideal type for user
-export type OverloadFunc2 = {
+export type OverloadFunc = {
   change: (content: string) => void;
   input: (inputEvent: InputEvent) => void;
 };
@@ -18,11 +18,27 @@ export interface IEmitsForVue {
   (event: 'input', inputEvent: InputEvent): void;
 }
 
+type EmitType = {
+  (event: 'change', content: string): void;
+  (event: 'input', inputEvent: InputEvent): void;
+};
+
+export type OverloadFunc3 = {
+  change: { content: string };
+  input: { inputEvent: InputEvent };
+};
+
+type EmitType2 = ((event: 'change', content: string) => void) | ((event: 'input', inputEvent: InputEvent) => void);
+
+const aaa: EmitType2 = (event: 'change123', content: string) => {
+  console.log('hello');
+};
+
 type DefineEmitFuncBase = (event: string, ...args: any[]) => any;
 type ExportEmitFuncBase = (...args: any[]) => any;
 
 // TODO: overload function type
-type OverloadFunc = {
+type OverloadFunc2 = {
   change: (event: 'change', content: string) => void;
   input: (event: 'input', inputEvent: InputEvent) => void;
 };

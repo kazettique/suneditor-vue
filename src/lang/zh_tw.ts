@@ -103,7 +103,7 @@ const zhTwLang: Lang = {
     fontColor: '字體顏色',
     fontSize: '字號',
     formats: '格式',
-    fullScreen: '全屏',
+    fullScreen: '全螢幕',
     hiliteColor: '背景顏色',
     horizontalRule: '水平線',
     hr_dashed: '虛線',

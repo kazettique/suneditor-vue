@@ -431,7 +431,7 @@ onMounted(() => {
     console.log('SunEditor instance created!');
   };
 
-  console.log(import.meta.env);
+  // console.log(import.meta.env);
   // * Need to create sun editor instance with setTimeout,
   // * preventing issue about mounting sun editor instance in Vitest environment.
   // * The error message is shown below.
