@@ -4,7 +4,7 @@ import getLanguage from '../misc/getLanguage';
 import type { IProps } from '../SunEditor.vue';
 import type { SetOptions } from '../types';
 
-const editorConfig: SetOptions = {
+const setOptions: SetOptions = {
   buttonList: [
     ['undo', 'redo'],
     ['font', 'fontSize', 'formatBlock'],
@@ -23,7 +23,7 @@ const editorConfig: SetOptions = {
     /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
   ],
   charCounter: true,
-  charCounterLabel: 'Maintain by Purin - Total Character',
+  charCounterLabel: 'Hello this is charCounterLabel',
   formats: ['p', 'blockquote', 'h2', 'h3'],
   height: '200px',
   hideToolbar: false,
@@ -48,7 +48,7 @@ const editorProps: IProps = {
   setAllPlugins: false,
   setContents: 'test set contents', // TODO: no need?
   setDefaultStyle: 'test set default style',
-  setOptions: editorConfig,
+  setOptions,
 };
 
 export default editorProps;

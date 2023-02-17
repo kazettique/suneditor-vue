@@ -5,19 +5,26 @@ import editorEventHandlers from '../mock/emits';
 import editorProps from '../mock/props';
 import SunEditor from '../SunEditor.vue';
 
-describe.skip('Test component props', async () => {
+describe('Test component props', async () => {
   it('check sun editor instance', () => {
     // * ARRANGE
     expect(SunEditor).toBeTruthy();
 
     const wrapper = mount(SunEditor, {
-      props: editorProps,
+      props: {
+        ...editorProps,
+        isTestingMode: true,
+      },
     });
 
     // * ACT
-    // const sunEditorElement = wrapper.get('.sun-editor');
-    // expect(sunEditorElement).toBeTruthy();
-    // expect(() => wrapper.getComponent('.not-there')).toThrowError();
+    const sunEditorElement = wrapper.find('.sun-editor');
+
+    const undoEl = wrapper.find('[data-command="undo"]');
+
+    // * ASSERT
+    expect(sunEditorElement).toBeTruthy();
+    expect(undoEl).toBeTruthy();
 
     // await wrapper.get('button').trigger('click');
 
