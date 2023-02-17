@@ -25,6 +25,8 @@ describe('Test component props', async () => {
 
     // * ASSERT
     expect(editorMountedEl).toBeTruthy();
+
+    wrapper.unmount();
   });
 
   it.each(buttonList)('Check if "%s" button exists.', (buttonName) => {
@@ -41,21 +43,33 @@ describe('Test component props', async () => {
 
     // * ASSERT
     expect(buttonEl).toBeTruthy();
+
+    wrapper.unmount();
   });
 
-  // it('Check', (buttonName) => {
-  //   // * ARRANGE
-  //   const wrapper = mount(SunEditor, {
-  //     props: {
-  //       ...editorProps,
-  //       isTestingMode: true,
-  //     },
-  //   });
+  it('Check placeholder', async (buttonName) => {
+    // * ARRANGE
+    const PLACEHOLDER = 'this is test placeholder message.';
+    const wrapper = mount(SunEditor, {
+      props: {
+        isTestingMode: true,
+        setOptions: {
+          placeholder: PLACEHOLDER,
+        },
+      },
+    });
 
-  //   // * ACT
-  //   const buttonEl = wrapper.find(`[data-command="${buttonName}"]`);
+    // * ACT
+    const placeholderEl = await wrapper.find(`.se-placeholder`);
+    let text = '';
+    if (placeholderEl.exists()) {
+      text = await placeholderEl.text();
+    }
 
-  //   // * ASSERT
-  //   expect(buttonEl).toBeTruthy();
-  // });
+    // * ASSERT
+    expect(text).toBe(PLACEHOLDER);
+    // expect(placeholderEl).toBeTruthy();
+
+    wrapper.unmount();
+  });
 });

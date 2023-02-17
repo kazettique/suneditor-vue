@@ -24,7 +24,7 @@ import type { IExpose, SetOptions, UploadStateType } from './types';
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
-  appendContents?: string;
+  // appendContents?: string;
   autoFocus?: boolean; // TODO: where is this?
   defaultValue?: string;
   disable?: boolean;
@@ -260,7 +260,7 @@ const setContents = (contents: string): void => {
   }
 };
 
-// append contents
+// expose method: append contents
 const appendContents = (contents: string): void => {
   if (editorInstance.value) {
     editorInstance.value.appendContents(contents);
@@ -437,7 +437,7 @@ onMounted(() => {
   // * The error message is shown below.
   // ! Error: [SUNEDITOR.create.fail] The element for that id was not found (ID:"editor_1")
   // TODO: use env variable later, not props
-  if (props.isTestingMode) setTimeout(instantiateEditor, 50);
+  if (props.isTestingMode) setTimeout(instantiateEditor, 500);
   else instantiateEditor();
 });
 
