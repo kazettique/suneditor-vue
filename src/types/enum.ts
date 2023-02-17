@@ -9,13 +9,13 @@ export enum ButtonEnum {
   FONT_SIZE = 'fontSize',
   FORMAT_BLOCK = 'formatBlock',
   FULL_SCREEN = 'fullScreen',
-  GALLERY = 'gallery',
+  // GALLERY = 'gallery', // TODO: check this error
   HILITE_COLOR = 'hiliteColor',
   HORIZONTAL_RULE = 'horizontalRule',
   IMAGE = 'image',
   INDENT = 'indent',
   ITALIC = 'italic',
-  LINE_BREAK = '/',
+  // LINE_BREAK = '/', // TODO: check this error
   LINE_HEIGHT = 'lineHeight',
   LINK = 'link',
   LIST = 'list',
@@ -27,7 +27,7 @@ export enum ButtonEnum {
   REMOVE_FORMAT = 'removeFormat',
   SAVE = 'save',
   SHOW_BLOCKS = 'showBlocks',
-  SLASH = '/',
+  // SLASH = '/', // TODO: check this error
   STRIKE = 'strike',
   SUBSCRIPT = 'subscript',
   SUPERSCRIPT = 'superscript',

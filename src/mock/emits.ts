@@ -1,6 +1,6 @@
-import type { ExportIEmits } from '@/types';
+import type { IEmits } from '@/types/interface';
 
-const editorEventHandlers: ExportIEmits = {
+const editorEventHandlers: IEmits = {
   audioUpload: (targetElement, index, state, info, remainingFilesCount) => {
     console.log('audioUpload');
   },
