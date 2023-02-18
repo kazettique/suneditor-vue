@@ -24,19 +24,15 @@ import type { IExpose, SetOptions, UploadStateType } from './types';
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
-  // appendContents?: string;
-  autoFocus?: boolean; // TODO: where is this?
   defaultValue?: string;
   disable?: boolean;
   disableToolbar?: boolean;
   disableWysiwyg?: boolean;
-  hide?: boolean; // TODO: no need?
   isNoticeOpen?: boolean;
   isTestingMode?: boolean; // component testing flag
   noticeMessage?: string;
   readOnly?: boolean;
   setAllPlugins?: boolean;
-  setContents?: string; // TODO: no need?
   setDefaultStyle?: string;
   setOptions?: SetOptions;
 }

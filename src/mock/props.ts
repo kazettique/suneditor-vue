@@ -38,19 +38,13 @@ const setOptions: SetOptions = {
 };
 
 const editorProps: IProps = {
-  // appendContents: 'test append contents',
-  autoFocus: true,
   defaultValue: 'test default value',
   disable: false,
   disableToolbar: false,
   disableWysiwyg: false,
-  hide: false, // TODO: no need?
-  isNoticeOpen: false,
-  // name: 'test name', // TODO: no need?
   noticeMessage: 'test notice message',
   readOnly: false,
   setAllPlugins: false,
-  setContents: 'test set contents', // TODO: no need?
   setDefaultStyle: 'test set default style',
   setOptions,
 };
