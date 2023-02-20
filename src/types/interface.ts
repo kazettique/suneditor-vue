@@ -14,11 +14,24 @@ import type { DialogPlugin } from 'suneditor/src/plugins/DialogPlugin';
 import type { Plugin } from 'suneditor/src/plugins/Plugin';
 import type { SubmenuPlugin } from 'suneditor/src/plugins/SubmenuPlugin';
 
-import type { PluginDisplayEnum } from './enum';
-import type { ButtonType, PluginDisplayType, PluginNameType, UploadStateType } from './type';
+import type { AlignItemsEnum, PluginDisplayEnum } from './enum';
+import type {
+  AlignItemsType,
+  ButtonType,
+  CharCounterType,
+  EditorModeType,
+  PluginDisplayType,
+  PluginNameType,
+  PopupDisplayType,
+  UploadStateType,
+} from './type';
 
-export interface SetOptions extends SunEditorOptions {
+export interface SetOptions extends Partial<SunEditorOptions> {
+  alignItems?: AlignItemsType[];
   buttonList?: (ButtonType[] | ButtonType)[];
+  charCounterType?: CharCounterType;
+  mode?: EditorModeType;
+  popupDisplay?: PopupDisplayType;
   // customPlugins?: Array<Plugin> | Record<string, Plugin>;
 }
 

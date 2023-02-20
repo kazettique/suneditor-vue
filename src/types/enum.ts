@@ -74,3 +74,28 @@ export enum PluginDisplayEnum {
   DIALOG = 'dialog',
   SUBMENU = 'submenu',
 }
+
+export enum EditorModeEnum {
+  BALLOON = 'balloon',
+  BALLOON_ALWAYS = 'balloon-always',
+  CLASSIC = 'classic',
+  INLINE = 'inline',
+}
+
+export enum PopupDisplayEnum {
+  FULL = 'full',
+  LOCAL = 'local',
+}
+
+export enum CharCounterEnum {
+  BYTE = 'byte',
+  BYTE_HTML = 'byte-html',
+  CHAR = 'char',
+}
+
+export enum AlignItemsEnum {
+  CENTER = 'center',
+  JUSTIFY = 'justify',
+  LEFT = 'left',
+  RIGHT = 'right',
+}

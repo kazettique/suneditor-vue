@@ -21,6 +21,7 @@ import type {
 import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 
 import type { IExpose, SetOptions, UploadStateType } from './types';
+import { isEmptyObject } from './utils';
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
@@ -147,7 +148,7 @@ const editorId: string = compInstance ? 'editor_' + compInstance.uid.toString() 
 // props watcher: setOptions
 const setOptions = computed(() => props.setOptions);
 watch(setOptions, (newValue, oldValue) => {
-  if (editorInstance.value) {
+  if (editorInstance.value && isEmptyObject(newValue)) {
     editorInstance.value.setOptions(newValue);
   }
 });

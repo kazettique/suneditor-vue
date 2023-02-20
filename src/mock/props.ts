@@ -38,7 +38,7 @@ const setOptions: SetOptions = {
 };
 
 const editorProps: IProps = {
-  defaultValue: 'test default value',
+  defaultValue: '<h1>test default value</h1>',
   disable: false,
   disableToolbar: false,
   disableWysiwyg: false,
