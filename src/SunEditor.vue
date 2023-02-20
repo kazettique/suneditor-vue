@@ -30,6 +30,7 @@ export interface IProps {
   disableWysiwyg?: boolean;
   isNoticeOpen?: boolean;
   isTestingMode?: boolean; // component testing flag
+  modelValue?: string;
   noticeMessage?: string;
   readOnly?: boolean;
   setAllPlugins?: boolean;
@@ -119,6 +120,7 @@ interface IEmits {
   (event: 'audioUploadHandler', xmlHttpRequest: XMLHttpRequest, info: audioInputInformation, core: Core): void;
   (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
   (event: 'showController', controllers: Controllers, name: string): void;
+  (event: 'update:modelValue', newValue: string): void;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -345,7 +347,10 @@ onMounted(() => {
     instance.onInput = (event: Event, core: Core): void => emits('input', event as InputEvent);
     instance.onKeyDown = (event: Event, core: Core): void => emits('keyDown', event as KeyboardEvent);
     instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', event as KeyboardEvent);
-    instance.onChange = (contents: string, core: Core): void => emits('change', contents);
+    instance.onChange = (contents: string, core: Core): void => {
+      emits('change', contents);
+      emits('update:modelValue', contents);
+    };
     instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
     instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
       emits('drop', event as DragEvent, cleanData, maxCharCount, core);

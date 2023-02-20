@@ -32,8 +32,10 @@
       v-on:video-upload-before="editorEventHandlers.videoUploadBefore"
       v-on:video-upload-error="editorEventHandlers.videoUploadError"
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
+      v-model="testVModel"
     />
     <button v-on:click="save">save</button>
+    <div style="color: #ffffff">{{ testVModel }}</div>
   </div>
 </template>
 
@@ -57,6 +59,8 @@ const insertHTML: IExpose['insertHTML'] = (html, notCleaningData, checkCharCount
 const save: IExpose['save'] = () => {
   console.log('save');
 };
+
+const testVModel = ref<string>('');
 </script>
 
 <style scoped lang="scss"></style>
