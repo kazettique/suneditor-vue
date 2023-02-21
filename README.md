@@ -30,6 +30,8 @@ Using composition API with TypeScript:
 </template>
 
 <script setup lang="ts">
+  import 'suneditor/dist/css/suneditor.min.css';
+
   import { ref } from 'vue';
   import { IProps, IEmits, SunEditor } from 'SunEditor';
 
@@ -64,10 +66,11 @@ interface IProps {
   setAllPlugins?: boolean;
   setDefaultStyle?: string;
   setOptions?: SetOptions;
+}
 ```
 
 ```ts
-import type { IProps } from '../SunEditor.vue';
+import type { IProps } from 'suneditor-vue';
 
 const props: IProps = {
   // some props
@@ -200,7 +203,14 @@ interface IExpose {
 
 ## Special Thanks
 
-<!-- special thanks message -->
+Thanks [JiHong88](https://github.com/JiHong88) for amazing WYSIWYG editor.
+And thanks [mkhstar](https://github.com/mkhstar)'s React version for good reference and ideas.
+
+## Todo List
+
+- [ ] Adding code mirror
+- [ ] Adding custom plugin
+- [ ] Adding katex
 
 ## License
 

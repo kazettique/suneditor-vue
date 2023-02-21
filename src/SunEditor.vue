@@ -1,12 +1,10 @@
 <template>
-  <div data-test-comp="SunEditor">
+  <div data-test-comp="SunEditor" class="sunEditorVue">
     <textarea v-bind:id="editorId" />
   </div>
 </template>
 
 <script setup lang="ts">
-import 'suneditor/dist/css/suneditor.min.css';
-
 import suneditor from 'suneditor';
 import type { Context } from 'suneditor/src/lib/context';
 import type SunEditorCore from 'suneditor/src/lib/core';
@@ -25,7 +23,6 @@ import { isEmptyObject } from './utils';
 
 // TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
 export interface IProps {
-  defaultValue?: string;
   disable?: boolean;
   disableToolbar?: boolean;
   disableWysiwyg?: boolean;
@@ -35,7 +32,6 @@ export interface IProps {
   noticeMessage?: string;
   readOnly?: boolean;
   setAllPlugins?: boolean;
-  setDefaultStyle?: string;
   setOptions?: SetOptions;
 }
 
@@ -150,14 +146,6 @@ const setOptions = computed(() => props.setOptions);
 watch(setOptions, (newValue, oldValue) => {
   if (editorInstance.value && isEmptyObject(newValue)) {
     editorInstance.value.setOptions(newValue);
-  }
-});
-
-// props watcher: setDefaultStyle
-const setDefaultStyle = computed(() => props.setDefaultStyle);
-watch(setDefaultStyle, (newValue, oldValue) => {
-  if (editorInstance.value && newValue) {
-    return editorInstance.value.setDefaultStyle(newValue);
   }
 });
 
@@ -429,6 +417,19 @@ onMounted(() => {
       resizeObserverEntry: ResizeObserverEntry | null,
     ): {} => emits('resizeEditor', height, core, prevHeight, resizeObserverEntry);
     instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', buttonList);
+
+    if (props.disable) instance.disable();
+    else instance.enable();
+
+    if (props.disableToolbar) instance.toolbar.disable();
+    else instance.toolbar.enable();
+
+    if (props.disableWysiwyg) instance.wysiwyg.disable();
+    else instance.wysiwyg.enable();
+
+    if (props.readOnly) instance.readOnly(true);
+    else instance.readOnly(false);
+
     editorInstance.value = instance;
     console.log('SunEditor instance created!');
   };
@@ -452,4 +453,8 @@ onUnmounted(() => {
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.sunEditorVue {
+  /* position: relative; */
+}
+</style>

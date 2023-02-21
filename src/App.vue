@@ -1,14 +1,11 @@
 <template>
   <div class="wrapper">
-    <Example1 />
-    <!-- <Example2 /> -->
-    <!-- <div v-show="false">test5566</div> -->
+    <Example />
   </div>
 </template>
 
 <script setup lang="ts">
-import Example1 from '@/components/Example1.vue';
-import Example2 from '@/components/Example2.vue';
+import Example from '@/components/Example.vue';
 </script>
 
 <style>

@@ -1,4 +1,7 @@
-import SunEditor from './SunEditor.vue';
+import getLanguage from './misc/getLanguage';
+import SunEditor, { type IProps } from './SunEditor.vue';
 
-export * as buttonList from './misc/buttonList';
 export default SunEditor;
+
+export * from './types';
+export { getLanguage, IProps };

@@ -38,14 +38,13 @@ const setOptions: SetOptions = {
 };
 
 const editorProps: IProps = {
-  defaultValue: '<h1>test default value</h1>',
   disable: false,
   disableToolbar: false,
   disableWysiwyg: false,
+  isNoticeOpen: false,
   noticeMessage: 'test notice message',
   readOnly: false,
-  setAllPlugins: false,
-  setDefaultStyle: 'test set default style',
+  // setAllPlugins: false,
   setOptions,
 };
 

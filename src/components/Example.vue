@@ -2,7 +2,7 @@
   <div>
     <SunEditor
       ref="editorEl"
-      v-bind="editorProps"
+      v-bind="props"
       v-on:audio-upload="editorEventHandlers.audioUpload"
       v-on:audio-upload-before="editorEventHandlers.audioUploadBefore"
       v-on:audio-upload-error="editorEventHandlers.audioUploadError"
@@ -34,20 +34,23 @@
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
       v-model="testVModel"
     />
-    <button v-on:click="save">save</button>
+    <button v-on:click="handleClick">btn</button>
     <div style="color: #ffffff">{{ testVModel }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
+import 'suneditor/dist/css/suneditor.min.css';
+
 import { ref } from 'vue';
 
+import SunEditor, { type IExpose, type IProps } from '@/index';
 import editorEventHandlers from '@/mock/emits';
 import editorProps from '@/mock/props';
-import SunEditor from '@/SunEditor.vue';
-import type { IExpose } from '@/types';
+// import type { IExpose } from '@/types';
 
 const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
+const props = ref<IProps>(editorProps);
 
 // * EXPOSE METHODS
 const insertHTML: IExpose['insertHTML'] = (html, notCleaningData, checkCharCount, rangeSelection) => {
@@ -56,8 +59,16 @@ const insertHTML: IExpose['insertHTML'] = (html, notCleaningData, checkCharCount
   }
 };
 
-const save: IExpose['save'] = () => {
-  console.log('save');
+const handleClick = () => {
+  props.value = {
+    ...editorProps,
+    // disable: !props.value.disable,
+    // disableToolbar: !props.value.disableToolbar,
+    // disableWysiwyg: !props.value.disableWysiwyg,
+    // isNoticeOpen: !props.value.isNoticeOpen,
+    // noticeMessage: props.value.noticeMessage + 'a',
+    readOnly: !props.value.readOnly,
+  };
 };
 
 const testVModel = ref<string>('');
