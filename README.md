@@ -4,6 +4,24 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
 
 ## Table of Contents
 
+- [suneditor-vue](#suneditor-vue)
+  - [Table of Contents](#table-of-contents)
+  - [Demos](#demos)
+  - [Installation](#installation)
+  - [Basic Usage](#basic-usage)
+  - [Props](#props)
+    - [SetOptions](#setoptions)
+    - [Language Support (i18n)](#language-support-i18n)
+      - [Adding Traditional Chinese Language Pack! 🎉](#adding-traditional-chinese-language-pack-)
+  - [Events](#events)
+  - [Expose Methods](#expose-methods)
+  - [TypeScript Support](#typescript-support)
+    - [Props Typing](#props-typing)
+    - [Events Typing](#events-typing)
+  - [Special Thanks](#special-thanks)
+  - [Todo List](#todo-list)
+  - [License](#license)
+
 ## Demos
 
 <!-- add demo link here -->
@@ -37,20 +55,20 @@ Import SunEditorVue component with composition API in Vue 3:
   <SunEditor v-bind="props" @change="handleChange" v-model="editorHtmlString" />
 </template>
 
-<script setup lang="ts">
+<script setup>
   import 'suneditor/dist/css/suneditor.min.css';
 
   import { ref } from 'vue';
-  import { SunEditor } from 'suneditor-vue';
+  import SunEditor from 'suneditor-vue';
 
   // props
   const props = {
-    // some props
+    // some props...
   };
 
   // event handler
   const handleChange = (content) => {
-    // do something
+    // do something...
   };
 
   // binding ref with v-model
@@ -69,9 +87,9 @@ The core part in props is `SetOptions`. `SetOptions` is a large object, almost a
 Import `getLanguage` method to get language object for toolbar interface. If not, English will be default.
 
 ```ts
-import getLanguage from 'suneditor-vue';
+import { getLanguage } from 'suneditor-vue';
 
-const setOptions: SetOptions = {
+const setOptions = {
   lang: getLanguage('zh_tw'),
   // other settings...
 };
@@ -87,30 +105,82 @@ Since the [original SunEditor](https://github.com/JiHong88/SunEditor) does not h
 
 Original SunEditor has some methods to manipulate the editor imperatively. So I expose these methods for using from outside of SunEditorVue component.
 
-```ts
-interface IExpose {
-  appendContents: (contents: string) => void;
-  getCharCount: (charCounterType?: string) => number;
-  getContents: (onlyContents: boolean) => string;
-  getContext: () => Context;
-  getFilesInfo: (pluginName: string) => fileInfo[];
-  getImagesInfo: () => fileInfo[];
-  getText: () => string;
-  insertHTML: (
-    html: Element | string,
-    notCleaningData?: boolean,
-    checkCharCount?: boolean,
-    rangeSelection?: boolean,
-  ) => void;
-  insertImage: (files: FileList) => void;
-  save: () => void;
-  setContents: (contents: string) => void;
-}
-```
-
 ## TypeScript Support
 
-<!-- typescript message -->
+If you were a TypeScript maniac (just like me), you would like to typing things as many as possible. So here's the recipe:
+
+### Props Typing
+
+You can do props typing by import `IProps`.
+
+```html
+<template>
+  <SunEditor v-bind="props" />
+</template>
+
+<script setup lang="ts">
+  import type { IProps, SetOptions } from 'suneditor-vue';
+
+  const setOptions: SetOptions = {
+    // your SetOptions...
+  };
+
+  const props: IProps = {
+    // your props...
+    setOptions,
+  };
+</script>
+```
+
+### Events Typing
+
+You can do events typing by importing `IEmits`.
+
+```html
+<template>
+  <SunEditor @blur="eventHandlers.blur" @change="eventHandlers.change" @click="eventHandlers.click" />
+</template>
+
+<script setup lang="ts">
+  import type { IEmits } from 'suneditor-vue';
+
+  const eventHandlers: IEmits = {
+    blur: (payload) => {
+      // do something...
+    },
+    change: (payload) => {
+      // do something...
+    },
+    click: (payload) => {
+      // do something...
+    },
+  };
+</script>
+```
+
+Or defining event handlers separately:
+
+```html
+<template>
+  <SunEditor @blur="handleBlur" @change="handleChange" @click="handleClick" />
+</template>
+
+<script setup lang="ts">
+  import type { IEmits } from 'suneditor-vue';
+
+  const handleBlur: IEmits['blur'] = (payload) => {
+    // do something...
+  };
+
+  const handleChange: IEmits['change'] = (payload) => {
+    // do something...
+  };
+
+  const handleClick: IEmits['click'] = (payload) => {
+    // do something...
+  };
+</script>
+```
 
 ## Special Thanks
 
