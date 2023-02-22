@@ -1,8 +1,8 @@
 import plugins from 'suneditor/src/plugins';
 
-import getLanguage from '../misc/getLanguage';
 import type { IProps } from '../SunEditor.vue';
 import { ButtonEnum, type SetOptions } from '../types';
+import { getLanguage } from '../utils';
 
 const fullButtonList = Object.values(ButtonEnum).map((item) => item);
 

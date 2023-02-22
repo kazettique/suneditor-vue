@@ -1,5 +1,5 @@
-import getLanguage from './misc/getLanguage';
 import SunEditor, { type IProps } from './SunEditor.vue';
+import { getLanguage } from './utils';
 
 export default SunEditor;
 
