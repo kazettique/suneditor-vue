@@ -29,9 +29,10 @@ const setOptions: SetOptions = {
   charCounterLabel: 'Hello this is charCounterLabel',
   formats: ['p', 'blockquote', 'h2', 'h3'],
   height: '200px',
-  hideToolbar: false,
+  hideToolbar: false, // TODO: fix with reactivity
   lang: getLanguage('zh_tw'),
-  minHeight: '150',
+  minHeight: '250',
+  minWidth: '500',
   placeholder: 'test placeholder',
   plugins: { ...plugins },
   width: '500px',
