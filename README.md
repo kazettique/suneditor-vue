@@ -211,6 +211,8 @@ And thanks [mkhstar](https://github.com/mkhstar)'s React version component for g
 - [ ] Adding code mirror
 - [ ] Adding custom plugin
 - [ ] Adding katex
+- [ ] custom style
+- [ ]
 
 ## License
 
