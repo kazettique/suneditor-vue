@@ -75,7 +75,7 @@ yarn add suneditor-vue
 Using pnpm:
 
 ```shell
-pnpm install suneditor-vue --save
+pnpm add suneditor-vue --save
 ```
 
 ## Basic Usage
@@ -321,7 +321,7 @@ Or defining event handlers separately:
 ## Special Thanks
 
 Thanks [JiHong88](https://github.com/JiHong88) for awesome WYSIWYG editor.
-And thanks [mkhstar](https://github.com/mkhstar)'s React version component for good references and ideas.
+And thanks [mkhstar](https://github.com/mkhstar)'s React version for good references and ideas.
 
 ## Todo List
 
