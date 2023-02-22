@@ -21,7 +21,7 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watch
 import type { IExpose, SetOptions, UploadStateType } from './types';
 import { isEmptyObject } from './utils';
 
-// TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
+// TODO: waiting for enabling to move types outside of SFC until Vue 3.3 released
 export interface IProps {
   disable?: boolean;
   disableToolbar?: boolean;
@@ -35,88 +35,94 @@ export interface IProps {
   setOptions?: SetOptions;
 }
 
-// TODO: waiting for enabling to move outside of SFC, until Vue 3.3 release
+// TODO: waiting for enabling to move types outside of SFC until Vue 3.3 released
 interface IEmits {
+  (event: 'setToolbarButtons', payload: { buttonList: Array<any> }): void;
+  (
+    event: 'resizeEditor',
+    payload: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null },
+  ): void;
+  (event: 'audioUploadError', payload: { errorMessage: string; result: any }): void;
+  (event: 'videoUploadError', payload: { errorMessage: string; result: any }): void;
+  (event: 'imageUploadError', payload: { errorMessage: string; result: any }): void;
   (
     event: 'imageUpload',
-    targetImgElement: HTMLImageElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
+    payload: {
+      index: number;
+      info: fileInfo;
+      remainingFilesCount: number;
+      state: UploadStateType;
+      targetElement: HTMLImageElement;
+    },
   ): void;
   (
-    event: 'videoUpload',
-    targetElement: HTMLElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
+    event: 'audioUploadBefore',
+    payload: {
+      files: Array<File>; // TODO: different with origin
+      info: audioInputInformation;
+      uploadHandler: Function;
+    },
   ): void;
   (
-    event: 'audioUpload',
-    targetElement: HTMLElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
+    event: 'videoUploadBefore',
+    payload: {
+      files: Array<File>; // TODO: different with origin
+      info: videoInputInformation;
+      uploadHandler: Function;
+    },
   ): void;
   (
     event: 'imageUploadBefore',
-    files: Array<File>, // TODO: different with origin
-    info: imageInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ): boolean | any[] | undefined;
+    payload: {
+      files: Array<File>; // TODO: different with origin
+      info: imageInputInformation;
+      uploadHandler: Function;
+    },
+  ): void;
+  (event: 'toggleFullScreen', payload: { isFullScreen: boolean }): void;
+  (event: 'toggleCodeView', payload: { isCodeView: boolean }): void;
+  (event: 'audioUploadHandler', payload: { info: audioInputInformation; xmlHttp: XMLHttpRequest }): void;
+  (event: 'videoUploadHandler', payload: { info: videoInputInformation; xmlHttp: XMLHttpRequest }): void;
+  (event: 'imageUploadHandler', payload: { info: imageInputInformation; xmlHttp: XMLHttpRequest }): void;
+  (event: 'showController', payload: { controllers: Controllers; name: string }): void;
+  (event: 'showInline', payload: { context: Context; toolbar: Element }): void;
+  (event: 'save', payload: { contents: string }): void;
+  (event: 'cut', payload: { clipboardData: any; clipboardEvent: ClipboardEvent }): void;
+  (event: 'copy', payload: { clipboardData: any; clipboardEvent: ClipboardEvent }): void;
+  (event: 'paste', payload: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: number }): void;
+  (event: 'drop', payload: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }): void;
+  (event: 'blur', payload: { focusEvent: FocusEvent }): void;
+  (event: 'change', payload: { contents: string }): void;
+  (event: 'keyUp', payload: { keyboardEvent: KeyboardEvent }): void;
+  (event: 'keyDown', payload: { keyboardEvent: KeyboardEvent }): void;
+  (event: 'input', payload: { inputEvent: InputEvent }): void;
+  (event: 'click', payload: { mouseEvent: PointerEvent }): void;
+  (event: 'mouseDown', payload: { mouseEvent: MouseEvent }): void;
+  (event: 'focus', payload: { focusEvent: FocusEvent }): void;
   (
-    event: 'videoUploadBefore',
-    files: Array<File>, // TODO: different with origin
-    info: videoInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ): boolean | any[] | undefined;
+    event: 'videoUpload',
+    payload: {
+      index: number;
+      info: fileInfo;
+      remainingFilesCount: number;
+      state: UploadStateType;
+      targetElement: HTMLElement;
+    },
+  ): void;
   (
-    event: 'audioUploadBefore',
-    files: Array<File>, // TODO: different with origin
-    info: audioInputInformation,
-    uploadHandler: Function,
-  ): boolean | any[] | undefined;
-  (
-    event: 'resizeEditor',
-    height: number,
-    core: Core,
-    prevHeight: number,
-    resizeObserverEntry: ResizeObserverEntry | null,
-  ): {};
-  (event: 'paste', clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: number, core: Core):
-    | boolean
-    | string;
-  (event: 'input', inputEvent: InputEvent): void;
-  (event: 'drop', dragEvent: DragEvent, cleanData: string, maxCharCount: number, core: Core): boolean;
-  (event: 'copy', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
-  (event: 'cut', clipboardEvent: ClipboardEvent, clipboardData: any): boolean;
-  (event: 'scroll', uiEvent: UIEvent): void;
-  (event: 'change', content: string): void;
-  (event: 'click', mouseEvent: PointerEvent): void;
-  (event: 'mouseDown', mouseEvent: MouseEvent): void;
-  (event: 'keyUp', keyboardEvent: KeyboardEvent): void;
-  (event: 'keyDown', keyboardEvent: KeyboardEvent): void;
-  (event: 'focus', focusEvent: FocusEvent): void;
-  (event: 'blur', focusEvent: FocusEvent): void;
-  (event: 'save', contents: string): void;
-  (event: 'setToolbarButtons', buttonList: Array<any>): void;
-  (event: 'load', reload: boolean): void;
-  (event: 'imageUploadError', errorMessage: string, result: any): boolean;
-  (event: 'videoUploadError', errorMessage: string, result: any): boolean;
-  (event: 'audioUploadError', errorMessage: string, result: any): boolean;
-  (event: 'toggleCodeView', isCodeView: boolean): void;
-  (event: 'toggleFullScreen', isFullScreen: boolean): void;
-  (event: 'showInline', context: Context, toolbar: Element): void;
-  (event: 'imageUploadHandler', xmlHttpRequest: XMLHttpRequest, info: imageInputInformation, core: Core): void;
-  (event: 'videoUploadHandler', xmlHttpRequest: XMLHttpRequest, info: videoInputInformation, core: Core): void;
-  (event: 'audioUploadHandler', xmlHttpRequest: XMLHttpRequest, info: audioInputInformation, core: Core): void;
-  (event: 'getSunEditorInstance', sunEditor: SunEditorCore): void;
-  (event: 'showController', controllers: Controllers, name: string): void;
+    event: 'audioUpload',
+    payload: {
+      index: number;
+      info: fileInfo;
+      remainingFilesCount: number;
+      state: UploadStateType;
+      targetElement: HTMLElement;
+    },
+  ): void;
+  (event: 'scroll', payload: { uiEvent: UIEvent }): void;
+  (event: 'load', payload: { reload: boolean }): void;
+  (event: 'getSunEditorInstance', payload: { sunEditor: SunEditorCore }): void;
+
   (event: 'update:modelValue', newValue: string): void;
 }
 
@@ -329,57 +335,76 @@ onMounted(() => {
     const instance = suneditor.create(editorId, props.setOptions);
 
     // binding emit handlers with suneditor instance
-    instance.onScroll = (event: Event, core: Core): void => emits('scroll', event as UIEvent);
-    instance.onFocus = (event: Event, core: Core): void => emits('focus', event as FocusEvent);
-    instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', event as MouseEvent);
-    instance.onClick = (event: Event, core: Core): void => emits('click', event as PointerEvent);
-    instance.onInput = (event: Event, core: Core): void => emits('input', event as InputEvent);
-    instance.onKeyDown = (event: Event, core: Core): void => emits('keyDown', event as KeyboardEvent);
-    instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', event as KeyboardEvent);
+    instance.onScroll = (event: Event, core: Core): void => emits('scroll', { uiEvent: event as UIEvent });
+    instance.onFocus = (event: Event, core: Core): void => emits('focus', { focusEvent: event as FocusEvent });
+    instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', { mouseEvent: event as MouseEvent });
+    instance.onClick = (event: Event, core: Core): void => emits('click', { mouseEvent: event as PointerEvent });
+    instance.onInput = (event: Event, core: Core): void => emits('input', { inputEvent: event as InputEvent });
+    instance.onKeyDown = (event: Event, core: Core): void =>
+      emits('keyDown', { keyboardEvent: event as KeyboardEvent });
+    instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', { keyboardEvent: event as KeyboardEvent });
     instance.onChange = (contents: string, core: Core): void => {
-      emits('change', contents);
+      emits('change', { contents });
       emits('update:modelValue', contents);
     };
-    instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', event);
-    instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-      emits('drop', event as DragEvent, cleanData, maxCharCount, core);
-    instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string =>
-      emits('paste', event as ClipboardEvent, cleanData, maxCharCount, core);
-    instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean =>
-      emits('copy', event as ClipboardEvent, clipboardData);
-    instance.onCut = (event: Event, clipboardData: any, core: Core): boolean =>
-      emits('cut', event as ClipboardEvent, clipboardData);
-    instance.onSave = (contents: string, core: Core): void => emits('save', contents);
+    instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', { focusEvent: event });
+    instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string => {
+      emits('drop', { cleanData, dragEvent: event as DragEvent, maxCharCount });
+      return true;
+    };
+    instance.onPaste = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string => {
+      emits('paste', { cleanData, clipboardEvent: event as ClipboardEvent, maxCharCount });
+      return true;
+    };
+    instance.onCopy = (event: Event, clipboardData: any, core: Core): boolean => {
+      emits('copy', { clipboardData, clipboardEvent: event as ClipboardEvent });
+      return true;
+    };
+    instance.onCut = (event: Event, clipboardData: any, core: Core): boolean => {
+      emits('cut', { clipboardData, clipboardEvent: event as ClipboardEvent });
+      return true;
+    };
+    instance.onSave = (contents: string, core: Core): void => emits('save', { contents });
     instance.showInline = (toolbar: Element, context: Context, core: Core): void =>
-      emits('showInline', context, toolbar);
+      emits('showInline', { context, toolbar });
     instance.showController = (name: String, controllers: Controllers, core: Core): void =>
-      emits('showController', controllers, name as string);
+      emits('showController', { controllers, name: name as string });
     instance.imageUploadHandler = (xmlHttp: XMLHttpRequest, info: imageInputInformation, core: Core): void =>
-      emits('imageUploadHandler', xmlHttp, info, core);
+      emits('imageUploadHandler', { info, xmlHttp });
     instance.videoUploadHandler = (xmlHttp: XMLHttpRequest, info: videoInputInformation, core: Core): void =>
-      emits('videoUploadHandler', xmlHttp, info, core);
+      emits('videoUploadHandler', { info, xmlHttp });
     instance.audioUploadHandler = (xmlHttp: XMLHttpRequest, info: audioInputInformation, core: Core): void =>
-      emits('audioUploadHandler', xmlHttp, info, core);
-    instance.toggleCodeView = (isCodeView: boolean, core: Core): void => emits('toggleCodeView', isCodeView);
-    instance.toggleFullScreen = (isFullScreen: boolean, core: Core): void => emits('toggleFullScreen', isFullScreen);
+      emits('audioUploadHandler', { info, xmlHttp });
+    instance.toggleCodeView = (isCodeView: boolean, core: Core): void => emits('toggleCodeView', { isCodeView });
+    instance.toggleFullScreen = (isFullScreen: boolean, core: Core): void =>
+      emits('toggleFullScreen', { isFullScreen });
     instance.onImageUploadBefore = (
       files: any[],
       info: imageInputInformation,
       core: Core,
       uploadHandler: Function,
-    ): boolean | any[] | undefined => emits('imageUploadBefore', files, info, core, uploadHandler);
+    ): boolean | any[] | undefined => {
+      emits('imageUploadBefore', { files, info, uploadHandler });
+      return false;
+    }; // TODO: adjust return type
     instance.onVideoUploadBefore = (
       files: any[],
       info: videoInputInformation,
       core: Core,
       uploadHandler: Function,
-    ): boolean | any[] | undefined => emits('videoUploadBefore', files, info, core, uploadHandler);
+    ): boolean | any[] | undefined => {
+      emits('videoUploadBefore', { files, info, uploadHandler });
+      return false;
+    }; // TODO: adjust return type
     instance.onAudioUploadBefore = (
       files: any[],
       info: audioInputInformation,
       core: Core,
       uploadHandler: Function,
-    ): boolean | any[] | undefined => emits('audioUploadBefore', files, info, uploadHandler);
+    ): boolean | any[] | undefined => {
+      emits('audioUploadBefore', { files, info, uploadHandler });
+      return false;
+    }; // TODO: adjust return type
     instance.onImageUpload = (
       targetElement: HTMLImageElement,
       index: number,
@@ -387,7 +412,7 @@ onMounted(() => {
       info: fileInfo,
       remainingFilesCount: number,
       core: Core,
-    ): void => emits('imageUpload', targetElement, index, state, info, remainingFilesCount);
+    ): void => emits('imageUpload', { index, info, remainingFilesCount, state, targetElement });
     instance.onVideoUpload = (
       targetElement: HTMLIFrameElement | HTMLVideoElement,
       index: number,
@@ -395,7 +420,7 @@ onMounted(() => {
       info: fileInfo,
       remainingFilesCount: number,
       core: Core,
-    ): void => emits('videoUpload', targetElement, index, state, info, remainingFilesCount);
+    ): void => emits('videoUpload', { index, info, remainingFilesCount, state, targetElement });
     instance.onAudioUpload = (
       targetElement: HTMLAudioElement,
       index: number,
@@ -403,20 +428,29 @@ onMounted(() => {
       info: fileInfo,
       remainingFilesCount: number,
       core: Core,
-    ): void => emits('audioUpload', targetElement, index, state, info, remainingFilesCount);
-    instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean =>
-      emits('imageUploadError', errorMessage, result);
-    instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean =>
-      emits('videoUploadError', errorMessage, result);
-    instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean =>
-      emits('audioUploadError', errorMessage, result);
+    ): void => emits('audioUpload', { index, info, remainingFilesCount, state, targetElement });
+    instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean => {
+      emits('imageUploadError', { errorMessage, result });
+      return false;
+    }; // TODO: adjust return type
+    instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean => {
+      emits('videoUploadError', { errorMessage, result });
+      return false;
+    }; // TODO: adjust return type
+    instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean => {
+      emits('audioUploadError', { errorMessage, result });
+      return false;
+    }; // TODO: adjust return type
     instance.onResizeEditor = (
       height: number,
       prevHeight: number,
       core: Core,
       resizeObserverEntry: ResizeObserverEntry | null,
-    ): {} => emits('resizeEditor', height, core, prevHeight, resizeObserverEntry);
-    instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', buttonList);
+    ): {} => {
+      emits('resizeEditor', { height, prevHeight, resizeObserverEntry });
+      return {};
+    };
+    instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', { buttonList });
 
     if (props.disable) instance.disable();
     else instance.enable();

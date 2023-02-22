@@ -1,118 +1,141 @@
 import type { IEmits } from '@/types/interface';
 
 const editorEventHandlers: IEmits = {
-  audioUpload: (targetElement, index, state, info, remainingFilesCount) => {
-    console.log('audioUpload');
+  audioUpload: (payload) => {
+    console.log('Event: audioUpload');
+    console.log('payload', payload);
   },
-  audioUploadBefore: (files, audioInputInformation, uploadHandler) => {
-    console.log('audioUploadBefore');
-    return false;
+  audioUploadBefore: (payload) => {
+    console.log('Event: audioUploadBefore');
+    console.log('payload', payload);
   },
-  audioUploadError: (errorMessage, result) => {
-    console.log('audioUploadError');
-    return false;
+  audioUploadError: (payload) => {
+    console.log('Event: audioUploadError');
+    console.log('payload', payload);
   },
-  audioUploadHandler: (xmlHttpRequest, info, core) => {
-    console.log('audioUploadHandler');
+  audioUploadHandler: (payload) => {
+    console.log('Event: audioUploadHandler');
+    console.log('payload', payload);
   },
-  blur: (focusEvent) => {
-    console.log('blur');
+  blur: (payload) => {
+    console.log('Event: blur');
+    console.log('payload', payload);
   },
-  change: (content) => {
-    console.log('change');
+  change: (payload) => {
+    console.log('Event: change');
+    console.log('payload', payload);
   },
-  click: (mouseEvent) => {
-    console.log('click');
+  click: (payload) => {
+    console.log('Event: click');
+    console.log('payload', payload);
   },
-  copy: (clipboardEvent, clipboardData) => {
-    console.log('copy');
-    return false;
+  copy: (payload) => {
+    console.log('Event: copy');
+    console.log('payload', payload);
   },
-  cut: (clipboardEvent, clipboardData) => {
-    console.log('cut');
-    return false;
+  cut: (payload) => {
+    console.log('Event: cut');
+    console.log('payload', payload);
   },
-  drop: (dragEvent, cleanData, maxCharCount, core) => {
-    console.log('drop');
-    return '';
+  drop: (payload) => {
+    console.log('Event: drop');
+    console.log('payload', payload);
   },
-  focus: (focusEvent) => {
-    console.log('focus');
+  focus: (payload) => {
+    console.log('Event: focus');
+    console.log('payload', payload);
   },
-  getSunEditorInstance: (sunEditor) => {
-    console.log('getSunEditorInstance');
+  getSunEditorInstance: (payload) => {
+    console.log('Event: getSunEditorInstance');
+    console.log('payload', payload);
   },
-  imageUpload: (targetImgElement, index, state, info, remainingFileCount) => {
-    console.log('imageUpload');
+  imageUpload: (payload) => {
+    console.log('Event: imageUpload');
+    console.log('payload', payload);
   },
-  imageUploadBefore: (files, info, core, uploadHandler) => {
-    console.log('imageUploadBefore');
-    return false;
+  imageUploadBefore: (payload) => {
+    console.log('Event: imageUploadBefore');
+    console.log('payload', payload);
   },
-  imageUploadError: (errorMessage, result) => {
-    console.log('imageUploadError');
-    return false;
+  imageUploadError: (payload) => {
+    console.log('Event: imageUploadError');
+    console.log('payload', payload);
   },
-  imageUploadHandler: (xmlHttpRequest, info, core) => {
-    console.log('imageUploadHandler');
+  imageUploadHandler: (payload) => {
+    console.log('Event: imageUploadHandler');
+    console.log('payload', payload);
   },
-  input: (inputEvent) => {
-    console.log('input');
+  input: (payload) => {
+    console.log('Event: input');
+    console.log('payload', payload);
   },
-  keyDown: (keyboardEvent) => {
-    console.log('keydown');
+  keyDown: (payload) => {
+    console.log('Event: keydown');
+    console.log('payload', payload);
   },
-  keyUp: (keyboardEvent: KeyboardEvent) => {
-    console.log('keyUp');
+  keyUp: (payload) => {
+    console.log('Event: keyUp');
+    console.log('payload', payload);
   },
-  load: (reload: boolean) => {
-    console.log('load');
+  load: (payload) => {
+    console.log('Event: load');
+    console.log('payload', payload);
   },
-  mouseDown: (mouseEvent: MouseEvent) => {
-    console.log('mouseDown');
+  mouseDown: (payload) => {
+    console.log('Event: mouseDown');
+    console.log('payload', payload);
   },
-  paste: (clipboardEvent, cleanData, maxCharCount, core) => {
-    console.log('paste');
-    return false;
+  paste: (payload) => {
+    console.log('Event: paste');
+    console.log('payload', payload);
   },
-  resizeEditor: (height, core, prevHeight, resizeObserverEntry) => {
-    console.log('resizeEditor');
-    return {};
+  resizeEditor: (payload) => {
+    console.log('Event: resizeEditor');
+    console.log('payload', payload);
   },
-  save: (contents) => {
-    console.log('save');
+  save: (payload) => {
+    console.log('Event: save');
+    console.log('payload', payload);
   },
-  scroll: (uiEvent) => {
-    console.log('scroll');
+  scroll: (payload) => {
+    console.log('Event: scroll');
+    console.log('payload', payload);
   },
-  setToolbarButtons: (buttonList) => {
-    console.log('setToolbarButtons');
+  setToolbarButtons: (payload) => {
+    console.log('Event: setToolbarButtons');
+    console.log('payload', payload);
   },
-  showController: (controllers, name) => {
-    console.log('showController');
+  showController: (payload) => {
+    console.log('Event: showController');
+    console.log('payload', payload);
   },
-  showInline: (context, toolbar) => {
-    console.log('showInline');
+  showInline: (payload) => {
+    console.log('Event: showInline');
+    console.log('payload', payload);
   },
-  toggleCodeView: (isCodeView: boolean) => {
-    console.log('toggleCodeView');
+  toggleCodeView: (payload) => {
+    console.log('Event: toggleCodeView');
+    console.log('payload', payload);
   },
-  toggleFullScreen: (isFullScreen) => {
-    console.log('toggleFullScreen');
+  toggleFullScreen: (payload) => {
+    console.log('Event: toggleFullScreen');
+    console.log('payload', payload);
   },
-  videoUpload: (targetElement, index, state, info, remainingFilesCount) => {
-    console.log('videoUpload');
+  videoUpload: (payload) => {
+    console.log('Event: videoUpload');
+    console.log('payload', payload);
   },
-  videoUploadBefore: (files, info, core, uploadHandler) => {
-    console.log('videoUploadBefore');
-    return false;
+  videoUploadBefore: (payload) => {
+    console.log('Event: videoUploadBefore');
+    console.log('payload', payload);
   },
-  videoUploadError: (errorMessage, result) => {
-    console.log('videoUploadError');
-    return false;
+  videoUploadError: (payload) => {
+    console.log('Event: videoUploadError');
+    console.log('payload', payload);
   },
-  videoUploadHandler: (xmlHttpRequest, info, core) => {
-    console.log('videoUploadHandler');
+  videoUploadHandler: (payload) => {
+    console.log('Event: videoUploadHandler');
+    console.log('payload', payload);
   },
 };
 
