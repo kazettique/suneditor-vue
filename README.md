@@ -1,10 +1,12 @@
 # suneditor-vue
 
-A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [Sun Editor](https://github.com/JiHong88/SunEditor). Hooking up with Vue's reactivity APIs, controlled by the lifecycle of Vue. Fully TypeScript support with every type you need for configurations.
+A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor](https://github.com/JiHong88/SunEditor). Hooking up with Vue's reactivity APIs, controlled by the lifecycle of Vue. Fully TypeScript support with every type you need for configurations. Let's dive in! 🙌
 
 ## Table of Contents
 
 ## Demos
+
+<!-- add demo link here -->
 
 ## Installation
 
@@ -20,9 +22,15 @@ Using yarn:
 yarn add suneditor-vue
 ```
 
+Using pnpm:
+
+```shell
+pnpm install suneditor-vue --save
+```
+
 ## Basic Usage
 
-Using composition API with TypeScript:
+Import SunEditorVue component with composition API in Vue 3:
 
 ```html
 <template>
@@ -33,148 +41,51 @@ Using composition API with TypeScript:
   import 'suneditor/dist/css/suneditor.min.css';
 
   import { ref } from 'vue';
-  import { IProps, IEmits, SunEditor } from 'SunEditor';
+  import { SunEditor } from 'suneditor-vue';
 
   // props
-  const props: IProps = {
+  const props = {
     // some props
   };
 
   // event handler
-  const handleChange: IEmits['change'] = (content) => {
+  const handleChange = (content) => {
     // do something
   };
 
   // binding ref with v-model
-  const editorHtmlString = ref<string>('');
+  const editorHtmlString = ref('');
 </script>
 ```
 
 ## Props
 
-```ts
-interface IProps {
-  defaultValue?: string;
-  disable?: boolean;
-  disableToolbar?: boolean;
-  disableWysiwyg?: boolean;
-  isNoticeOpen?: boolean;
-  isTestingMode?: boolean;
-  modelValue?: string;
-  noticeMessage?: string;
-  readOnly?: boolean;
-  setAllPlugins?: boolean;
-  setDefaultStyle?: string;
-  setOptions?: SetOptions;
-}
-```
-
-```ts
-import type { IProps } from 'suneditor-vue';
-
-const props: IProps = {
-  // some props
-};
-```
-
 ### SetOptions
 
-The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of sun editor are set inside this object. Almost all of `SetOptions` remain the same with [original](./) one. But I made something more strongly typed. But just in case, I listed all of it below:
+The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original](./) one. I made something more strongly typed. But don't worry, the usage will be the same.
 
-For who considering typing their props object, you can import it from [here]('./'):
+### Language Support (i18n)
 
-### Internationalization (i18n)
-
-Importing `getLanguage` method to get language object.
+Import `getLanguage` method to get language object for toolbar interface. If not, English will be default.
 
 ```ts
 import getLanguage from 'suneditor-vue';
+
 const setOptions: SetOptions = {
-  lang: getLanguage('en'),
-  // other settings
+  lang: getLanguage('zh_tw'),
+  // other settings...
 };
 ```
 
 #### Adding Traditional Chinese Language Pack! 🎉
 
-Since the original sun editor does not has traditional Chinese language, so I added one if anyone need it. 🙌
+Since the [original SunEditor](https://github.com/JiHong88/SunEditor) does not has traditional Chinese language pack, so I added one if anyone need it. 🙌
 
 ## Events
 
-```ts
-interface IEmits {
-  audioUpload: (
-    targetElement: HTMLElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
-  ) => void;
-  audioUploadBefore: (
-    files: Array<File>, // TODO: different with origin
-    info: audioInputInformation,
-    uploadHandler: Function,
-  ) => boolean | any[] | undefined;
-  audioUploadError: (errorMessage: string, result: any) => boolean;
-  audioUploadHandler: (xmlHttpRequest: XMLHttpRequest, info: audioInputInformation, core: Core) => void;
-  blur: (focusEvent: FocusEvent) => void;
-  change: (content: string) => void;
-  click: (mouseEvent: PointerEvent) => void;
-  copy: (clipboardEvent: ClipboardEvent, clipboardData: any) => boolean;
-  cut: (clipboardEvent: ClipboardEvent, clipboardData: any) => boolean;
-  drop: (dragEvent: DragEvent, cleanData: string, maxCharCount: number, core: Core) => boolean | string;
-  focus: (focusEvent: FocusEvent) => void;
-  getSunEditorInstance: (sunEditor: SunEditorCore) => void;
-  imageUpload: (
-    targetImgElement: HTMLImageElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
-  ) => void;
-  imageUploadBefore: (
-    files: Array<File>, // TODO: different with origin
-    info: imageInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ) => boolean | any[] | undefined;
-  imageUploadError: (errorMessage: string, result: any) => boolean;
-  imageUploadHandler: (xmlHttpRequest: XMLHttpRequest, info: imageInputInformation, core: Core) => void;
-  input: (inputEvent: InputEvent) => void;
-  keyDown: (keyboardEvent: KeyboardEvent) => void;
-  keyUp: (keyboardEvent: KeyboardEvent) => void;
-  load: (reload: boolean) => void;
-  mouseDown: (mouseEvent: MouseEvent) => void;
-  paste: (clipboardEvent: ClipboardEvent, cleanData: string, maxCharCount: boolean, core: Core) => boolean | string;
-  resizeEditor: (height: number, core: Core, prevHeight: number, resizeObserverEntry: ResizeObserverEntry | null) => {};
-  save: (contents: string) => void;
-  scroll: (uiEvent: UIEvent) => void;
-  setToolbarButtons: (buttonList: Array<any>) => void;
-  showController: (controllers: Controllers, name: string) => void;
-  showInline: (context: Context, toolbar: Element) => void;
-  toggleCodeView: (isCodeView: boolean) => void;
-  toggleFullScreen: (isFullScreen: boolean) => void;
-  videoUpload: (
-    targetElement: HTMLElement,
-    index: number,
-    state: UploadStateType,
-    info: fileInfo,
-    remainingFilesCount: number,
-  ) => void;
-  videoUploadBefore: (
-    files: Array<File>, // TODO: different with origin
-    info: videoInputInformation,
-    core: Core,
-    uploadHandler: Function,
-  ) => boolean | any[] | undefined;
-  videoUploadError: (errorMessage: string, result: any) => boolean;
-  videoUploadHandler: (xmlHttpRequest: XMLHttpRequest, info: videoInputInformation, core: Core) => void;
-}
-```
-
 ## Expose Methods
 
-Original sun editor has some methods to manipulate the editor imperatively. So I expose these methods for using from outside of suneditor-vue component.
+Original SunEditor has some methods to manipulate the editor imperatively. So I expose these methods for using from outside of SunEditorVue component.
 
 ```ts
 interface IExpose {
@@ -211,8 +122,7 @@ And thanks [mkhstar](https://github.com/mkhstar)'s React version component for g
 - [ ] Adding code mirror
 - [ ] Adding custom plugin
 - [ ] Adding katex
-- [ ] custom style
-- [ ]
+- [ ] custom style (like... dark mode?🕶)
 
 ## License
 
