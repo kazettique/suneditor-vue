@@ -58,20 +58,20 @@ const insertHTML: IExpose['insertHTML'] = (html, notCleaningData, checkCharCount
     editorEl.value.insertHTML(html, notCleaningData, checkCharCount, rangeSelection);
   }
 };
+const testVModel = ref<string>('');
 
 const handleClick = () => {
-  props.value = {
-    ...editorProps,
-    // disable: !props.value.disable,
-    // disableToolbar: !props.value.disableToolbar,
-    // disableWysiwyg: !props.value.disableWysiwyg,
-    // isNoticeOpen: !props.value.isNoticeOpen,
-    // noticeMessage: props.value.noticeMessage + 'a',
-    readOnly: !props.value.readOnly,
-  };
+  // props.value = {
+  // ...editorProps,
+  // disable: !props.value.disable,
+  // disableToolbar: !props.value.disableToolbar,
+  // disableWysiwyg: !props.value.disableWysiwyg,
+  // isNoticeOpen: !props.value.isNoticeOpen,
+  // noticeMessage: props.value.noticeMessage + 'a',
+  // readOnly: !props.value.readOnly,
+  // };
+  testVModel.value = '';
 };
-
-const testVModel = ref<string>('');
 </script>
 
 <style scoped lang="scss"></style>

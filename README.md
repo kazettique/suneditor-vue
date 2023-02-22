@@ -203,8 +203,8 @@ interface IExpose {
 
 ## Special Thanks
 
-Thanks [JiHong88](https://github.com/JiHong88) for amazing WYSIWYG editor.
-And thanks [mkhstar](https://github.com/mkhstar)'s React version for good reference and ideas.
+Thanks [JiHong88](https://github.com/JiHong88) for awesome WYSIWYG editor.
+And thanks [mkhstar](https://github.com/mkhstar)'s React version component for good references and ideas.
 
 ## Todo List
 

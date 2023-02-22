@@ -14,7 +14,7 @@ import type { DialogPlugin } from 'suneditor/src/plugins/DialogPlugin';
 import type { Plugin } from 'suneditor/src/plugins/Plugin';
 import type { SubmenuPlugin } from 'suneditor/src/plugins/SubmenuPlugin';
 
-import type { AlignItemsEnum, PluginDisplayEnum } from './enum';
+import type { PluginDisplayEnum } from './enum';
 import type {
   AlignItemsType,
   ButtonType,
