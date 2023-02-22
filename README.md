@@ -18,6 +18,7 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
   - [TypeScript Support](#typescript-support)
     - [Props Typing](#props-typing)
     - [Events Typing](#events-typing)
+    - [Expose Methods Typing](#expose-methods-typing)
   - [Special Thanks](#special-thanks)
   - [Todo List](#todo-list)
   - [License](#license)
@@ -77,6 +78,16 @@ Import SunEditorVue component with composition API in Vue 3:
 ```
 
 ## Props
+
+| Prop           | Type         | Required | Description                       |
+| -------------- | ------------ | -------- | --------------------------------- |
+| disable        | `boolean`    | false    | Disable whole component.          |
+| disableToolbar | `boolean`    | false    | Disable toolbar area.             |
+| disableWysiwyg | `boolean`    | false    | Disable Wysiwyg area.             |
+| isNoticeOpen   | `boolean`    | false    | Toggle open the notice bar.       |
+| noticeMessage  | `string`     | false    | Content message in notice bar.    |
+| readOnly       | `boolean`    | false    | Make component read only.         |
+| setOptions     | `SetOptions` | false    | Set options for editor component. |
 
 ### SetOptions
 
@@ -181,6 +192,10 @@ Or defining event handlers separately:
   };
 </script>
 ```
+
+### Expose Methods Typing
+
+<!-- TODO: example -->
 
 ## Special Thanks
 
