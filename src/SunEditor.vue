@@ -334,7 +334,7 @@ onMounted(() => {
   const instantiateEditor = (): void => {
     const instance = suneditor.create(editorId, props.setOptions);
 
-    // binding emit handlers with suneditor instance
+    // binding emit handlers with SunEditor instance
     instance.onScroll = (event: Event, core: Core): void => emits('scroll', { uiEvent: event as UIEvent });
     instance.onFocus = (event: Event, core: Core): void => emits('focus', { focusEvent: event as FocusEvent });
     instance.onMouseDown = (event: Event, core: Core): void => emits('mouseDown', { mouseEvent: event as MouseEvent });
@@ -452,6 +452,7 @@ onMounted(() => {
     };
     instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', { buttonList });
 
+    // set props for first time (watcher does not run when mounted.)
     if (props.disable) instance.disable();
     else instance.enable();
 

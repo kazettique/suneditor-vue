@@ -14,6 +14,37 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
     - [Language Support (i18n)](#language-support-i18n)
       - [Adding Traditional Chinese Language Pack! 🎉](#adding-traditional-chinese-language-pack-)
   - [Events](#events)
+    - [Scroll Event](#scroll-event)
+    - [Focus Event](#focus-event)
+    - [Mouse Down Event](#mouse-down-event)
+    - [Click Event](#click-event)
+    - [Input Event](#input-event)
+    - [Key Up Event](#key-up-event)
+    - [Change Event](#change-event)
+    - [Blur Event](#blur-event)
+    - [Drop Event](#drop-event)
+    - [Paste Event](#paste-event)
+    - [Copy Event](#copy-event)
+    - [Cut Event](#cut-event)
+    - [Save Event](#save-event)
+    - [Show Inline Event](#show-inline-event)
+    - [Show Controller Event](#show-controller-event)
+    - [Image Upload Handler Event](#image-upload-handler-event)
+    - [Video Upload Handler Event](#video-upload-handler-event)
+    - [Audio UPload Handler Event](#audio-upload-handler-event)
+    - [Toggle Code View Event](#toggle-code-view-event)
+    - [Toggle Full Screen Event](#toggle-full-screen-event)
+    - [Image Upload Before Event](#image-upload-before-event)
+    - [Video Upload Before Event](#video-upload-before-event)
+    - [Audio Upload Before Event](#audio-upload-before-event)
+    - [Image Upload Event](#image-upload-event)
+    - [Video Upload Event](#video-upload-event)
+    - [Audio Upload Event](#audio-upload-event)
+    - [Image Upload Error Event](#image-upload-error-event)
+    - [Video Upload Error Event](#video-upload-error-event)
+    - [Audio Upload Error Event](#audio-upload-error-event)
+    - [Resize Editor Event](#resize-editor-event)
+    - [Set Toolbar Buttons Event](#set-toolbar-buttons-event)
   - [Expose Methods](#expose-methods)
   - [TypeScript Support](#typescript-support)
     - [Props Typing](#props-typing)
@@ -93,6 +124,10 @@ Import SunEditorVue component with composition API in Vue 3:
 
 The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original](./) one. I made something more strongly typed. But don't worry, the usage will be the same.
 
+| Prop       | Type | Required | Description |
+| ---------- | ---- | -------- | ----------- |
+| alignItems |      |          |             |
+
 ### Language Support (i18n)
 
 Import `getLanguage` method to get language object for toolbar interface. If not, English will be default.
@@ -111,6 +146,92 @@ const setOptions = {
 Since the [original SunEditor](https://github.com/JiHong88/SunEditor) does not has traditional Chinese language pack, so I added one if anyone need it. 🙌
 
 ## Events
+
+For event handlers, I adjusted a little bit with payload in callback functions.
+
+From original callback functions, for example, `onCopy` event, the type definition is:
+
+```ts
+(event: Event, clipboardData: any, core: Core) => boolean;
+```
+
+I changed it into:
+
+```ts
+(payload: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+```
+
+First, I removed `core` from params since I don't want to mutate the component imperatively. (Using reactivity system from Vue!)
+
+Second, I turned params into an object, it became slimmer. After that, don't worry about the order. Just destruct what you need. No redundant variables. 😎
+
+All events are listed below:
+
+### Scroll Event
+
+| Event Name | Payload                | Description |
+| ---------- | ---------------------- | ----------- |
+| scroll     | `{ uiEvent: UIEvent }` |             |
+
+### Focus Event
+
+### Mouse Down Event
+
+### Click Event
+
+### Input Event
+
+### Key Up Event
+
+### Change Event
+
+### Blur Event
+
+### Drop Event
+
+### Paste Event
+
+### Copy Event
+
+### Cut Event
+
+### Save Event
+
+### Show Inline Event
+
+### Show Controller Event
+
+### Image Upload Handler Event
+
+### Video Upload Handler Event
+
+### Audio UPload Handler Event
+
+### Toggle Code View Event
+
+### Toggle Full Screen Event
+
+### Image Upload Before Event
+
+### Video Upload Before Event
+
+### Audio Upload Before Event
+
+### Image Upload Event
+
+### Video Upload Event
+
+### Audio Upload Event
+
+### Image Upload Error Event
+
+### Video Upload Error Event
+
+### Audio Upload Error Event
+
+### Resize Editor Event
+
+### Set Toolbar Buttons Event
 
 ## Expose Methods
 
