@@ -7,7 +7,7 @@ import { getLanguage } from '../utils';
 const fullButtonList = Object.values(ButtonEnum).map((item) => item);
 
 const setOptions: SetOptions = {
-  alignItems: ['right'],
+  alignItems: ['center', 'left', 'right', 'justify'],
   buttonList: [
     // ['undo', 'redo'],
     // ['font', 'fontSize', 'formatBlock'],
