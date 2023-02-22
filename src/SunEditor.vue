@@ -144,7 +144,7 @@ const editorId: string = compInstance ? 'editor_' + compInstance.uid.toString() 
 // props watcher: setOptions
 const setOptions = computed(() => props.setOptions);
 watch(setOptions, (newValue, oldValue) => {
-  if (editorInstance.value && isEmptyObject(newValue)) {
+  if (editorInstance.value && !isEmptyObject(newValue)) {
     editorInstance.value.setOptions(newValue);
   }
 });
