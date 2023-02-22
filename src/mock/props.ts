@@ -7,6 +7,7 @@ import { getLanguage } from '../utils';
 const fullButtonList = Object.values(ButtonEnum).map((item) => item);
 
 const setOptions: SetOptions = {
+  alignItems: ['right'],
   buttonList: [
     // ['undo', 'redo'],
     // ['font', 'fontSize', 'formatBlock'],
@@ -27,6 +28,7 @@ const setOptions: SetOptions = {
   ],
   charCounter: true,
   charCounterLabel: 'Hello this is charCounterLabel',
+  charCounterType: 'char',
   formats: ['p', 'blockquote', 'h2', 'h3'],
   height: '200px',
   hideToolbar: false, // TODO: fix with reactivity
@@ -35,6 +37,7 @@ const setOptions: SetOptions = {
   minWidth: '500',
   placeholder: 'test placeholder',
   plugins: { ...plugins },
+  popupDisplay: 'full',
   width: '500px',
 };
 
