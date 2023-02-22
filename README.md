@@ -163,7 +163,7 @@ I changed it into:
 
 First, I removed `core` from params since I don't want to mutate the component imperatively. (Using reactivity system from Vue!)
 
-Second, I turned params into an object, it became slimmer. After that, don't worry about the order. Just destruct what you need. No redundant variables. 😎
+Second, I turned params into an object. After that, don't worry about the order anymore. Just destruct what you need. No redundant variables. 😎
 
 All events are listed below:
 
