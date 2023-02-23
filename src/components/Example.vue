@@ -34,7 +34,7 @@
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
       v-model="testVModel"
     />
-    <button v-on:click="handleClick">btn</button>
+    <button v-on:click="handleTest">btn</button>
     <div style="color: #ffffff">{{ testVModel }}</div>
   </div>
 </template>
@@ -52,13 +52,15 @@ import editorProps from '@/mock/props';
 const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 const props = ref<IProps>(editorProps);
 
-// * EXPOSE METHODS
-const insertHTML: IExpose['insertHTML'] = (html, notCleaningData, checkCharCount, rangeSelection) => {
+const testVModel = ref<string>('');
+
+const handleTest = () => {
+  // testVModel.value = testVModel.value + '123';
   if (editorEl.value) {
-    editorEl.value.insertHTML(html, notCleaningData, checkCharCount, rangeSelection);
+    const test = editorEl.value.getImagesInfo();
+    console.log('test', test);
   }
 };
-const testVModel = ref<string>('');
 
 const handleClick = () => {
   // props.value = {
@@ -70,7 +72,7 @@ const handleClick = () => {
   // noticeMessage: props.value.noticeMessage + 'a',
   // readOnly: !props.value.readOnly,
   // };
-  testVModel.value = '';
+  // testVModel.value = '';
 };
 </script>
 

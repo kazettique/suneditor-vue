@@ -169,25 +169,7 @@ watchEffect(() => {
 // expose method: save
 const save = (): void => {
   if (editorInstance.value) {
-    return editorInstance.value.save();
-  }
-};
-
-// expose method: getContext
-const getContext = (): Context => {
-  if (editorInstance.value) {
-    return editorInstance.value.getContext();
-  } else {
-    return {} as Context;
-  }
-};
-
-// expose method: getContents
-const getContents = (onlyContents: boolean): string => {
-  if (editorInstance.value) {
-    return editorInstance.value.getContents(onlyContents);
-  } else {
-    return '';
+    editorInstance.value.save();
   }
 };
 
@@ -224,39 +206,6 @@ const getFilesInfo = (pluginName: string): fileInfo[] => {
     return editorInstance.value.getFilesInfo(pluginName);
   } else {
     return [];
-  }
-};
-
-// expose method: insertImage
-const insertImage = (files: FileList): void => {
-  if (editorInstance.value) {
-    editorInstance.value.insertImage(files);
-  }
-};
-
-// expose method: insertHTML
-const insertHTML = (
-  html: Element | string,
-  notCleaningData?: boolean,
-  checkCharCount?: boolean,
-  rangeSelection?: boolean,
-): void => {
-  if (editorInstance.value) {
-    editorInstance.value.insertHTML(html, notCleaningData, checkCharCount, rangeSelection);
-  }
-};
-
-// expose method: setContents
-const setContents = (contents: string): void => {
-  if (editorInstance.value) {
-    editorInstance.value.setContents(contents);
-  }
-};
-
-// expose method: append contents
-const appendContents = (contents: string): void => {
-  if (editorInstance.value) {
-    editorInstance.value.appendContents(contents);
   }
 };
 
@@ -316,18 +265,21 @@ watch(disableToolbar, (newValue, oldValue) => {
   }
 });
 
+// TODO: fix v-model
+// props watcher: modelValue
+const modelValue = computed(() => props.modelValue);
+watch(modelValue, (newValue, oldValue) => {
+  if (editorInstance.value && newValue) {
+    // editorInstance.value.setContents(newValue);
+  }
+});
+
 defineExpose<IExpose>({
-  appendContents,
   getCharCount,
-  getContents,
-  getContext,
   getFilesInfo,
   getImagesInfo,
   getText,
-  insertHTML,
-  insertImage,
   save,
-  setContents,
 });
 
 onMounted(() => {

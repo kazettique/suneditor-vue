@@ -36,22 +36,20 @@ export interface SetOptions extends Partial<SunEditorOptions> {
 }
 
 export interface IExpose {
-  appendContents: (contents: string) => void;
-  getCharCount: (charCounterType?: string) => number;
-  getContents: (onlyContents: boolean) => string;
-  getContext: () => Context;
+  // appendContents: (contents: string) => void;
+  getCharCount: (charCounterType?: string) => number; // TODO: change to event?
   getFilesInfo: (pluginName: string) => fileInfo[];
   getImagesInfo: () => fileInfo[];
-  getText: () => string;
-  insertHTML: (
-    html: Element | string,
-    notCleaningData?: boolean,
-    checkCharCount?: boolean,
-    rangeSelection?: boolean,
-  ) => void;
-  insertImage: (files: FileList) => void;
-  save: () => void;
-  setContents: (contents: string) => void;
+  getText: () => string; // TODO: change to event?
+  // insertHTML: (args: {
+  //   checkCharCount?: boolean;
+  //   html: Element | string;
+  //   notCleaningData?: boolean;
+  //   rangeSelection?: boolean;
+  // }) => void;
+  // insertImage: (files: FileList) => void;
+  save: () => void; // saving from outside of editor
+  // setContents: (contents: string) => void;
 }
 
 export interface IEmits {

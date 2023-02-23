@@ -32,7 +32,7 @@ const setOptions: SetOptions = {
   formats: ['p', 'blockquote', 'h2', 'h3'],
   height: '200px',
   hideToolbar: false, // TODO: fix with reactivity
-  lang: getLanguage('zh_tw'),
+  lang: getLanguage('en'),
   minHeight: '250',
   minWidth: '500',
   placeholder: 'test placeholder',

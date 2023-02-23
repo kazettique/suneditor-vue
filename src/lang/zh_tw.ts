@@ -136,7 +136,7 @@ const zhTwLang: Lang = {
     tag_h: '標題',
     tag_p: '段落',
     tag_pre: '程式碼',
-    template: '模板',
+    template: '樣板',
     textStyle: '文字樣式',
     underline: '底線',
     undo: '復原',
