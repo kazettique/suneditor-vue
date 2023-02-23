@@ -31,7 +31,7 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
     - [Show Controller Event](#show-controller-event)
     - [Image Upload Handler Event](#image-upload-handler-event)
     - [Video Upload Handler Event](#video-upload-handler-event)
-    - [Audio UPload Handler Event](#audio-upload-handler-event)
+    - [Audio Upload Handler Event](#audio-upload-handler-event)
     - [Toggle Code View Event](#toggle-code-view-event)
     - [Toggle Full Screen Event](#toggle-full-screen-event)
     - [Image Upload Before Event](#image-upload-before-event)
@@ -288,69 +288,219 @@ All events are listed below:
 
 ### Scroll Event
 
-| Event Name | Payload                | Description |
-| ---------- | ---------------------- | ----------- |
-| scroll     | `{ uiEvent: UIEvent }` |             |
+```ts
+(args: { uiEvent: UIEvent }) => void;
+```
 
 ### Focus Event
 
+```ts
+(args: { focusEvent: FocusEvent }) => void;
+```
+
 ### Mouse Down Event
+
+```ts
+(args: { mouseEvent: MouseEvent }) => void;
+```
 
 ### Click Event
 
+```ts
+(args: { mouseEvent: PointerEvent }) => void;
+```
+
 ### Input Event
+
+```ts
+(args: { inputEvent: InputEvent }) => void;
+```
 
 ### Key Up Event
 
+```ts
+(args: { keyboardEvent: KeyboardEvent }) => void;
+```
+
 ### Change Event
+
+```ts
+(args: { contents: string }) => void;
+```
 
 ### Blur Event
 
+```ts
+(args: { focusEvent: FocusEvent }) => void;
+```
+
 ### Drop Event
+
+```ts
+(args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
+```
 
 ### Paste Event
 
+```ts
+(args: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: boolean }) => void;
+```
+
 ### Copy Event
+
+```ts
+(args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+```
 
 ### Cut Event
 
+```ts
+(args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+```
+
 ### Save Event
+
+```ts
+(args: { contents: string }) => void;
+```
 
 ### Show Inline Event
 
+```ts
+(args: { context: Context; toolbar: Element }) => void;
+```
+
 ### Show Controller Event
+
+```ts
+(args: { controllers: Controllers; name: string }) => void;
+```
 
 ### Image Upload Handler Event
 
+```ts
+(args: { info: imageInputInformation; xmlHttp: XMLHttpRequest }) => void;
+```
+
 ### Video Upload Handler Event
 
-### Audio UPload Handler Event
+```ts
+(args: { info: videoInputInformation; xmlHttp: XMLHttpRequest }) => void;
+```
+
+### Audio Upload Handler Event
+
+```ts
+(args: { info: audioInputInformation; xmlHttp: XMLHttpRequest }) => void;
+```
 
 ### Toggle Code View Event
 
+```ts
+(args: { isCodeView: boolean }) => void;
+```
+
 ### Toggle Full Screen Event
+
+```ts
+(args: { isFullScreen: boolean }) => void;
+```
 
 ### Image Upload Before Event
 
+```ts
+(args: {
+  files: Array<File>; // TODO: different with origin
+  info: imageInputInformation;
+  uploadHandler: Function;
+}) => void;
+```
+
 ### Video Upload Before Event
+
+```ts
+(args: {
+  files: Array<File>; // TODO: different with origin
+  info: videoInputInformation;
+  uploadHandler: Function;
+}) => void;
+```
 
 ### Audio Upload Before Event
 
+```ts
+(args: {
+  files: Array<File>; // TODO: different with origin
+  info: audioInputInformation;
+  uploadHandler: Function;
+}) => void;
+```
+
 ### Image Upload Event
+
+```ts
+(args: {
+  index: number;
+  info: fileInfo;
+  remainingFilesCount: number;
+  state: UploadStateType;
+  targetImgElement: HTMLImageElement;
+}) => void;
+```
 
 ### Video Upload Event
 
+```ts
+(args: {
+  index: number;
+  info: fileInfo;
+  remainingFilesCount: number;
+  state: UploadStateType;
+  targetElement: HTMLElement;
+}) => void;
+```
+
 ### Audio Upload Event
+
+```ts
+(args: {
+  index: number;
+  info: fileInfo;
+  remainingFilesCount: number;
+  state: UploadStateType;
+  targetElement: HTMLElement;
+}) => void;
+```
 
 ### Image Upload Error Event
 
+```ts
+(args: { errorMessage: string; result: any }) => void;
+```
+
 ### Video Upload Error Event
+
+```ts
+(args: { errorMessage: string; result: any }) => void;
+```
 
 ### Audio Upload Error Event
 
+```ts
+(args: { errorMessage: string; result: any }) => void;
+```
+
 ### Resize Editor Event
 
+```ts
+(args: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null }) => void;
+```
+
 ### Set Toolbar Buttons Event
+
+```ts
+(args: { buttonList: Array<any> }) => void;
+```
 
 ## Expose Methods
 
