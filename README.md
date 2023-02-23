@@ -45,7 +45,6 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
     - [Audio Upload Error Event](#audio-upload-error-event)
     - [Resize Editor Event](#resize-editor-event)
     - [Set Toolbar Buttons Event](#set-toolbar-buttons-event)
-  - [Expose Methods](#expose-methods)
   - [TypeScript Support](#typescript-support)
     - [Props Typing](#props-typing)
     - [Events Typing](#events-typing)
@@ -123,7 +122,7 @@ All props are OPTIONAL.
 
 ### SetOptions
 
-The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original](./) one. I made something more strongly typed. But don't worry, the usage will be the same.
+The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original][SunEditionOptions] one. I made something more strongly typed. But don't worry, the usage will be the same.
 
 | Prop                        | Type                                   | Description |
 | --------------------------- | -------------------------------------- | ----------- |
@@ -311,6 +310,8 @@ All events are listed below:
 
 ### Input Event
 
+Wysiwyg area input event.
+
 ```ts
 (args: { inputEvent: InputEvent }) => void;
 ```
@@ -322,6 +323,8 @@ All events are listed below:
 ```
 
 ### Change Event
+
+When contents change in wysiwyg area.
 
 ```ts
 (args: { contents: string }) => void;
@@ -395,11 +398,15 @@ All events are listed below:
 
 ### Toggle Code View Event
 
+Toggling between code view and wysiwyg view.
+
 ```ts
 (args: { isCodeView: boolean }) => void;
 ```
 
 ### Toggle Full Screen Event
+
+An event when toggling full screen.
 
 ```ts
 (args: { isFullScreen: boolean }) => void;
@@ -409,7 +416,7 @@ All events are listed below:
 
 ```ts
 (args: {
-  files: Array<File>; // TODO: different with origin
+  files: Array<File>;
   info: imageInputInformation;
   uploadHandler: Function;
 }) => void;
@@ -419,7 +426,7 @@ All events are listed below:
 
 ```ts
 (args: {
-  files: Array<File>; // TODO: different with origin
+  files: Array<File>;
   info: videoInputInformation;
   uploadHandler: Function;
 }) => void;
@@ -429,7 +436,7 @@ All events are listed below:
 
 ```ts
 (args: {
-  files: Array<File>; // TODO: different with origin
+  files: Array<File>;
   info: audioInputInformation;
   uploadHandler: Function;
 }) => void;
@@ -491,6 +498,8 @@ All events are listed below:
 
 ### Resize Editor Event
 
+Emit when editor is resized.
+
 ```ts
 (args: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null }) => void;
 ```
@@ -500,10 +509,6 @@ All events are listed below:
 ```ts
 (args: { buttonList: Array<any> }) => void;
 ```
-
-## Expose Methods
-
-Original SunEditor has some methods to manipulate the editor imperatively. So I expose these methods for using from outside of SunEditorVue component.
 
 ## TypeScript Support
 
@@ -585,7 +590,7 @@ Or defining event handlers separately:
 ## Special Thanks
 
 Thanks [JiHong88](https://github.com/JiHong88) for awesome WYSIWYG editor.
-And thanks [mkhstar](https://github.com/mkhstar)'s React version for good references and ideas.
+And thanks [mkhstar](https://github.com/mkhstar)'s React version for references and ideas.
 
 ## Todo List
 
@@ -600,6 +605,7 @@ And thanks [mkhstar](https://github.com/mkhstar)'s React version for good refere
 
 <!-- referenced link -->
 
+[SunEditionOptions]: https://github.com/JiHong88/suneditor/blob/master/src/options.d.ts#L4
 [Lang]: https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/lang/Lang.d.ts#L1
 [FormatTagName]: https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L592
 [LineHeightsItem]: https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L605
