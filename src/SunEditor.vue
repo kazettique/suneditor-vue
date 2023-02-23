@@ -37,17 +37,17 @@ export interface IProps {
 
 // TODO: waiting for enabling to move types outside of SFC until Vue 3.3 released
 interface IEmits {
-  (event: 'setToolbarButtons', payload: { buttonList: Array<any> }): void;
+  (event: 'setToolbarButtons', args: { buttonList: Array<any> }): void;
   (
     event: 'resizeEditor',
-    payload: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null },
+    args: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null },
   ): void;
-  (event: 'audioUploadError', payload: { errorMessage: string; result: any }): void;
-  (event: 'videoUploadError', payload: { errorMessage: string; result: any }): void;
-  (event: 'imageUploadError', payload: { errorMessage: string; result: any }): void;
+  (event: 'audioUploadError', args: { errorMessage: string; result: any }): void;
+  (event: 'videoUploadError', args: { errorMessage: string; result: any }): void;
+  (event: 'imageUploadError', args: { errorMessage: string; result: any }): void;
   (
     event: 'imageUpload',
-    payload: {
+    args: {
       index: number;
       info: fileInfo;
       remainingFilesCount: number;
@@ -57,7 +57,7 @@ interface IEmits {
   ): void;
   (
     event: 'audioUploadBefore',
-    payload: {
+    args: {
       files: Array<File>; // TODO: different with origin
       info: audioInputInformation;
       uploadHandler: Function;
@@ -65,7 +65,7 @@ interface IEmits {
   ): void;
   (
     event: 'videoUploadBefore',
-    payload: {
+    args: {
       files: Array<File>; // TODO: different with origin
       info: videoInputInformation;
       uploadHandler: Function;
@@ -73,35 +73,35 @@ interface IEmits {
   ): void;
   (
     event: 'imageUploadBefore',
-    payload: {
+    args: {
       files: Array<File>; // TODO: different with origin
       info: imageInputInformation;
       uploadHandler: Function;
     },
   ): void;
-  (event: 'toggleFullScreen', payload: { isFullScreen: boolean }): void;
-  (event: 'toggleCodeView', payload: { isCodeView: boolean }): void;
-  (event: 'audioUploadHandler', payload: { info: audioInputInformation; xmlHttp: XMLHttpRequest }): void;
-  (event: 'videoUploadHandler', payload: { info: videoInputInformation; xmlHttp: XMLHttpRequest }): void;
-  (event: 'imageUploadHandler', payload: { info: imageInputInformation; xmlHttp: XMLHttpRequest }): void;
-  (event: 'showController', payload: { controllers: Controllers; name: string }): void;
-  (event: 'showInline', payload: { context: Context; toolbar: Element }): void;
-  (event: 'save', payload: { contents: string }): void;
-  (event: 'cut', payload: { clipboardData: any; clipboardEvent: ClipboardEvent }): void;
-  (event: 'copy', payload: { clipboardData: any; clipboardEvent: ClipboardEvent }): void;
-  (event: 'paste', payload: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: number }): void;
-  (event: 'drop', payload: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }): void;
-  (event: 'blur', payload: { focusEvent: FocusEvent }): void;
-  (event: 'change', payload: { contents: string }): void;
-  (event: 'keyUp', payload: { keyboardEvent: KeyboardEvent }): void;
-  (event: 'keyDown', payload: { keyboardEvent: KeyboardEvent }): void;
-  (event: 'input', payload: { inputEvent: InputEvent }): void;
-  (event: 'click', payload: { mouseEvent: PointerEvent }): void;
-  (event: 'mouseDown', payload: { mouseEvent: MouseEvent }): void;
-  (event: 'focus', payload: { focusEvent: FocusEvent }): void;
+  (event: 'toggleFullScreen', args: { isFullScreen: boolean }): void;
+  (event: 'toggleCodeView', args: { isCodeView: boolean }): void;
+  (event: 'audioUploadHandler', args: { info: audioInputInformation; xmlHttp: XMLHttpRequest }): void;
+  (event: 'videoUploadHandler', args: { info: videoInputInformation; xmlHttp: XMLHttpRequest }): void;
+  (event: 'imageUploadHandler', args: { info: imageInputInformation; xmlHttp: XMLHttpRequest }): void;
+  (event: 'showController', args: { controllers: Controllers; name: string }): void;
+  (event: 'showInline', args: { context: Context; toolbar: Element }): void;
+  (event: 'save', args: { contents: string }): void;
+  (event: 'cut', args: { clipboardData: any; clipboardEvent: ClipboardEvent }): void;
+  (event: 'copy', args: { clipboardData: any; clipboardEvent: ClipboardEvent }): void;
+  (event: 'paste', args: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: number }): void;
+  (event: 'drop', args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }): void;
+  (event: 'blur', args: { focusEvent: FocusEvent }): void;
+  (event: 'change', args: { contents: string }): void;
+  (event: 'keyUp', args: { keyboardEvent: KeyboardEvent }): void;
+  (event: 'keyDown', args: { keyboardEvent: KeyboardEvent }): void;
+  (event: 'input', args: { inputEvent: InputEvent }): void;
+  (event: 'click', args: { mouseEvent: PointerEvent }): void;
+  (event: 'mouseDown', args: { mouseEvent: MouseEvent }): void;
+  (event: 'focus', args: { focusEvent: FocusEvent }): void;
   (
     event: 'videoUpload',
-    payload: {
+    args: {
       index: number;
       info: fileInfo;
       remainingFilesCount: number;
@@ -111,7 +111,7 @@ interface IEmits {
   ): void;
   (
     event: 'audioUpload',
-    payload: {
+    args: {
       index: number;
       info: fileInfo;
       remainingFilesCount: number;
@@ -119,9 +119,9 @@ interface IEmits {
       targetElement: HTMLElement;
     },
   ): void;
-  (event: 'scroll', payload: { uiEvent: UIEvent }): void;
-  (event: 'load', payload: { reload: boolean }): void;
-  (event: 'getSunEditorInstance', payload: { sunEditor: SunEditorCore }): void;
+  (event: 'scroll', args: { uiEvent: UIEvent }): void;
+  (event: 'load', args: { reload: boolean }): void;
+  (event: 'getSunEditorInstance', args: { sunEditor: SunEditorCore }): void;
 
   (event: 'update:modelValue', newValue: string): void;
 }

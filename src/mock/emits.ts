@@ -1,141 +1,141 @@
 import type { IEmits } from '@/types/interface';
 
 const editorEventHandlers: IEmits = {
-  audioUpload: (payload) => {
+  audioUpload: (args) => {
     console.log('Event: audioUpload');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  audioUploadBefore: (payload) => {
+  audioUploadBefore: (args) => {
     console.log('Event: audioUploadBefore');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  audioUploadError: (payload) => {
+  audioUploadError: (args) => {
     console.log('Event: audioUploadError');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  audioUploadHandler: (payload) => {
+  audioUploadHandler: (args) => {
     console.log('Event: audioUploadHandler');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  blur: (payload) => {
+  blur: (args) => {
     console.log('Event: blur');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  change: (payload) => {
+  change: (args) => {
     console.log('Event: change');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  click: (payload) => {
+  click: (args) => {
     console.log('Event: click');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  copy: (payload) => {
+  copy: (args) => {
     console.log('Event: copy');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  cut: (payload) => {
+  cut: (args) => {
     console.log('Event: cut');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  drop: (payload) => {
+  drop: (args) => {
     console.log('Event: drop');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  focus: (payload) => {
+  focus: (args) => {
     console.log('Event: focus');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  getSunEditorInstance: (payload) => {
+  getSunEditorInstance: (args) => {
     console.log('Event: getSunEditorInstance');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  imageUpload: (payload) => {
+  imageUpload: (args) => {
     console.log('Event: imageUpload');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  imageUploadBefore: (payload) => {
+  imageUploadBefore: (args) => {
     console.log('Event: imageUploadBefore');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  imageUploadError: (payload) => {
+  imageUploadError: (args) => {
     console.log('Event: imageUploadError');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  imageUploadHandler: (payload) => {
+  imageUploadHandler: (args) => {
     console.log('Event: imageUploadHandler');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  input: (payload) => {
+  input: (args) => {
     console.log('Event: input');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  keyDown: (payload) => {
+  keyDown: (args) => {
     console.log('Event: keydown');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  keyUp: (payload) => {
+  keyUp: (args) => {
     console.log('Event: keyUp');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  load: (payload) => {
+  load: (args) => {
     console.log('Event: load');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  mouseDown: (payload) => {
+  mouseDown: (args) => {
     console.log('Event: mouseDown');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  paste: (payload) => {
+  paste: (args) => {
     console.log('Event: paste');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  resizeEditor: (payload) => {
+  resizeEditor: (args) => {
     console.log('Event: resizeEditor');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  save: (payload) => {
+  save: (args) => {
     console.log('Event: save');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  scroll: (payload) => {
+  scroll: (args) => {
     console.log('Event: scroll');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  setToolbarButtons: (payload) => {
+  setToolbarButtons: (args) => {
     console.log('Event: setToolbarButtons');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  showController: (payload) => {
+  showController: (args) => {
     console.log('Event: showController');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  showInline: (payload) => {
+  showInline: (args) => {
     console.log('Event: showInline');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  toggleCodeView: (payload) => {
+  toggleCodeView: (args) => {
     console.log('Event: toggleCodeView');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  toggleFullScreen: (payload) => {
+  toggleFullScreen: (args) => {
     console.log('Event: toggleFullScreen');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  videoUpload: (payload) => {
+  videoUpload: (args) => {
     console.log('Event: videoUpload');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  videoUploadBefore: (payload) => {
+  videoUploadBefore: (args) => {
     console.log('Event: videoUploadBefore');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  videoUploadError: (payload) => {
+  videoUploadError: (args) => {
     console.log('Event: videoUploadError');
-    console.log('payload', payload);
+    console.log('args', args);
   },
-  videoUploadHandler: (payload) => {
+  videoUploadHandler: (args) => {
     console.log('Event: videoUploadHandler');
-    console.log('payload', payload);
+    console.log('args', args);
   },
 };
 
