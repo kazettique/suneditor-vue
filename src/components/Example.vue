@@ -46,10 +46,9 @@ import 'suneditor/dist/css/suneditor.min.css';
 
 import { ref } from 'vue';
 
-import SunEditor, { type IExpose, type IProps } from '@/index';
+import SunEditor, { type IProps } from '@/index';
 import editorEventHandlers from '@/mock/emits';
 import editorProps from '@/mock/props';
-// import type { IExpose } from '@/types';
 
 const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 const props = ref<IProps>(editorProps);
@@ -57,11 +56,7 @@ const props = ref<IProps>(editorProps);
 const testVModel = ref<string>('');
 
 const handleTest = () => {
-  // testVModel.value = testVModel.value + '123';
-  if (editorEl.value) {
-    const test = editorEl.value.getImagesInfo();
-    console.log('test', test);
-  }
+  testVModel.value = testVModel.value + '123';
 };
 
 const handleClick = () => {

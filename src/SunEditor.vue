@@ -256,6 +256,8 @@ watchEffect(() => {
     // getText event
     const contents = editorInstance.value.getText();
     emits('getText', { contents });
+
+    editorInstance.value.setContents(props.modelValue);
   }
 });
 
@@ -314,7 +316,7 @@ onMounted(() => {
       uploadHandler: Function,
     ): boolean | any[] | undefined => {
       emits('imageUploadBefore', { files, info, uploadHandler });
-      return false;
+      return true;
     }; // TODO: adjust return type
     instance.onVideoUploadBefore = (
       files: any[],
@@ -323,7 +325,7 @@ onMounted(() => {
       uploadHandler: Function,
     ): boolean | any[] | undefined => {
       emits('videoUploadBefore', { files, info, uploadHandler });
-      return false;
+      return true;
     }; // TODO: adjust return type
     instance.onAudioUploadBefore = (
       files: any[],
@@ -332,7 +334,7 @@ onMounted(() => {
       uploadHandler: Function,
     ): boolean | any[] | undefined => {
       emits('audioUploadBefore', { files, info, uploadHandler });
-      return false;
+      return true;
     }; // TODO: adjust return type
     instance.onImageUpload = (
       targetElement: HTMLImageElement,
@@ -360,15 +362,15 @@ onMounted(() => {
     ): void => emits('audioUpload', { index, info, remainingFilesCount, state, targetElement });
     instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean => {
       emits('imageUploadError', { errorMessage, result });
-      return false;
+      return true;
     }; // TODO: adjust return type
     instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean => {
       emits('videoUploadError', { errorMessage, result });
-      return false;
+      return true;
     }; // TODO: adjust return type
     instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean => {
       emits('audioUploadError', { errorMessage, result });
-      return false;
+      return true;
     }; // TODO: adjust return type
     instance.onResizeEditor = (
       height: number,
@@ -419,6 +421,6 @@ onUnmounted(() => {
 
 <style scoped>
 .sunEditorVue {
-  /* position: relative; */
+  overflow: hidden;
 }
 </style>
