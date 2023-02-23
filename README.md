@@ -49,7 +49,6 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
   - [TypeScript Support](#typescript-support)
     - [Props Typing](#props-typing)
     - [Events Typing](#events-typing)
-    - [Expose Methods Typing](#expose-methods-typing)
   - [Special Thanks](#special-thanks)
   - [Todo List](#todo-list)
   - [License](#license)
@@ -582,10 +581,6 @@ Or defining event handlers separately:
   };
 </script>
 ```
-
-### Expose Methods Typing
-
-<!-- TODO: example -->
 
 ## Special Thanks
 
