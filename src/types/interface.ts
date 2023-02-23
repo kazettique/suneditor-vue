@@ -55,74 +55,70 @@ export interface IExpose {
 }
 
 export interface IEmits {
-  audioUpload: (payload: {
+  audioUpload: (args: {
     index: number;
     info: fileInfo;
     remainingFilesCount: number;
     state: UploadStateType;
     targetElement: HTMLElement;
   }) => void;
-  audioUploadBefore: (payload: {
+  audioUploadBefore: (args: {
     files: Array<File>; // TODO: different with origin
     info: audioInputInformation;
     uploadHandler: Function;
   }) => void;
-  audioUploadError: (payload: { errorMessage: string; result: any }) => void;
-  audioUploadHandler: (payload: { info: audioInputInformation; xmlHttp: XMLHttpRequest }) => void;
-  blur: (payload: { focusEvent: FocusEvent }) => void;
-  change: (payload: { contents: string }) => void;
-  click: (payload: { mouseEvent: PointerEvent }) => void;
-  copy: (payload: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
-  cut: (payload: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
-  drop: (payload: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
-  focus: (payload: { focusEvent: FocusEvent }) => void;
-  getSunEditorInstance: (payload: { sunEditor: SunEditorCore }) => void;
-  imageUpload: (payload: {
+  audioUploadError: (args: { errorMessage: string; result: any }) => void;
+  audioUploadHandler: (args: { info: audioInputInformation; xmlHttp: XMLHttpRequest }) => void;
+  blur: (args: { focusEvent: FocusEvent }) => void;
+  change: (args: { contents: string }) => void;
+  click: (args: { mouseEvent: PointerEvent }) => void;
+  copy: (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+  cut: (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+  drop: (args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
+  focus: (args: { focusEvent: FocusEvent }) => void;
+  getSunEditorInstance: (args: { sunEditor: SunEditorCore }) => void;
+  imageUpload: (args: {
     index: number;
     info: fileInfo;
     remainingFilesCount: number;
     state: UploadStateType;
     targetImgElement: HTMLImageElement;
   }) => void;
-  imageUploadBefore: (payload: {
+  imageUploadBefore: (args: {
     files: Array<File>; // TODO: different with origin
     info: imageInputInformation;
     uploadHandler: Function;
   }) => void;
-  imageUploadError: (payload: { errorMessage: string; result: any }) => void;
-  imageUploadHandler: (payload: { info: imageInputInformation; xmlHttp: XMLHttpRequest }) => void;
-  input: (payload: { inputEvent: InputEvent }) => void;
-  keyDown: (payload: { keyboardEvent: KeyboardEvent }) => void;
-  keyUp: (payload: { keyboardEvent: KeyboardEvent }) => void;
-  load: (payload: { reload: boolean }) => void;
-  mouseDown: (payload: { mouseEvent: MouseEvent }) => void;
-  paste: (payload: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: boolean }) => void;
-  resizeEditor: (payload: {
-    height: number;
-    prevHeight: number;
-    resizeObserverEntry: ResizeObserverEntry | null;
-  }) => void;
-  save: (payload: { contents: string }) => void;
-  scroll: (payload: { uiEvent: UIEvent }) => void;
-  setToolbarButtons: (payload: { buttonList: Array<any> }) => void;
-  showController: (payload: { controllers: Controllers; name: string }) => void;
-  showInline: (payload: { context: Context; toolbar: Element }) => void;
-  toggleCodeView: (payload: { isCodeView: boolean }) => void;
-  toggleFullScreen: (payload: { isFullScreen: boolean }) => void;
-  videoUpload: (payload: {
+  imageUploadError: (args: { errorMessage: string; result: any }) => void;
+  imageUploadHandler: (args: { info: imageInputInformation; xmlHttp: XMLHttpRequest }) => void;
+  input: (args: { inputEvent: InputEvent }) => void;
+  keyDown: (args: { keyboardEvent: KeyboardEvent }) => void;
+  keyUp: (args: { keyboardEvent: KeyboardEvent }) => void;
+  load: (args: { reload: boolean }) => void;
+  mouseDown: (args: { mouseEvent: MouseEvent }) => void;
+  paste: (args: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: boolean }) => void;
+  resizeEditor: (args: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null }) => void;
+  save: (args: { contents: string }) => void;
+  scroll: (args: { uiEvent: UIEvent }) => void;
+  setToolbarButtons: (args: { buttonList: Array<any> }) => void;
+  showController: (args: { controllers: Controllers; name: string }) => void;
+  showInline: (args: { context: Context; toolbar: Element }) => void;
+  toggleCodeView: (args: { isCodeView: boolean }) => void;
+  toggleFullScreen: (args: { isFullScreen: boolean }) => void;
+  videoUpload: (args: {
     index: number;
     info: fileInfo;
     remainingFilesCount: number;
     state: UploadStateType;
     targetElement: HTMLElement;
   }) => void;
-  videoUploadBefore: (payload: {
+  videoUploadBefore: (args: {
     files: Array<File>; // TODO: different with origin
     info: videoInputInformation;
     uploadHandler: Function;
   }) => void;
-  videoUploadError: (payload: { errorMessage: string; result: any }) => void;
-  videoUploadHandler: (payload: { info: videoInputInformation; xmlHttp: XMLHttpRequest }) => void;
+  videoUploadError: (args: { errorMessage: string; result: any }) => void;
+  videoUploadHandler: (args: { info: videoInputInformation; xmlHttp: XMLHttpRequest }) => void;
 }
 
 export interface IPlugin extends Plugin {
