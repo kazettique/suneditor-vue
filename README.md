@@ -270,7 +270,7 @@ Since the [original SunEditor][SunEditor] does not has traditional Chinese langu
 
 ## Events
 
-For event handlers, I adjusted a little bit with args in callback functions.
+For event handlers, I adjusted a little bit with arguments in callback functions.
 
 From original callback functions, for example, `onCopy` event, the type definition is:
 
