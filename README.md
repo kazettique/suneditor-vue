@@ -266,7 +266,7 @@ Since the [original SunEditor](https://github.com/JiHong88/SunEditor) does not h
 
 ## Events
 
-For event handlers, I adjusted a little bit with payload in callback functions.
+For event handlers, I adjusted a little bit with args in callback functions.
 
 From original callback functions, for example, `onCopy` event, the type definition is:
 
@@ -277,7 +277,7 @@ From original callback functions, for example, `onCopy` event, the type definiti
 I changed it into:
 
 ```ts
-(payload: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+(args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
 ```
 
 First, I removed `core` from arguments since I don't want to mutate the component imperatively. (Using reactivity system from Vue!)
@@ -546,13 +546,13 @@ You can do events typing by importing `IEmits`.
   import type { IEmits } from 'suneditor-vue';
 
   const eventHandlers: IEmits = {
-    blur: (payload) => {
+    blur: (args) => {
       // do something...
     },
-    change: (payload) => {
+    change: (args) => {
       // do something...
     },
-    click: (payload) => {
+    click: (args) => {
       // do something...
     },
   };
@@ -569,15 +569,15 @@ Or defining event handlers separately:
 <script setup lang="ts">
   import type { IEmits } from 'suneditor-vue';
 
-  const handleBlur: IEmits['blur'] = (payload) => {
+  const handleBlur: IEmits['blur'] = (args) => {
     // do something...
   };
 
-  const handleChange: IEmits['change'] = (payload) => {
+  const handleChange: IEmits['change'] = (args) => {
     // do something...
   };
 
-  const handleClick: IEmits['click'] = (payload) => {
+  const handleClick: IEmits['click'] = (args) => {
     // do something...
   };
 </script>
