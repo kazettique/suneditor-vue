@@ -124,6 +124,8 @@ All props are OPTIONAL.
 
 The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original][SunEditionOptions] one. I made something more strongly typed. But don't worry, the usage will be the same.
 
+<!-- TODO: descriptionS, types -->
+
 | Prop                        | Type                                   | Description |
 | --------------------------- | -------------------------------------- | ----------- |
 | plugins                     |                                        |             |
@@ -258,6 +260,10 @@ const setOptions = {
 };
 ```
 
+`getLanguage` method is defined with TypeScript, if we type quotation mark, all available lang will show up:
+
+![getLanguage](/public/img/getLang.png)
+
 #### Adding Traditional Chinese Language Pack! 🎉
 
 Since the [original SunEditor][SunEditor] does not has traditional Chinese language pack, so I added one if anyone need it. 🙌
@@ -338,11 +344,15 @@ When contents change in wysiwyg area.
 
 ### Drop Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
 ```
 
 ### Paste Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: boolean }) => void;
@@ -350,11 +360,15 @@ When contents change in wysiwyg area.
 
 ### Copy Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
 ```
 
 ### Cut Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
@@ -362,11 +376,15 @@ When contents change in wysiwyg area.
 
 ### Save Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { contents: string }) => void;
 ```
 
 ### Show Inline Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { context: Context; toolbar: Element }) => void;
@@ -374,11 +392,15 @@ When contents change in wysiwyg area.
 
 ### Show Controller Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { controllers: Controllers; name: string }) => void;
 ```
 
 ### Image Upload Handler Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { info: imageInputInformation; xmlHttp: XMLHttpRequest }) => void;
@@ -386,11 +408,15 @@ When contents change in wysiwyg area.
 
 ### Video Upload Handler Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { info: videoInputInformation; xmlHttp: XMLHttpRequest }) => void;
 ```
 
 ### Audio Upload Handler Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { info: audioInputInformation; xmlHttp: XMLHttpRequest }) => void;
@@ -414,6 +440,8 @@ An event when toggling full screen.
 
 ### Image Upload Before Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: {
   files: Array<File>;
@@ -423,6 +451,8 @@ An event when toggling full screen.
 ```
 
 ### Video Upload Before Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: {
@@ -434,6 +464,8 @@ An event when toggling full screen.
 
 ### Audio Upload Before Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: {
   files: Array<File>;
@@ -443,6 +475,8 @@ An event when toggling full screen.
 ```
 
 ### Image Upload Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: {
@@ -456,6 +490,8 @@ An event when toggling full screen.
 
 ### Video Upload Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: {
   index: number;
@@ -467,6 +503,8 @@ An event when toggling full screen.
 ```
 
 ### Audio Upload Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: {
@@ -480,17 +518,23 @@ An event when toggling full screen.
 
 ### Image Upload Error Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { errorMessage: string; result: any }) => void;
 ```
 
 ### Video Upload Error Event
 
+<!-- TODO: description -->
+
 ```ts
 (args: { errorMessage: string; result: any }) => void;
 ```
 
 ### Audio Upload Error Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { errorMessage: string; result: any }) => void;
@@ -505,6 +549,8 @@ Emit when editor is resized.
 ```
 
 ### Set Toolbar Buttons Event
+
+<!-- TODO: description -->
 
 ```ts
 (args: { buttonList: Array<any> }) => void;
