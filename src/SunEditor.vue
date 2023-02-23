@@ -18,7 +18,7 @@ import type {
 } from 'suneditor/src/lib/core';
 import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watchEffect } from 'vue';
 
-import type { IExpose, SetOptions, UploadStateType } from './types';
+import type { SetOptions, UploadStateType } from './types';
 import { isEmptyObject } from './utils';
 
 // TODO: waiting for enabling to move types outside of SFC until Vue 3.3 released
@@ -122,6 +122,8 @@ interface IEmits {
   (event: 'scroll', args: { uiEvent: UIEvent }): void;
   (event: 'load', args: { reload: boolean }): void;
   (event: 'getSunEditorInstance', args: { sunEditor: SunEditorCore }): void;
+  (event: 'getCharCount', args: { charCount: number }): void;
+  (event: 'getText', args: { contents: string }): void;
 
   (event: 'update:modelValue', newValue: string): void;
 }
@@ -166,48 +168,23 @@ watchEffect(() => {
   }
 });
 
-// expose method: save
-const save = (): void => {
-  if (editorInstance.value) {
-    editorInstance.value.save();
-  }
-};
-
-// expose method: getText
-const getText = (): string => {
-  if (editorInstance.value) {
-    return editorInstance.value.getText();
-  } else {
-    return '';
-  }
-};
-
-// expose method: getCharCount
-const getCharCount = (charCounterType?: string): number => {
-  if (editorInstance.value) {
-    return editorInstance.value.getCharCount(charCounterType);
-  } else {
-    return 0;
-  }
-};
-
 // expose method: getImagesInfo
-const getImagesInfo = (): fileInfo[] => {
-  if (editorInstance.value) {
-    return editorInstance.value.getImagesInfo();
-  } else {
-    return [];
-  }
-};
+// const getImagesInfo = (): fileInfo[] => {
+//   if (editorInstance.value) {
+//     return editorInstance.value.getImagesInfo();
+//   } else {
+//     return [];
+//   }
+// };
 
 // expose method: getFilesInfo
-const getFilesInfo = (pluginName: string): fileInfo[] => {
-  if (editorInstance.value) {
-    return editorInstance.value.getFilesInfo(pluginName);
-  } else {
-    return [];
-  }
-};
+// const getFilesInfo = (pluginName: string): fileInfo[] => {
+//   if (editorInstance.value) {
+//     return editorInstance.value.getFilesInfo(pluginName);
+//   } else {
+//     return [];
+//   }
+// };
 
 // props watcher: readOnly
 const readOnly = computed(() => props.readOnly);
@@ -267,19 +244,19 @@ watch(disableToolbar, (newValue, oldValue) => {
 
 // TODO: fix v-model
 // props watcher: modelValue
-const modelValue = computed(() => props.modelValue);
-watch(modelValue, (newValue, oldValue) => {
-  if (editorInstance.value && newValue) {
-    // editorInstance.value.setContents(newValue);
-  }
-});
+watchEffect(() => {
+  if (editorInstance.value && props.modelValue) {
+    // getCharCount event
+    const charCounterType = props.setOptions.charCounterType;
+    if (charCounterType) {
+      const charCount = editorInstance.value.getCharCount(charCounterType);
+      emits('getCharCount', { charCount });
+    }
 
-defineExpose<IExpose>({
-  getCharCount,
-  getFilesInfo,
-  getImagesInfo,
-  getText,
-  save,
+    // getText event
+    const contents = editorInstance.value.getText();
+    emits('getText', { contents });
+  }
 });
 
 onMounted(() => {

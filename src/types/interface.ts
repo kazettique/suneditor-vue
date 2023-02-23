@@ -2,7 +2,6 @@ import type { Context } from 'suneditor/src/lib/context';
 import type {
   audioInputInformation,
   Controllers,
-  Core,
   fileInfo,
   imageInputInformation,
   videoInputInformation,
@@ -35,12 +34,12 @@ export interface SetOptions extends Partial<SunEditorOptions> {
   // customPlugins?: Array<Plugin> | Record<string, Plugin>;
 }
 
-export interface IExpose {
+interface IExpose {
   // appendContents: (contents: string) => void;
-  getCharCount: (charCounterType?: string) => number; // TODO: change to event?
+  // getCharCount: (charCounterType?: string) => number;
   getFilesInfo: (pluginName: string) => fileInfo[];
   getImagesInfo: () => fileInfo[];
-  getText: () => string; // TODO: change to event?
+  // getText: () => string;
   // insertHTML: (args: {
   //   checkCharCount?: boolean;
   //   html: Element | string;
@@ -74,7 +73,9 @@ export interface IEmits {
   cut: (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
   drop: (args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
   focus: (args: { focusEvent: FocusEvent }) => void;
+  getCharCount: (args: { charCount: number }) => void;
   getSunEditorInstance: (args: { sunEditor: SunEditorCore }) => void;
+  getText: (args: { contents: string }) => void;
   imageUpload: (args: {
     index: number;
     info: fileInfo;

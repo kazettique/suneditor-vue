@@ -32,6 +32,8 @@
       v-on:video-upload-before="editorEventHandlers.videoUploadBefore"
       v-on:video-upload-error="editorEventHandlers.videoUploadError"
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
+      v-on:get-char-count="editorEventHandlers.getCharCount"
+      v-on:get-text="editorEventHandlers.getText"
       v-model="testVModel"
     />
     <button v-on:click="handleTest">btn</button>
