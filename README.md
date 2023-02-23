@@ -271,13 +271,13 @@ For event handlers, I adjusted a little bit with args in callback functions.
 From original callback functions, for example, `onCopy` event, the type definition is:
 
 ```ts
-(event: Event, clipboardData: any, core: Core) => boolean;
+(clipboardEvent: ClipboardEvent, clipboardData: any, core: Core) => boolean;
 ```
 
 I changed it into:
 
 ```ts
-(args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
+(args: { clipboardEvent: ClipboardEvent; clipboardData: any; }) => void;
 ```
 
 First, I removed `core` from arguments since I don't want to mutate the component imperatively. (Using reactivity system from Vue!)
