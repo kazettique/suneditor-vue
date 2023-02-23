@@ -110,23 +110,142 @@ Import SunEditorVue component with composition API in Vue 3:
 
 ## Props
 
-| Prop           | Type         | Required | Description                       |
-| -------------- | ------------ | -------- | --------------------------------- |
-| disable        | `boolean`    | false    | Disable whole component.          |
-| disableToolbar | `boolean`    | false    | Disable toolbar area.             |
-| disableWysiwyg | `boolean`    | false    | Disable Wysiwyg area.             |
-| isNoticeOpen   | `boolean`    | false    | Toggle open the notice bar.       |
-| noticeMessage  | `string`     | false    | Content message in notice bar.    |
-| readOnly       | `boolean`    | false    | Make component read only.         |
-| setOptions     | `SetOptions` | false    | Set options for editor component. |
+All props are OPTIONAL.
+
+| Prop           | Type         | Description                       |
+| -------------- | ------------ | --------------------------------- |
+| disable        | `boolean`    | Disable whole component.          |
+| disableToolbar | `boolean`    | Disable toolbar area.             |
+| disableWysiwyg | `boolean`    | Disable Wysiwyg area.             |
+| isNoticeOpen   | `boolean`    | Toggle open the notice bar.       |
+| noticeMessage  | `string`     | Content message in notice bar.    |
+| readOnly       | `boolean`    | Make component read only.         |
+| setOptions     | `SetOptions` | Set options for editor component. |
 
 ### SetOptions
 
 The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original](./) one. I made something more strongly typed. But don't worry, the usage will be the same.
 
-| Prop       | Type | Required | Description |
-| ---------- | ---- | -------- | ----------- |
-| alignItems |      |          |             |
+| Prop                        | Type                                                                                                                             | Description |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| plugins                     |                                                                                                                                  |             |
+| lang                        | [Lang](https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/lang/Lang.d.ts#L1)                |             |
+| defaultTag                  | `string`                                                                                                                         |             |
+| textTags                    |                                                                                                                                  |             |
+| value                       | `string`                                                                                                                         |             |
+| historyStackDelayTime       | `number`                                                                                                                         |             |
+| addTagsWhitelist            | `string \| '*'`                                                                                                                  |             |
+| tagsBlacklist               | `string`                                                                                                                         |             |
+| pasteTagsWhitelist          | `string \| '*'`                                                                                                                  |             |
+| pasteTagsBlacklist          | `string`                                                                                                                         |             |
+| attributesWhitelist         |                                                                                                                                  |             |
+| attributesBlacklist         |                                                                                                                                  |             |
+| mode                        | `EditorModeType`                                                                                                                 |             |
+| rtl                         | `boolean`                                                                                                                        |             |
+| lineAttrRest                | `string`                                                                                                                         |             |
+| buttonList                  |                                                                                                                                  |             |
+| toolbarWidth                | `string`                                                                                                                         |             |
+| toolbarContainer            | `HTMLElement \| string`                                                                                                          |             |
+| stickyToolbar               | `number \| string`                                                                                                               |             |
+| hideToolbar                 | `boolean`                                                                                                                        |             |
+| fulScreenOffset             | `number \| string`                                                                                                               |             |
+| iframe                      | `boolean`                                                                                                                        |             |
+| fullPage                    | `boolean`                                                                                                                        |             |
+| iframeAttributes            |                                                                                                                                  |             |
+| iframeCSSFileName           | `string \| string[]`                                                                                                             |             |
+| previewTemplate             | `string`                                                                                                                         |             |
+| printTemplate               | `string`                                                                                                                         |             |
+| codeMirror                  |                                                                                                                                  |             |
+| katex                       |                                                                                                                                  |             |
+| mathFontSize                |                                                                                                                                  |             |
+| position                    | `string`                                                                                                                         |             |
+| display                     | `string`                                                                                                                         |             |
+| popupDisplay                | `PopupDisplayType`                                                                                                               |             |
+| resizingBar                 |                                                                                                                                  |             |
+| showPathLabel               |                                                                                                                                  |             |
+| resizeEnable                |                                                                                                                                  |             |
+| resizingBarContainer        | `HTMLElement \| string`                                                                                                          |             |
+| charCounter                 | `boolean`                                                                                                                        |             |
+| charCounterType             | `CharCounterType`                                                                                                                |             |
+| charCounterLabel            | `string`                                                                                                                         |             |
+| maxCharCount                | `number`                                                                                                                         |             |
+| width                       | `string`                                                                                                                         |             |
+| minWidth                    | `string`                                                                                                                         |             |
+| maxWidth                    | `string`                                                                                                                         |             |
+| height                      | `string`                                                                                                                         |             |
+| minHeight                   | `string`                                                                                                                         |             |
+| maxHeight                   | `string`                                                                                                                         |             |
+| className                   | `string`                                                                                                                         |             |
+| defaultStyle                | `string`                                                                                                                         |             |
+| font                        | `string[]`                                                                                                                       |             |
+| fontSize                    | `number[]`                                                                                                                       |             |
+| fontSizeUnit                | `string`                                                                                                                         |             |
+| alignItems                  | `AlignItemsType[]`                                                                                                               |             |
+| formats                     | [FormatTagName](https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L592)`[]`   |             |
+| colorList                   | `string[]`                                                                                                                       |             |
+| lineHeights                 | [LineHeightsItem](https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L605)`[]` |             |
+| paragraphStyles             | [ParagraphStyles](https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L606)     |             |
+| textStyles                  | [TextStyles](https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L607)          |             |
+| imageResizing               | `boolean`                                                                                                                        |             |
+| imageHeightShow             | `boolean`                                                                                                                        |             |
+| imageAlignShow              | `boolean`                                                                                                                        |             |
+| imageWidth                  | `string`                                                                                                                         |             |
+| imageHeight                 | `string`                                                                                                                         |             |
+| imageSizeOnlyPercentage     | `boolean`                                                                                                                        |             |
+| imageRotation               | `boolean`                                                                                                                        |             |
+| imageFileInput              | `boolean`                                                                                                                        |             |
+| imageUrlInput               | `boolean`                                                                                                                        |             |
+| imageUploadHeader           |                                                                                                                                  |             |
+| imageUPloadUrl              | `string`                                                                                                                         |             |
+| imageUploadSizeLimit        | `number`                                                                                                                         |             |
+| imageMultipleFile           | `boolean`                                                                                                                        |             |
+| imageAccept                 | `string`                                                                                                                         |             |
+| imageGalleryUrl             | `string`                                                                                                                         |             |
+| imageGalleryHeader          |                                                                                                                                  |             |
+| videoResizing               | `boolean`                                                                                                                        |             |
+| videoHeightShow             | `boolean`                                                                                                                        |             |
+| videoAlignShow              | `boolean`                                                                                                                        |             |
+| videoRatioShow              | `boolean`                                                                                                                        |             |
+| videoWidth                  | `string`                                                                                                                         |             |
+| videoHeight                 | `string`                                                                                                                         |             |
+| videoSizeOnlyPercentage     | `boolean`                                                                                                                        |             |
+| videoRotation               | `boolean`                                                                                                                        |             |
+| videoRatio                  | `number`                                                                                                                         |             |
+| videoRatioList              |                                                                                                                                  |             |
+| youtubeQuery                | `string`                                                                                                                         |             |
+| videoFileInput              | `boolean`                                                                                                                        |             |
+| videoUrlInput               | `boolean`                                                                                                                        |             |
+| videoUploadHeader           |                                                                                                                                  |             |
+| videoUploadUrl              | `string`                                                                                                                         |             |
+| videoUploadSizeLimit        | `number`                                                                                                                         |             |
+| videoMultipleFile           | `boolean`                                                                                                                        |             |
+| videoIframeAttrs            |                                                                                                                                  |             |
+| videoAccept                 | `string`                                                                                                                         |             |
+| audioWidth                  | `string`                                                                                                                         |             |
+| audioHeight                 | `string`                                                                                                                         |             |
+| audioFileInput              | `boolean`                                                                                                                        |             |
+| audioUrlInput               | `boolean`                                                                                                                        |             |
+| audioUploadHeader           |                                                                                                                                  |             |
+| audioUploadUrl              | `string`                                                                                                                         |             |
+| audioUploadSizeLimit        | `number`                                                                                                                         |             |
+| audioMultipleFile           | `boolean`                                                                                                                        |             |
+| audioTagAttrs               |                                                                                                                                  |             |
+| audioAccept                 | `string`                                                                                                                         |             |
+| tableCellControllerPosition | `string`                                                                                                                         |             |
+| linkTargetNewWindow         | `boolean`                                                                                                                        |             |
+| linkProtocol                | `string`                                                                                                                         |             |
+| linkRel                     | `string[]`                                                                                                                       |             |
+| linkRelDefault              |                                                                                                                                  |             |
+| linkNoPrefix                | `boolean`                                                                                                                        |             |
+| hrItems                     |                                                                                                                                  |             |
+| tabDisable                  | `boolean`                                                                                                                        |             |
+| shortcutsDisable            | `string[]`                                                                                                                       |             |
+| shortcutsHint               | `boolean`                                                                                                                        |             |
+| callBackSave                |                                                                                                                                  |             |
+| templates                   | [TemplatesItem](https://github.com/JiHong88/suneditor/blob/7e2b79f258bbc0845bacd1c7c8296ec17babaeca/src/options.d.ts#L604)`[]`   |             |
+| placeholder                 | `string`                                                                                                                         |             |
+| mediaAutoSelect             |                                                                                                                                  |             |
+| icons                       |                                                                                                                                  |             |
 
 ### Language Support (i18n)
 
@@ -161,9 +280,9 @@ I changed it into:
 (payload: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
 ```
 
-First, I removed `core` from params since I don't want to mutate the component imperatively. (Using reactivity system from Vue!)
+First, I removed `core` from arguments since I don't want to mutate the component imperatively. (Using reactivity system from Vue!)
 
-Second, I turned params into an object. After that, don't worry about the order anymore. Just destruct what you need. No redundant variables. 😎
+Second, I turned arguments into an object. So we don't have to worry about the order anymore. Just destruct what you need. No redundant variables. 😎
 
 All events are listed below:
 
