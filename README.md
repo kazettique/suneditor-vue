@@ -81,13 +81,11 @@ Import SunEditorVue component with composition API in Vue 3:
 
 ```html
 <template>
-  <SunEditor v-bind="props" @change="handleChange" v-model="editorHtmlString" />
+  <SunEditor v-bind="props" @change="handleChange" />
 </template>
 
 <script setup>
   import 'suneditor/dist/css/suneditor.min.css';
-
-  import { ref } from 'vue';
   import SunEditor from 'suneditor-vue';
 
   // props
@@ -99,9 +97,6 @@ Import SunEditorVue component with composition API in Vue 3:
   const handleChange = (content) => {
     // do something...
   };
-
-  // binding ref with v-model
-  const editorHtmlString = ref('');
 </script>
 ```
 
