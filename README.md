@@ -292,11 +292,15 @@ All events are listed below:
 
 ### Scroll Event
 
+Emit when wysiwyg element is scrolled.
+
 ```ts
 (args: { uiEvent: UIEvent }) => void;
 ```
 
 ### Focus Event
+
+Emit when editor element is focused.
 
 ```ts
 (args: { focusEvent: FocusEvent }) => void;
@@ -304,11 +308,15 @@ All events are listed below:
 
 ### Mouse Down Event
 
+Mouse down event.
+
 ```ts
 (args: { mouseEvent: MouseEvent }) => void;
 ```
 
 ### Click Event
+
+Emit when editor element is clicked.
 
 ```ts
 (args: { mouseEvent: PointerEvent }) => void;
@@ -324,6 +332,8 @@ Wysiwyg area input event.
 
 ### Key Up Event
 
+Key up event.
+
 ```ts
 (args: { keyboardEvent: KeyboardEvent }) => void;
 ```
@@ -338,13 +348,15 @@ When contents change in wysiwyg area.
 
 ### Blur Event
 
+Emit when editor element is blurred.
+
 ```ts
 (args: { focusEvent: FocusEvent }) => void;
 ```
 
 ### Drop Event
 
-<!-- TODO: description -->
+Drop event.
 
 ```ts
 (args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
@@ -352,7 +364,7 @@ When contents change in wysiwyg area.
 
 ### Paste Event
 
-<!-- TODO: description -->
+Paste from clipboard.
 
 ```ts
 (args: { cleanData: string; clipboardEvent: ClipboardEvent; maxCharCount: boolean }) => void;
@@ -360,7 +372,7 @@ When contents change in wysiwyg area.
 
 ### Copy Event
 
-<!-- TODO: description -->
+Copy selected area.
 
 ```ts
 (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
@@ -368,7 +380,7 @@ When contents change in wysiwyg area.
 
 ### Cut Event
 
-<!-- TODO: description -->
+Cut selected area.
 
 ```ts
 (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
@@ -376,7 +388,7 @@ When contents change in wysiwyg area.
 
 ### Save Event
 
-<!-- TODO: description -->
+Emit when save button is clicked.
 
 ```ts
 (args: { contents: string }) => void;
@@ -384,7 +396,7 @@ When contents change in wysiwyg area.
 
 ### Show Inline Event
 
-<!-- TODO: description -->
+Emit before inline toolbar is positioned and displayed on screen.
 
 ```ts
 (args: { context: Context; toolbar: Element }) => void;
@@ -392,7 +404,7 @@ When contents change in wysiwyg area.
 
 ### Show Controller Event
 
-<!-- TODO: description -->
+Emit before the controller is positioned and displayed on screen.
 
 ```ts
 (args: { controllers: Controllers; name: string }) => void;
@@ -440,7 +452,7 @@ An event when toggling full screen.
 
 ### Image Upload Before Event
 
-<!-- TODO: description -->
+Emit before the image is uploaded.
 
 ```ts
 (args: {
@@ -452,7 +464,7 @@ An event when toggling full screen.
 
 ### Video Upload Before Event
 
-<!-- TODO: description -->
+Emit before the video is uploaded.
 
 ```ts
 (args: {
@@ -464,7 +476,7 @@ An event when toggling full screen.
 
 ### Audio Upload Before Event
 
-<!-- TODO: description -->
+Emit before the audio is uploaded.
 
 ```ts
 (args: {
@@ -476,7 +488,7 @@ An event when toggling full screen.
 
 ### Image Upload Event
 
-<!-- TODO: description -->
+Emit when the image is uploaded, updated, deleted.
 
 ```ts
 (args: {
@@ -490,7 +502,7 @@ An event when toggling full screen.
 
 ### Video Upload Event
 
-<!-- TODO: description -->
+Emit when the video is uploaded, updated, deleted.
 
 ```ts
 (args: {
@@ -504,7 +516,7 @@ An event when toggling full screen.
 
 ### Audio Upload Event
 
-<!-- TODO: description -->
+Emit when the audio is uploaded, updated, deleted.
 
 ```ts
 (args: {
@@ -518,7 +530,7 @@ An event when toggling full screen.
 
 ### Image Upload Error Event
 
-<!-- TODO: description -->
+Emit when image upload fails.
 
 ```ts
 (args: { errorMessage: string; result: any }) => void;
@@ -526,7 +538,7 @@ An event when toggling full screen.
 
 ### Video Upload Error Event
 
-<!-- TODO: description -->
+Emit when video upload fails.
 
 ```ts
 (args: { errorMessage: string; result: any }) => void;
@@ -534,7 +546,7 @@ An event when toggling full screen.
 
 ### Audio Upload Error Event
 
-<!-- TODO: description -->
+Emit when audio upload fails.
 
 ```ts
 (args: { errorMessage: string; result: any }) => void;
