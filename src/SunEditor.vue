@@ -28,7 +28,7 @@ export interface IProps {
   disableWysiwyg?: boolean;
   isNoticeOpen?: boolean;
   isTestingMode?: boolean; // component testing flag
-  modelValue?: string;
+  // modelValue?: string;
   noticeMessage?: string;
   readOnly?: boolean;
   setAllPlugins?: boolean;
@@ -37,7 +37,7 @@ export interface IProps {
 
 // TODO: waiting for enabling to move types outside of SFC until Vue 3.3 released
 interface IEmits {
-  (event: 'setToolbarButtons', args: { buttonList: Array<any> }): void;
+  // (event: 'setToolbarButtons', args: { buttonList: Array<any> }): void;
   (
     event: 'resizeEditor',
     args: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null },
@@ -58,7 +58,7 @@ interface IEmits {
   (
     event: 'audioUploadBefore',
     args: {
-      files: Array<File>; // TODO: different with origin
+      files: Array<File>; // different with origin
       info: audioInputInformation;
       uploadHandler: Function;
     },
@@ -66,7 +66,7 @@ interface IEmits {
   (
     event: 'videoUploadBefore',
     args: {
-      files: Array<File>; // TODO: different with origin
+      files: Array<File>; // different with origin
       info: videoInputInformation;
       uploadHandler: Function;
     },
@@ -74,7 +74,7 @@ interface IEmits {
   (
     event: 'imageUploadBefore',
     args: {
-      files: Array<File>; // TODO: different with origin
+      files: Array<File>; // different with origin
       info: imageInputInformation;
       uploadHandler: Function;
     },
@@ -122,10 +122,10 @@ interface IEmits {
   (event: 'scroll', args: { uiEvent: UIEvent }): void;
   (event: 'load', args: { reload: boolean }): void;
   (event: 'getSunEditorInstance', args: { sunEditor: SunEditorCore }): void;
-  (event: 'getCharCount', args: { charCount: number }): void;
-  (event: 'getText', args: { contents: string }): void;
+  // (event: 'getCharCount', args: { charCount: number }): void;
+  // (event: 'getText', args: { contents: string }): void;
 
-  (event: 'update:modelValue', newValue: string): void;
+  // (event: 'update:modelValue', newValue: string): void;
 }
 
 const props = withDefaults(defineProps<IProps>(), {
@@ -244,22 +244,22 @@ watch(disableToolbar, (newValue, oldValue) => {
 
 // TODO: fix v-model
 // props watcher: modelValue
-watchEffect(() => {
-  if (editorInstance.value && props.modelValue) {
-    // getCharCount event
-    const charCounterType = props.setOptions.charCounterType;
-    if (charCounterType) {
-      const charCount = editorInstance.value.getCharCount(charCounterType);
-      emits('getCharCount', { charCount });
-    }
+// watchEffect(() => {
+//   if (editorInstance.value && props.modelValue) {
+//     // getCharCount event
+//     const charCounterType = props.setOptions.charCounterType;
+//     if (charCounterType) {
+//       const charCount = editorInstance.value.getCharCount(charCounterType);
+//       emits('getCharCount', { charCount });
+//     }
 
-    // getText event
-    const contents = editorInstance.value.getText();
-    emits('getText', { contents });
+//     // getText event
+//     const contents = editorInstance.value.getText();
+//     emits('getText', { contents });
 
-    editorInstance.value.setContents(props.modelValue);
-  }
-});
+//     editorInstance.value.setContents(props.modelValue);
+//   }
+// });
 
 onMounted(() => {
   const instantiateEditor = (): void => {
@@ -276,7 +276,7 @@ onMounted(() => {
     instance.onKeyUp = (event: Event, core: Core): void => emits('keyUp', { keyboardEvent: event as KeyboardEvent });
     instance.onChange = (contents: string, core: Core): void => {
       emits('change', { contents });
-      emits('update:modelValue', contents);
+      // emits('update:modelValue', contents);
     };
     instance.onBlur = (event: FocusEvent, core: Core): void => emits('blur', { focusEvent: event });
     instance.onDrop = (event: Event, cleanData: string, maxCharCount: number, core: Core): boolean | string => {
@@ -317,7 +317,7 @@ onMounted(() => {
     ): boolean | any[] | undefined => {
       emits('imageUploadBefore', { files, info, uploadHandler });
       return true;
-    }; // TODO: adjust return type
+    };
     instance.onVideoUploadBefore = (
       files: any[],
       info: videoInputInformation,
@@ -326,7 +326,7 @@ onMounted(() => {
     ): boolean | any[] | undefined => {
       emits('videoUploadBefore', { files, info, uploadHandler });
       return true;
-    }; // TODO: adjust return type
+    };
     instance.onAudioUploadBefore = (
       files: any[],
       info: audioInputInformation,
@@ -335,7 +335,7 @@ onMounted(() => {
     ): boolean | any[] | undefined => {
       emits('audioUploadBefore', { files, info, uploadHandler });
       return true;
-    }; // TODO: adjust return type
+    };
     instance.onImageUpload = (
       targetElement: HTMLImageElement,
       index: number,
@@ -363,15 +363,15 @@ onMounted(() => {
     instance.onImageUploadError = (errorMessage: string, result: any, core: Core): boolean => {
       emits('imageUploadError', { errorMessage, result });
       return true;
-    }; // TODO: adjust return type
+    };
     instance.onVideoUploadError = (errorMessage: string, result: any, core: Core): boolean => {
       emits('videoUploadError', { errorMessage, result });
       return true;
-    }; // TODO: adjust return type
+    };
     instance.onAudioUploadError = (errorMessage: string, result: any, core: Core): boolean => {
       emits('audioUploadError', { errorMessage, result });
       return true;
-    }; // TODO: adjust return type
+    };
     instance.onResizeEditor = (
       height: number,
       prevHeight: number,
@@ -381,7 +381,7 @@ onMounted(() => {
       emits('resizeEditor', { height, prevHeight, resizeObserverEntry });
       return {};
     };
-    instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', { buttonList });
+    // instance.onSetToolbarButtons = (buttonList: any[], core: Core): void => emits('setToolbarButtons', { buttonList });
 
     // set props for first time (watcher does not run when mounted.)
     if (props.disable) instance.disable();

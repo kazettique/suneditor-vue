@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="example">
     <SunEditor
       ref="editorEl"
       v-bind="props"
@@ -24,7 +24,6 @@
       v-on:resize-editor="editorEventHandlers.resizeEditor"
       v-on:save="editorEventHandlers.save"
       v-on:scroll="editorEventHandlers.scroll"
-      v-on:set-tool-bar-buttons="editorEventHandlers.setToolbarButtons"
       v-on:show-controller="editorEventHandlers.showController"
       v-on:show-inline="editorEventHandlers.showInline"
       v-on:toggle-full-screen="editorEventHandlers.toggleFullScreen"
@@ -32,12 +31,8 @@
       v-on:video-upload-before="editorEventHandlers.videoUploadBefore"
       v-on:video-upload-error="editorEventHandlers.videoUploadError"
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
-      v-on:get-char-count="editorEventHandlers.getCharCount"
-      v-on:get-text="editorEventHandlers.getText"
-      v-model="testVModel"
     />
-    <button v-on:click="handleTest">btn</button>
-    <div style="color: #ffffff">{{ testVModel }}</div>
+    <button v-on:click="handleClick">btn</button>
   </div>
 </template>
 
@@ -53,24 +48,19 @@ import editorProps from '@/mock/props';
 const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 const props = ref<IProps>(editorProps);
 
-const testVModel = ref<string>('');
-
-const handleTest = () => {
-  testVModel.value = testVModel.value + '123';
-};
-
 const handleClick = () => {
-  // props.value = {
-  // ...editorProps,
-  // disable: !props.value.disable,
-  // disableToolbar: !props.value.disableToolbar,
-  // disableWysiwyg: !props.value.disableWysiwyg,
-  // isNoticeOpen: !props.value.isNoticeOpen,
-  // noticeMessage: props.value.noticeMessage + 'a',
-  // readOnly: !props.value.readOnly,
-  // };
-  // testVModel.value = '';
+  props.value = {
+    ...editorProps,
+    setOptions: {
+      ...editorProps.setOptions,
+      buttonList: [],
+    },
+  };
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped>
+.example {
+  width: 100%;
+}
+</style>

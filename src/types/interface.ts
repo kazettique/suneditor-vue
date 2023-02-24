@@ -73,9 +73,9 @@ export interface IEmits {
   cut: (args: { clipboardData: any; clipboardEvent: ClipboardEvent }) => void;
   drop: (args: { cleanData: string; dragEvent: DragEvent; maxCharCount: number }) => void;
   focus: (args: { focusEvent: FocusEvent }) => void;
-  getCharCount: (args: { charCount: number }) => void;
+  // getCharCount: (args: { charCount: number }) => void;
   getSunEditorInstance: (args: { sunEditor: SunEditorCore }) => void;
-  getText: (args: { contents: string }) => void;
+  // getText: (args: { contents: string }) => void;
   imageUpload: (args: {
     index: number;
     info: fileInfo;
@@ -99,7 +99,7 @@ export interface IEmits {
   resizeEditor: (args: { height: number; prevHeight: number; resizeObserverEntry: ResizeObserverEntry | null }) => void;
   save: (args: { contents: string }) => void;
   scroll: (args: { uiEvent: UIEvent }) => void;
-  setToolbarButtons: (args: { buttonList: Array<any> }) => void;
+  // setToolbarButtons: (args: { buttonList: Array<any> }) => void;
   showController: (args: { controllers: Controllers; name: string }) => void;
   showInline: (args: { context: Context; toolbar: Element }) => void;
   toggleCodeView: (args: { isCodeView: boolean }) => void;

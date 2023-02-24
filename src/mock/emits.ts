@@ -45,18 +45,18 @@ const editorEventHandlers: IEmits = {
     console.log('Event: focus');
     console.log('args', args);
   },
-  getCharCount: (args) => {
-    console.log('Event: getCharCount');
-    console.log('args', args);
-  },
+  // getCharCount: (args) => {
+  //   console.log('Event: getCharCount');
+  //   console.log('args', args);
+  // },
   getSunEditorInstance: (args) => {
     console.log('Event: getSunEditorInstance');
     console.log('args', args);
   },
-  getText: (args) => {
-    console.log('Event: getText');
-    console.log('args', args);
-  },
+  // getText: (args) => {
+  //   console.log('Event: getText');
+  //   console.log('args', args);
+  // },
   imageUpload: (args) => {
     console.log('Event: imageUpload');
     console.log('args', args);
