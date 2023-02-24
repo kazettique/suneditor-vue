@@ -29,15 +29,37 @@ const setOptions: SetOptions = {
   charCounter: true,
   charCounterLabel: 'Hello this is charCounterLabel',
   charCounterType: 'char',
+  // display: 'none',
   formats: ['p', 'blockquote', 'h2', 'h3'],
+  fullPage: false, // TODO: true will cause error, should always be false.
+  fullScreenOffset: 50,
   height: '200px',
   hideToolbar: false, // TODO: fix with reactivity
+  iframe: false, // TODO: true will cause error, should always be false.
+  // imageWidth: '50px',
+  // imageHeight: '100px',
+  imageResizing: true,
+  imageRotation: false,
+  imageSizeOnlyPercentage: true,
   lang: getLanguage('en'),
+  lineHeights: [
+    { text: 'aaa', value: 1 },
+    { text: 'bbb', value: 2 },
+  ],
+  maxCharCount: 100,
   minHeight: '250',
   minWidth: '500',
+  paragraphStyles: [{ class: 'aaaClass', name: 'aaa' }],
   placeholder: 'test placeholder',
   plugins: { ...plugins },
   popupDisplay: 'full',
+  position: 'relative',
+  previewTemplate: '<h1>Preview Template</h1> {{contents}} <div>_Footer_</div>',
+  printTemplate: '<h1>Print Template</h1> {{contents}} <div>_Footer_</div>',
+  resizeEnable: true,
+  resizingBar: true,
+  showPathLabel: true,
+  value: 'this is default value',
   width: '500px',
 };
 

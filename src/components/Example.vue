@@ -53,7 +53,8 @@ const handleClick = () => {
     ...editorProps,
     setOptions: {
       ...editorProps.setOptions,
-      buttonList: [],
+      // textTags: { ...editorProps.setOptions?.textTags, bold: 'B' },
+      // hideToolbar: true,
     },
   };
 };
