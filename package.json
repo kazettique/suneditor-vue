@@ -46,7 +46,9 @@
     "suneditor",
     "text-editor",
     "word",
-    "vue"
+    "vue",
+    "vue3",
+    "typescript"
   ],
   "author": "kazettique"
 }
