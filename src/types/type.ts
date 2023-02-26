@@ -28,3 +28,5 @@ export type AlignItemsType = `${AlignItemsEnum}`;
 export type PluginNameType = string;
 
 export type ButtonListItemType = ButtonType[] | ButtonType | PluginNameType[] | PluginNameType;
+
+export type VideoRatioType = { name: string; value: number };
