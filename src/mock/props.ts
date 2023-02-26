@@ -36,11 +36,16 @@ const setOptions: SetOptions = {
   height: '200px',
   hideToolbar: false, // TODO: fix with reactivity
   iframe: false, // TODO: true will cause error, should always be false.
+  // imageUploadSizeLimit: 102110,
+  // imageMultipleFile: true,
   // imageWidth: '50px',
   // imageHeight: '100px',
+  imageAccept: '.png .jpg',
+  imageFileInput: true,
   imageResizing: true,
   imageRotation: false,
   imageSizeOnlyPercentage: true,
+  imageUrlInput: true,
   lang: getLanguage('en'),
   lineHeights: [
     { text: 'aaa', value: 1 },
@@ -60,6 +65,11 @@ const setOptions: SetOptions = {
   resizingBar: true,
   showPathLabel: true,
   value: 'this is default value',
+  // videoResizing: false,
+  // videoHeightShow: true,
+  // videoAlignShow: false,
+  // videoRatioShow: false,
+  videoRotation: false,
   width: '500px',
 };
 

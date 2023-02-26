@@ -8,7 +8,7 @@
       v-on:audio-upload-error="editorEventHandlers.audioUploadError"
       v-on:blur="editorEventHandlers.blur"
       v-on:input="editorEventHandlers.input"
-      v-on:change="editorEventHandlers.change"
+      v-on:change="handleChange"
       v-on:click="editorEventHandlers.click"
       v-on:copy="editorEventHandlers.copy"
       v-on:cut="editorEventHandlers.cut"
@@ -33,6 +33,7 @@
       v-on:video-upload-handler="editorEventHandlers.videoUploadHandler"
     />
     <button v-on:click="handleClick">btn</button>
+    <div style="color: #fff; font-size: 1.2rem; width: 100%:">{{ editorContents }}</div>
   </div>
 </template>
 
@@ -47,6 +48,7 @@ import editorProps from '@/mock/props';
 
 const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 const props = ref<IProps>(editorProps);
+const editorContents = ref<string>('');
 
 const handleClick = () => {
   props.value = {
@@ -57,6 +59,10 @@ const handleClick = () => {
       // hideToolbar: true,
     },
   };
+};
+
+const handleChange = ({ contents }: { contents: string }) => {
+  editorContents.value = contents;
 };
 </script>
 
