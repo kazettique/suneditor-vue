@@ -22,6 +22,7 @@ import type {
   PluginDisplayType,
   PluginNameType,
   PopupDisplayType,
+  TableCellControllerPositionType,
   UploadStateType,
   VideoRatioType,
 } from './type';
@@ -32,6 +33,7 @@ export interface SetOptions extends Partial<SunEditorOptions> {
   charCounterType?: CharCounterType;
   mode?: EditorModeType;
   popupDisplay?: PopupDisplayType;
+  tableCellControllerPosition?: TableCellControllerPositionType;
   // customPlugins?: Array<Plugin> | Record<string, Plugin>;
   videoRatioList?: VideoRatioType[];
 }

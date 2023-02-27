@@ -99,3 +99,8 @@ export enum AlignItemsEnum {
   LEFT = 'left',
   RIGHT = 'right',
 }
+
+export enum TableCellControllerPositionEnum {
+  CELL = 'cell',
+  TOP = 'top',
+}

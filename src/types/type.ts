@@ -6,6 +6,7 @@ import type {
   LangEnum,
   PluginDisplayEnum,
   PopupDisplayEnum,
+  TableCellControllerPositionEnum,
   UploadStateEnum,
 } from './enum';
 
@@ -24,6 +25,8 @@ export type PopupDisplayType = `${PopupDisplayEnum}`;
 export type CharCounterType = `${CharCounterEnum}`;
 
 export type AlignItemsType = `${AlignItemsEnum}`;
+
+export type TableCellControllerPositionType = `${TableCellControllerPositionEnum}`;
 
 export type PluginNameType = string;
 
