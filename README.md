@@ -124,8 +124,6 @@ All props are OPTIONAL.
 
 The core part in props is `SetOptions`. `SetOptions` is a large object, almost all configurations of SunEditor are set inside this object. And many of them are remain the same with the [original][SunEditionOptions] one. I made something more strongly typed. But don't worry, the usage will be the same.
 
-<!-- TODO: descriptionS, types -->
-
 #### Editor
 
 | Prop                        | Type                                   | Default   | Description                                                                                                                   |
@@ -238,7 +236,7 @@ export default customLang;
 
 ##### Adding Traditional Chinese Language Pack! 🎉
 
-Since the [original SunEditor][SunEditor] does not has traditional Chinese language pack, so I added one if anyone need it. 🙌
+Since the [original SunEditor][SunEditor] does not has traditional Chinese language pack, so I provided one if anyone need it. 🙌
 
 #### Image
 

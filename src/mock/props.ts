@@ -29,9 +29,9 @@ const setOptions: SetOptions = {
     /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
     fullButtonList,
   ],
-  charCounter: false,
-  charCounterLabel: 'Hello this is charCounterLabel',
-  charCounterType: 'char',
+  // charCounter: true,
+  // charCounterLabel: 'Hello this is charCounterLabel',
+  // charCounterType: 'char',
   display: 'flex',
   formats: ['p', 'blockquote', 'h2', 'h3'],
   fullPage: false, // TODO: true will cause error, should always be false.
