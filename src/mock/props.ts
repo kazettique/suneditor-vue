@@ -45,9 +45,9 @@ const setOptions: SetOptions = {
   // imageHeight: '100px',
   // imageAccept: '.png, .jpg',
   // imageFileInput: true,
-  imageResizing: false,
+  imageResizing: true,
   // imageRotation: false,
-  // imageSizeOnlyPercentage: true,
+  imageSizeOnlyPercentage: true,
   imageUrlInput: true,
   lang: getLanguage('en'),
   lineHeights: [
@@ -83,6 +83,7 @@ const setOptions: SetOptions = {
   videoRotation: false,
   videoUrlInput: true,
   width: '500px',
+  youtubeQuery: '123',
 };
 
 const editorProps: IProps = {
