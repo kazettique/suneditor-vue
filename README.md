@@ -12,13 +12,13 @@ A Vue 3 component wrapped with pure JavaScript based WYSIWYG editor, [SunEditor]
   - [Props](#props)
     - [SetOptions](#setoptions)
       - [Editor](#editor)
-      - [Language](#language)
+      - [Language (i18n)](#language-i18n)
+        - [Add your own language pack](#add-your-own-language-pack)
+        - [Adding Traditional Chinese Language Pack! 🎉](#adding-traditional-chinese-language-pack-)
       - [Image](#image)
       - [Video](#video)
       - [Audio](#audio)
       - [Plugin \& Extension](#plugin--extension)
-    - [Language Support (i18n)](#language-support-i18n)
-      - [Adding Traditional Chinese Language Pack! 🎉](#adding-traditional-chinese-language-pack-)
   - [Events](#events)
     - [Scroll Event](#scroll-event)
     - [Focus Event](#focus-event)
@@ -110,15 +110,15 @@ Import SunEditorVue component with composition API in Vue 3:
 
 All props are OPTIONAL.
 
-| Prop           | Type         | Description                       |
-| -------------- | ------------ | --------------------------------- |
-| disable        | `boolean`    | Disable whole component.          |
-| disableToolbar | `boolean`    | Disable toolbar area.             |
-| disableWysiwyg | `boolean`    | Disable Wysiwyg area.             |
-| isNoticeOpen   | `boolean`    | Toggle open the notice bar.       |
-| noticeMessage  | `string`     | Content message in notice bar.    |
-| readOnly       | `boolean`    | Make component read only.         |
-| setOptions     | `SetOptions` | Set options for editor component. |
+| Prop           | Type         | Default | Description                             |
+| -------------- | ------------ | ------- | --------------------------------------- |
+| disable        | `boolean`    | `false` | Set `true` to disable whole component.  |
+| disableToolbar | `boolean`    | `false` | Set `true` to disable toolbar area.     |
+| disableWysiwyg | `boolean`    | `false` | Set `true` to disable Wysiwyg area.     |
+| isNoticeOpen   | `boolean`    | `false` | Set `true` to open the notice bar.      |
+| noticeMessage  | `string`     |         | Content message in notice bar.          |
+| readOnly       | `boolean`    | `false` | Set `true` to make component read only. |
+| setOptions     | `SetOptions` |         | Set options for editor component.       |
 
 ### SetOptions
 
@@ -127,70 +127,6 @@ The core part in props is `SetOptions`. `SetOptions` is a large object, almost a
 <!-- TODO: descriptionS, types -->
 
 #### Editor
-
-#### Language
-
-#### Image
-
-| Prop                    | Type                     | Description                                                                                                                                                                                                                                                  |
-| ----------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| imageResizing           | `boolean`                | Set whether inserted image resize is enabled.                                                                                                                                                                                                                |
-| imageHeightShow         | `boolean`                |                                                                                                                                                                                                                                                              |
-| imageAlignShow          | `boolean`                |                                                                                                                                                                                                                                                              |
-| imageWidth              | `string`                 | Set initial width when image is inserted.                                                                                                                                                                                                                    |
-| imageHeight             | `string`                 | Set initial height when image is inserted.                                                                                                                                                                                                                   |
-| imageSizeOnlyPercentage | `boolean`                | If `true`, image size can only be scaled by percentage.                                                                                                                                                                                                      |
-| imageRotation           | `boolean`                | <!--Disable image rotation (and rotation buttons), set to `false`.-->                                                                                                                                                                                        |
-| imageFileInput          | `boolean`                | Set `true` to show file input in image upload dialog.                                                                                                                                                                                                        |
-| imageUrlInput           | `boolean`                | Set `true` to show url text input image upload dialog.                                                                                                                                                                                                       |
-| imageUploadHeader       | `Record<string, string>` | Http Header when uploading images.                                                                                                                                                                                                                           |
-| imageUploadUrl          | `string`                 | The image upload to server mapping address                                                                                                                                                                                                                   |
-| imageUploadSizeLimit    | `number`                 | Set upload limit for image. (per image, in bytes)                                                                                                                                                                                                            |
-| imageMultipleFile       | `boolean`                | Set `true` to enable multiple file selection. Default is `false`.                                                                                                                                                                                            |
-| imageAccept             | `string`                 | Set accepted image file types. <br> Use asterisk mark accept for any types. <br> Use comma to separate accepted file extension name. <br> For example, "\*" or ".jpg, .png", etc. <br> **Caution**: must **use comma**, or will cause browser to force quit. |
-| imageGalleryUrl         | `string`                 | The url of the image gallery, if you use the image gallery                                                                                                                                                                                                   |
-| imageGalleryHeader      | `Record<string, string>` | <!--Http Header when get image gallery.-->                                                                                                                                                                                                                   |
-
-#### Video
-
-| Prop                    | Type                                | Description                                                                                                                                                                      |
-| ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| videoResizing           | `boolean`                           | Set `false` to hide video resizing, default is `true`.                                                                                                                           |
-| videoHeightShow         | `boolean`                           | Set `false` to hide video height input in upload dialog, default is `true`.                                                                                                      |
-| videoAlignShow          | `boolean`                           | Set `false` to hide video align radio buttons in upload dialog, default is `true`.                                                                                               |
-| videoRatioShow          | `boolean`                           | Set `false` to hide video ratio options in upload dialog, default is `true`.                                                                                                     |
-| videoWidth              | `string`                            | Set initial width when video is inserted.                                                                                                                                        |
-| videoHeight             | `string`                            | Set initial height when image is inserted.                                                                                                                                       |
-| videoSizeOnlyPercentage | `boolean`                           | If `true`, video size can only be scaled by percentage.                                                                                                                          |
-| videoRotation           | `boolean`                           | <!--Set `false` to disable video rotation and hide rotation buttons. Default is `true`. -->                                                                                      |
-| videoRatio              | `number`                            | The default aspect ratio of video. Up to 4 decimal places is accepted.                                                                                                           |
-| videoRatioList          | `VideoRatioType[]`                  | Replace video aspect ratio options.                                                                                                                                              |
-| youtubeQuery            | `string`                            | <!--The query string of a YouTube embedded URL-->                                                                                                                                |
-| videoFileInput          | `boolean`                           | Set `true` to show file input in video upload dialog. Default is `false`.                                                                                                        |
-| videoUrlInput           | `boolean`                           | Set `true` to show url text input video upload dialog.                                                                                                                           |
-| videoUploadHeader       | `Record<string, string>`            | Http Header when uploading videos.                                                                                                                                               |
-| videoUploadUrl          | `string`                            | The video upload to server mapping address.                                                                                                                                      |
-| videoUploadSizeLimit    | `number`                            | Set upload limit for video. (per video, in bytes)                                                                                                                                |
-| videoMultipleFile       | `boolean`                           | Set `true` to enable multiple file selection. Default is `false`.                                                                                                                |
-| videoIframeAttrs        | `Record<string, string \| boolean>` | Define HTML attributes of the video tag.                                                                                                                                         |
-| videoAccept             | `string`                            | Set accepted video file types. <br> Use asterisk mark accept for any types. <br> Use comma to separate accepted file extension name. <br> For example, "\*" or ".mp4 .avi", etc. |
-
-#### Audio
-
-| Prop                 | Type      | Description |
-| -------------------- | --------- | ----------- |
-| audioWidth           | `string`  |             |
-| audioHeight          | `string`  |             |
-| audioFileInput       | `boolean` |             |
-| audioUrlInput        | `boolean` |             |
-| audioUploadHeader    |           |             |
-| audioUploadUrl       | `string`  |             |
-| audioUploadSizeLimit | `number`  |             |
-| audioMultipleFile    | `boolean` |             |
-| audioTagAttrs        |           |             |
-| audioAccept          | `string`  |             |
-
-#### Plugin & Extension
 
 | Prop                        | Type                                   | Description                                                                                                                   |
 | --------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -268,7 +204,7 @@ The core part in props is `SetOptions`. `SetOptions` is a large object, almost a
 | mediaAutoSelect             |                                        |                                                                                                                               |
 | icons                       |                                        |                                                                                                                               |
 
-### Language Support (i18n)
+#### Language (i18n)
 
 Import `getLanguage` method to get language object for toolbar interface. If not, English will be default.
 
@@ -285,9 +221,89 @@ const setOptions = {
 
 ![getLanguage](/public/img/getLang.png)
 
-#### Adding Traditional Chinese Language Pack! 🎉
+##### Add your own language pack
+
+If the language is not available in list, you can add your own, just import `Lang` to define language object, then using it in `SetOption` of props.
+
+```ts
+import type { Lang } from 'suneditor/src/lang/Lang';
+
+const customLang: Lang = {
+  code: 'custom lang code',
+  // language settings...
+};
+
+export default customLang;
+```
+
+##### Adding Traditional Chinese Language Pack! 🎉
 
 Since the [original SunEditor][SunEditor] does not has traditional Chinese language pack, so I added one if anyone need it. 🙌
+
+#### Image
+
+| Prop                    | Type                     | Default | Description                                                                                                                                                                                                                                                  |
+| ----------------------- | ------------------------ | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| imageResizing           | `boolean`                | `true`  | Set `false` to disable resizing inserted image. <br> PS. If `imageSizeOnlyPercentage` is set to `true`, then `imageResizing` will set disabled IMPLICITLY.                                                                                                   |
+| imageHeightShow         | `boolean`                |         |                                                                                                                                                                                                                                                              |
+| imageAlignShow          | `boolean`                |         |                                                                                                                                                                                                                                                              |
+| imageWidth              | `string`                 |         | Set initial width when image is inserted.                                                                                                                                                                                                                    |
+| imageHeight             | `string`                 |         | Set initial height when image is inserted.                                                                                                                                                                                                                   |
+| imageSizeOnlyPercentage | `boolean`                |         | Set `true` to restrict image scaling only by percentage. In the meantime, `imageResizing` will set `false` IMPLICITLY.                                                                                                                                       |
+| imageRotation           | `boolean`                |         | <!--Disable image rotation (and rotation buttons), set to `false`.-->                                                                                                                                                                                        |
+| imageFileInput          | `boolean`                |         | Set `true` to show file input in image upload dialog.                                                                                                                                                                                                        |
+| imageUrlInput           | `boolean`                |         | Set `true` to show url text input image upload dialog.                                                                                                                                                                                                       |
+| imageUploadHeader       | `Record<string, string>` |         | Http Header when uploading images.                                                                                                                                                                                                                           |
+| imageUploadUrl          | `string`                 |         | The image upload to server mapping address                                                                                                                                                                                                                   |
+| imageUploadSizeLimit    | `number`                 |         | Set upload limit for image. (per image, in bytes)                                                                                                                                                                                                            |
+| imageMultipleFile       | `boolean`                | `false` | Set `true` to enable multiple file selection.                                                                                                                                                                                                                |
+| imageAccept             | `string`                 |         | Set accepted image file types. <br> Use asterisk mark accept for any types. <br> Use comma to separate accepted file extension name. <br> For example, "\*" or ".jpg, .png", etc. <br> **Caution**: must **use comma**, or will cause browser to force quit. |
+| imageGalleryUrl         | `string`                 |         | The url of the image gallery, if you use the image gallery                                                                                                                                                                                                   |
+| imageGalleryHeader      | `Record<string, string>` |         | <!--Http Header when get image gallery.-->                                                                                                                                                                                                                   |
+
+#### Video
+
+| Prop                    | Type                                | Default | Description                                                                                                                                                                      |
+| ----------------------- | ----------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| videoResizing           | `boolean`                           | `true`  | Set `false` to hide video resizing.                                                                                                                                              |
+| videoHeightShow         | `boolean`                           | `true`  | Set `false` to hide video height input in upload dialog.                                                                                                                         |
+| videoAlignShow          | `boolean`                           | `true`  | Set `false` to hide video align radio buttons in upload dialog.                                                                                                                  |
+| videoRatioShow          | `boolean`                           | `true`  | Set `false` to hide video ratio options in upload dialog.                                                                                                                        |
+| videoWidth              | `string`                            |         | Set initial width when video is inserted.                                                                                                                                        |
+| videoHeight             | `string`                            |         | Set initial height when image is inserted.                                                                                                                                       |
+| videoSizeOnlyPercentage | `boolean`                           |         | If `true`, video size can only be scaled by percentage.                                                                                                                          |
+| videoRotation           | `boolean`                           |         | <!--Set `false` to disable video rotation and hide rotation buttons. Default is `true`. -->                                                                                      |
+| videoRatio              | `number`                            |         | The default aspect ratio of video. Up to 4 decimal places is accepted.                                                                                                           |
+| videoRatioList          | `VideoRatioType[]`                  |         | Replace video aspect ratio options.                                                                                                                                              |
+| youtubeQuery            | `string`                            |         | <!--The query string of a YouTube embedded URL-->                                                                                                                                |
+| videoFileInput          | `boolean`                           | `false` | Set `true` to show file input in video upload dialog.                                                                                                                            |
+| videoUrlInput           | `boolean`                           |         | Set `true` to show url text input video upload dialog.                                                                                                                           |
+| videoUploadHeader       | `Record<string, string>`            |         | Http Header when uploading videos.                                                                                                                                               |
+| videoUploadUrl          | `string`                            |         | The video upload to server mapping address.                                                                                                                                      |
+| videoUploadSizeLimit    | `number`                            |         | Set upload limit for video. (per video, in bytes)                                                                                                                                |
+| videoMultipleFile       | `boolean`                           | `false` | Set `true` to enable multiple file selection.                                                                                                                                    |
+| videoIframeAttrs        | `Record<string, string \| boolean>` |         | Define HTML attributes of the video tag.                                                                                                                                         |
+| videoAccept             | `string`                            |         | Set accepted video file types. <br> Use asterisk mark accept for any types. <br> Use comma to separate accepted file extension name. <br> For example, "\*" or ".mp4 .avi", etc. |
+
+#### Audio
+
+| Prop                 | Type      | Default | Description |
+| -------------------- | --------- | ------- | ----------- |
+| audioWidth           | `string`  |         |             |
+| audioHeight          | `string`  |         |             |
+| audioFileInput       | `boolean` |         |             |
+| audioUrlInput        | `boolean` |         |             |
+| audioUploadHeader    |           |         |             |
+| audioUploadUrl       | `string`  |         |             |
+| audioUploadSizeLimit | `number`  |         |             |
+| audioMultipleFile    | `boolean` |         |             |
+| audioTagAttrs        |           |         |             |
+| audioAccept          | `string`  |         |             |
+
+#### Plugin & Extension
+
+| Prop | Type | Description |
+| ---- | ---- | ----------- |
 
 ## Events
 
