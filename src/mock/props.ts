@@ -8,6 +8,9 @@ const fullButtonList = Object.values(ButtonEnum).map((item) => item);
 
 const setOptions: SetOptions = {
   alignItems: ['center', 'left', 'right', 'justify'],
+  audioFileInput: true,
+  // audioUrlInput: true,
+  audioMultipleFile: true,
   buttonList: [
     // ['undo', 'redo'],
     // ['font', 'fontSize', 'formatBlock'],
@@ -29,11 +32,11 @@ const setOptions: SetOptions = {
   charCounter: false,
   charCounterLabel: 'Hello this is charCounterLabel',
   charCounterType: 'char',
-  // display: 'none',
+  display: 'flex',
   formats: ['p', 'blockquote', 'h2', 'h3'],
   fullPage: false, // TODO: true will cause error, should always be false.
   fullScreenOffset: 50,
-  height: '200px',
+  height: '500px',
   hideToolbar: false, // TODO: fix with reactivity
   iframe: false, // TODO: true will cause error, should always be false.
   // imageUploadSizeLimit: 102110,
@@ -54,8 +57,9 @@ const setOptions: SetOptions = {
   linkRel: ['hello'],
   linkTargetNewWindow: true,
   maxCharCount: 100,
-  minHeight: '250',
-  minWidth: '500',
+  // minHeight: '250',
+  // minWidth: '500',
+  // mode: 'balloon-always',
   paragraphStyles: [{ class: 'aaaClass', name: 'aaa' }],
   placeholder: 'test placeholder',
   plugins: { ...plugins },
@@ -63,9 +67,10 @@ const setOptions: SetOptions = {
   position: 'relative',
   previewTemplate: '<h1>Preview Template</h1> {{contents}} <div>_Footer_</div>',
   printTemplate: '<h1>Print Template</h1> {{contents}} <div>_Footer_</div>',
-  resizeEnable: false,
+  resizeEnable: true,
   resizingBar: true,
   showPathLabel: true,
+  // stickyToolbar: 50,
   tabDisable: true,
   tableCellControllerPosition: 'top',
   value: 'this is default value',
