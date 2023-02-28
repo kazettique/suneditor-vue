@@ -128,81 +128,81 @@ The core part in props is `SetOptions`. `SetOptions` is a large object, almost a
 
 #### Editor
 
-| Prop                        | Type                                   | Description                                                                                                                   |
-| --------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| plugins                     |                                        |                                                                                                                               |
-| lang                        | [Lang][Lang]                           | Setup button label languages.                                                                                                 |
-| defaultTag                  | `string`                               | Set default HTML tag. Default is `<p>`.                                                                                       |
-| textTags                    | [TextTags][TextTags]                   | Customize HTML tags for text format. <br> For example: default bold text might be `<strong>`, default italic might be `<em>`. |
-| value                       | `string`                               | Initial value (HTML string) in wysiwyg area.                                                                                  |
-| historyStackDelayTime       | `number`                               | Delay time (in ms) when recording history stack. The default is 400ms.                                                        |
-| addTagsWhitelist            | `string \| '*'`                        |                                                                                                                               |
-| tagsBlacklist               | `string`                               |                                                                                                                               |
-| pasteTagsWhitelist          | `string \| '*'`                        |                                                                                                                               |
-| pasteTagsBlacklist          | `string`                               |                                                                                                                               |
-| attributesWhitelist         |                                        |                                                                                                                               |
-| attributesBlacklist         |                                        |                                                                                                                               |
-| mode                        | `EditorModeType`                       | The mode of editor.                                                                                                           |
-| rtl                         | `boolean`                              | RTL (right to left) mode.                                                                                                     |
-| lineAttrRest                | `string`                               |                                                                                                                               |
-| buttonList                  |                                        |                                                                                                                               |
-| toolbarWidth                | `string`                               | The width of toolbar. Only applied when the mode is 'inline' or 'balloon'.                                                    |
-| toolbarContainer            | `HTMLElement \| string`                |                                                                                                                               |
-| stickyToolbar               | `number \| string`                     |                                                                                                                               |
-| hideToolbar                 | `boolean`                              | Hide toolbar when set to `true`.                                                                                              |
-| fullScreenOffset            | `number \| string`                     | Top offset value of 'full screen'.                                                                                            |
-| iframe                      | `boolean`                              |                                                                                                                               |
-| fullPage                    | `boolean`                              |                                                                                                                               |
-| iframeAttributes            |                                        |                                                                                                                               |
-| iframeCSSFileName           | `string \| string[]`                   |                                                                                                                               |
-| previewTemplate             | `string`                               | A template at preview page in HTML string. See [example][PreviewTemplateExample].                                             |
-| printTemplate               | `string`                               | A template at print page in HTML string. See [example][PrintTemplateExample]                                                  |
-| codeMirror                  |                                        |                                                                                                                               |
-| katex                       |                                        |                                                                                                                               |
-| mathFontSize                |                                        |                                                                                                                               |
-| position                    | `string`                               | The position property (CSS) of editor.                                                                                        |
-| display                     | `string`                               |                                                                                                                               |
-| popupDisplay                | `PopupDisplayType`                     | Set the size of dialog window when show up.                                                                                   |
-| resizingBar                 | `boolean`                              | Show resizing bar at the bottom of editor.                                                                                    |
-| showPathLabel               |                                        |                                                                                                                               |
-| resizeEnable                |                                        | Editor is resizable when set to `true`.                                                                                       |
-| resizingBarContainer        | `HTMLElement \| string`                |                                                                                                                               |
-| charCounter                 | `boolean`                              | Show character counter.                                                                                                       |
-| charCounterType             | `CharCounterType`                      | Define calculation method for character counter.                                                                              |
-| charCounterLabel            | `string`                               | Character counter label text.                                                                                                 |
-| maxCharCount                | `number`                               | The maximum number of characters for editor.                                                                                  |
-| width                       | `string`                               | Set width of editor.                                                                                                          |
-| minWidth                    | `string`                               | Set min-width of editor.                                                                                                      |
-| maxWidth                    | `string`                               | Set max-width of editor.                                                                                                      |
-| height                      | `string`                               | Set height of editor.                                                                                                         |
-| minHeight                   | `string`                               | Set min-height of editor.                                                                                                     |
-| maxHeight                   | `string`                               | Set max-height of editor.                                                                                                     |
-| className                   | `string`                               | Set CSS class to wysiwyg element. (`.sun-editor-editable`)                                                                    |
-| defaultStyle                | `string`                               | Set style to wysiwyg element. (`.sun-editor-editable`)                                                                        |
-| font                        | `string[]`                             | Replace default font-family array.                                                                                            |
-| fontSize                    | `number[]`                             | Replace default font-size array.                                                                                              |
-| fontSizeUnit                | `string`                               | Set font size unit.                                                                                                           |
-| alignItems                  | `AlignItemsType[]`                     | Set content & order of align items dropdown list.                                                                             |
-| formats                     | [FormatTagName][FormatTagName]`[]`     | Replace default formatBlock array.                                                                                            |
-| colorList                   | `string[]`                             | Replace default color picker list.                                                                                            |
-| lineHeights                 | [LineHeightsItem][LineHeightsItem]`[]` | Replace default line heights list.                                                                                            |
-| paragraphStyles             | [ParagraphStyles][ParagraphStyles]     | Replace default paragraph style list.                                                                                         |
-| textStyles                  | [TextStyles][TextStyles]               | Replace default text style list.                                                                                              |
-| tableCellControllerPosition | `TableCellControllerPositionType`      | Define position to the table cell controller. Default is `cell`.                                                              |
-| linkTargetNewWindow         | `boolean`                              | Set `true` for "Open in new window" checkbox checked initially. Default is `false`.                                           |
-| linkProtocol                | `string`                               |                                                                                                                               |
-| linkRel                     | `string[]`                             |                                                                                                                               |
-| linkRelDefault              |                                        |                                                                                                                               |
-| linkNoPrefix                | `boolean`                              |                                                                                                                               |
-| hrItems                     |                                        |                                                                                                                               |
-| tabDisable                  | `boolean`                              | Set `true` to disable tab key interaction in wysiwyg area. Default is `fal                                                    |
-| shortcutsDisable            | `string[]`                             |                                                                                                                               |
-| shortcutsHint               | `boolean`                              |                                                                                                                               |
-| callBackSave                |                                        |                                                                                                                               |
-| templates                   | [TemplatesItem][TemplatesItem]`[]`     |                                                                                                                               |
-| placeholder                 | `string`                               | Set placeholder text.                                                                                                         |
-| mediaAutoSelect             |                                        |                                                                                                                               |
-| icons                       |                                        |                                                                                                                               |
+| Prop                        | Type                                   | Default | Description                                                                                                                   |
+| --------------------------- | -------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| plugins                     |                                        |         |                                                                                                                               |
+| lang                        | [Lang][Lang]                           |         | Setup language pack for buttons.                                                                                              |
+| defaultTag                  | `string`                               | `<p>`   | Set default HTML tag.                                                                                                         |
+| textTags                    | [TextTags][TextTags]                   |         | Customize HTML tags for text format. <br> For example: default bold text might be `<strong>`, default italic might be `<em>`. |
+| value                       | `string`                               |         | Initial value (HTML string) in wysiwyg area.                                                                                  |
+| historyStackDelayTime       | `number`                               | `400`   | Set delay time (in milliseconds) when recording history stack.                                                                |
+| addTagsWhitelist            | `string \| '*'`                        |         |                                                                                                                               |
+| tagsBlacklist               | `string`                               |         |                                                                                                                               |
+| pasteTagsWhitelist          | `string \| '*'`                        |         |                                                                                                                               |
+| pasteTagsBlacklist          | `string`                               |         |                                                                                                                               |
+| attributesWhitelist         |                                        |         |                                                                                                                               |
+| attributesBlacklist         |                                        |         |                                                                                                                               |
+| mode                        | `EditorModeType`                       |         | The mode of editor.                                                                                                           |
+| rtl                         | `boolean`                              | `false` | Set `true` to enable RTL (right to left) mode.                                                                                |
+| lineAttrRest                | `string`                               |         |                                                                                                                               |
+| buttonList                  |                                        |         |                                                                                                                               |
+| toolbarWidth                | `string`                               |         | The width of toolbar. Only applied when the mode is 'inline' or 'balloon'.                                                    |
+| toolbarContainer            | `HTMLElement \| string`                |         |                                                                                                                               |
+| stickyToolbar               | `number \| string`                     |         |                                                                                                                               |
+| hideToolbar                 | `boolean`                              |         | Hide toolbar when set to `true`.                                                                                              |
+| fullScreenOffset            | `number \| string`                     |         | Top offset value of 'full screen'.                                                                                            |
+| iframe                      | `boolean`                              |         |                                                                                                                               |
+| fullPage                    | `boolean`                              |         |                                                                                                                               |
+| iframeAttributes            |                                        |         |                                                                                                                               |
+| iframeCSSFileName           | `string \| string[]`                   |         |                                                                                                                               |
+| previewTemplate             | `string`                               |         | A template at preview page in HTML string. See [example][PreviewTemplateExample].                                             |
+| printTemplate               | `string`                               |         | A template at print page in HTML string. See [example][PrintTemplateExample]                                                  |
+| codeMirror                  |                                        |         |                                                                                                                               |
+| katex                       |                                        |         |                                                                                                                               |
+| mathFontSize                |                                        |         |                                                                                                                               |
+| position                    | `string`                               |         | The position property (CSS) of editor.                                                                                        |
+| display                     | `string`                               |         |                                                                                                                               |
+| popupDisplay                | `PopupDisplayType`                     |         | Set the size of dialog window when show up.                                                                                   |
+| resizingBar                 | `boolean`                              |         | Show resizing bar at the bottom of editor.                                                                                    |
+| showPathLabel               |                                        |         |                                                                                                                               |
+| resizeEnable                |                                        | `true`  | Set `false` to disable resizing editor.                                                                                       |
+| resizingBarContainer        | `HTMLElement \| string`                |         |                                                                                                                               |
+| charCounter                 | `boolean`                              |         | <!--Show character counter.-->                                                                                                |
+| charCounterType             | `CharCounterType`                      |         | Define calculation method for character counter.                                                                              |
+| charCounterLabel            | `string`                               |         | Character counter label text.                                                                                                 |
+| maxCharCount                | `number`                               |         | The maximum number of characters for editor.                                                                                  |
+| width                       | `string`                               |         | Set width of editor.                                                                                                          |
+| minWidth                    | `string`                               |         | Set min-width of editor.                                                                                                      |
+| maxWidth                    | `string`                               |         | Set max-width of editor.                                                                                                      |
+| height                      | `string`                               |         | Set height of editor.                                                                                                         |
+| minHeight                   | `string`                               |         | Set min-height of editor.                                                                                                     |
+| maxHeight                   | `string`                               |         | Set max-height of editor.                                                                                                     |
+| className                   | `string`                               |         | Set CSS class to wysiwyg element. (`.sun-editor-editable`)                                                                    |
+| defaultStyle                | `string`                               |         | Set style to wysiwyg element. (`.sun-editor-editable`)                                                                        |
+| font                        | `string[]`                             |         | Replace default font-family array.                                                                                            |
+| fontSize                    | `number[]`                             |         | Replace default font-size array.                                                                                              |
+| fontSizeUnit                | `string`                               |         | Set font size unit.                                                                                                           |
+| alignItems                  | `AlignItemsType[]`                     |         | Set content & order of align items dropdown list.                                                                             |
+| formats                     | [FormatTagName][FormatTagName]`[]`     |         | Replace default formatBlock array.                                                                                            |
+| colorList                   | `string[]`                             |         | Replace default color picker list.                                                                                            |
+| lineHeights                 | [LineHeightsItem][LineHeightsItem]`[]` |         | Replace default line heights list.                                                                                            |
+| paragraphStyles             | [ParagraphStyles][ParagraphStyles]     |         | Replace default paragraph style list.                                                                                         |
+| textStyles                  | [TextStyles][TextStyles]               |         | Replace default text style list.                                                                                              |
+| tableCellControllerPosition | `TableCellControllerPositionType`      | `cell`  | Define position to the table cell controller.                                                                                 |
+| linkTargetNewWindow         | `boolean`                              | `false` | Set `true` for "Open in new window" checkbox checked initially.                                                               |
+| linkProtocol                | `string`                               |         |                                                                                                                               |
+| linkRel                     | `string[]`                             |         |                                                                                                                               |
+| linkRelDefault              |                                        |         |                                                                                                                               |
+| linkNoPrefix                | `boolean`                              |         |                                                                                                                               |
+| hrItems                     |                                        |         |                                                                                                                               |
+| tabDisable                  | `boolean`                              | `false` | Set `true` to disable tab key interaction in wysiwyg area.                                                                    |
+| shortcutsDisable            | `string[]`                             |         |                                                                                                                               |
+| shortcutsHint               | `boolean`                              |         |                                                                                                                               |
+| callBackSave                |                                        |         |                                                                                                                               |
+| templates                   | [TemplatesItem][TemplatesItem]`[]`     |         |                                                                                                                               |
+| placeholder                 | `string`                               |         | Set placeholder text.                                                                                                         |
+| mediaAutoSelect             |                                        |         |                                                                                                                               |
+| icons                       |                                        |         |                                                                                                                               |
 
 #### Language (i18n)
 

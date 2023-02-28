@@ -26,7 +26,7 @@ const setOptions: SetOptions = {
     /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
     fullButtonList,
   ],
-  charCounter: true,
+  charCounter: false,
   charCounterLabel: 'Hello this is charCounterLabel',
   charCounterType: 'char',
   // display: 'none',
@@ -63,7 +63,7 @@ const setOptions: SetOptions = {
   position: 'relative',
   previewTemplate: '<h1>Preview Template</h1> {{contents}} <div>_Footer_</div>',
   printTemplate: '<h1>Print Template</h1> {{contents}} <div>_Footer_</div>',
-  // resizeEnable: true,
+  resizeEnable: false,
   resizingBar: true,
   showPathLabel: true,
   tabDisable: true,
