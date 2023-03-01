@@ -1,8 +1,19 @@
 {
   "name": "suneditor-vue",
-  "version": "0.0.0",
-  "private": true,
   "description": "A Vue 3 Component for Suneditor",
+  "type": "module",
+  "author": "kazettique",
+  "version": "0.0.0",
+  "private": false,
+  "files": ["dist"],
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
@@ -49,6 +60,5 @@
     "vue",
     "vue3",
     "typescript"
-  ],
-  "author": "kazettique"
+  ]
 }
