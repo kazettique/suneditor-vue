@@ -109,10 +109,10 @@ const editorEventHandlers: IEmits = {
     console.log('Event: scroll');
     console.log('args', args);
   },
-  setToolbarButtons: (args) => {
-    console.log('Event: setToolbarButtons');
-    console.log('args', args);
-  },
+  // setToolbarButtons: (args) => {
+  //   console.log('Event: setToolbarButtons');
+  //   console.log('args', args);
+  // },
   showController: (args) => {
     console.log('Event: showController');
     console.log('args', args);

@@ -1,7 +1,6 @@
 <template>
   <div class="example">
     <SunEditor
-      ref="editorEl"
       v-bind="props"
       v-on:audio-upload="editorEventHandlers.audioUpload"
       v-on:audio-upload-before="editorEventHandlers.audioUploadBefore"
@@ -42,11 +41,11 @@ import 'suneditor/dist/css/suneditor.min.css';
 
 import { ref } from 'vue';
 
-import SunEditor, { type IProps } from '@/index';
+import { type IProps, SunEditor } from '@/index';
 import editorEventHandlers from '@/mock/emits';
 import editorProps from '@/mock/props';
 
-const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
+// const editorEl = ref<InstanceType<typeof SunEditor> | null>(null);
 const props = ref<IProps>(editorProps);
 const editorContents = ref<string>('');
 

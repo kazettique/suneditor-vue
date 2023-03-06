@@ -30,9 +30,9 @@ export type OverloadFunc3 = {
 
 type EmitType2 = ((event: 'change', content: string) => void) | ((event: 'input', inputEvent: InputEvent) => void);
 
-const aaa: EmitType2 = (event: 'change123', content: string) => {
-  console.log('hello');
-};
+// const aaa: EmitType2 = (event: 'change123', content: string) => {
+//   console.log('hello');
+// };
 
 type DefineEmitFuncBase = (event: string, ...args: any[]) => any;
 type ExportEmitFuncBase = (...args: any[]) => any;
