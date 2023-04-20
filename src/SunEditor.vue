@@ -420,6 +420,8 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+@import 'suneditor/dist/css/suneditor.min.css';
+
 .sunEditorVue {
   overflow: hidden;
 }
