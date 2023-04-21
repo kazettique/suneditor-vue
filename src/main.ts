@@ -1,5 +1,7 @@
-import { createApp } from 'vue';
+import SunEditorVue from './SunEditor.vue';
 
-import App from './App.vue';
-
-createApp(App).mount('#app');
+export default {
+  install: (app, options) => {
+    app.component("SunEditorVue", SunEditorVue)
+  }
+}
