@@ -20,6 +20,7 @@ import { computed, getCurrentInstance, onMounted, onUnmounted, ref, watch, watch
 
 import type { SetOptions, UploadStateType } from './types';
 import { isEmptyObject } from './utils';
+import "suneditor/dist/css/suneditor.min.css"
 
 // TODO: waiting for enabling to move types outside of SFC until Vue 3.3 released
 export interface IProps {

@@ -19,12 +19,12 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
-    "./dist/*.css": {
-      "import": "./dist/*.css",
-      "require": "./dist/*.css"
+    "./dist/style.css": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
     }
   },
-  "style": "dist/style.css",
+  "style": "./dist/style.css",
   "types": "./dist/SunEditor.vue.d.ts",
   "scripts": {
     "dev": "vite",
