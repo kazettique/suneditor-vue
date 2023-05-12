@@ -33,7 +33,7 @@ export default defineConfig({
   plugins: [vue(),
   typescript2({
     check: false,
-    include: ["src/**/*.vue"],
+    include: ["src/**/*.vue", "src/**/*.ts"],
     tsconfigOverride: {
       compilerOptions: {
         sourceMap: true,
